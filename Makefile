@@ -1,6 +1,6 @@
 all: cs dunit unit
 travis: cs travis-unit
-travis-benchmark: benchmark-travis benchmark-previous
+travis-benchmark: benchmark-travis
 contrib: cs dunit unit
 
 init:
@@ -15,13 +15,10 @@ unit: init
 benchmark: init
 	./vendor/bin/phpbench run benchmarks/ --report=aggregate --progress=dots --store
 
-benchmark-previous: init
-	./vendor/bin/phpbench show latest-1
-
 benchmark-travis: init
 	mkdir -p .phpbench_storage/xml
 	mkdir -p .phpbench_storage/store
-	./vendor/bin/phpbench run benchmarks/ --report=aggregate --progress=travis --dump-file=.phpbench_storage/xml/latest.xml --context=$(TRAVIS_BUILD_NUMBER)
+	./vendor/bin/phpbench run benchmarks/ --report=aggregate --progress=travis --store --dump-file=.phpbench_storage/xml/latest.xml --context=$(TRAVIS_BUILD_NUMBER)
 	if [ -f ".phpbench_storage/xml/previous.xml" ]; then ./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --file=.phpbench_storage/xml/latest.xml --report=compare; fi;
 	mv .phpbench_storage/xml/latest.xml .phpbench_storage/xml/previous.xml
 
