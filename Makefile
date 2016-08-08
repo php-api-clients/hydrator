@@ -1,6 +1,6 @@
 all: cs dunit unit
 travis: cs travis-unit
-travis-benchmark: benchmark-travis benchmark-previous
+travis-benchmark: benchmark-travis benchmark-previous benchmark-travis-report benchmark-travis-move
 contrib: cs dunit unit
 
 init:
@@ -19,7 +19,13 @@ benchmark-previous: init
 	./vendor/bin/phpbench show latest-1
 
 benchmark-travis: init
-	./vendor/bin/phpbench run benchmarks/ --report=aggregate --progress=travis
+	./vendor/bin/phpbench run benchmarks/ --report=aggregate --progress=travis --dump-file=.phpbench_storage/xml/latest.xml --context=$(TRAVIS_BUILD_NUMBER)
+
+benchmark-travis-report: init
+	./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --file=.phpbench_storage/xml/latest.xml --report=compare
+
+benchmark-travis-move: init
+	mv .phpbench_storage/xml/latest.xml .phpbench_storage/xml/previous.xml
 
 dunit: init
 	./vendor/bin/dunit
