@@ -27,18 +27,22 @@ matrix:
       env: dependencies=highest
     - php: nightly
       env: dependencies=highest
+    - php: 7.0
+      env: benchmark=true
   allow_failures:
     - php: hhvm
 
 ## Install or update dependencies
 install:
-  - if [ -z "$dependencies" ]; then composer install --prefer-dist; fi;
+  - if [ -z "$dependencies" ]; then composer install --prefer-dist -n; fi;
   - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-dist -n; fi;
   - if [ "$dependencies" = "highest" ]; then composer update --prefer-dist -n; fi;
   - composer show
 
-## Run the actual test
-script: make travis
+## Run the actual test and benchmark
+script:
+  - if [ -z "$benchmark" ]; then make travis; fi;
+  - if [ "$benchmark" = "true" ]; then make travis-benchmark; fi;
 
 ## Gather coverage and set it to coverage servers
 after_script: make travis-coverage

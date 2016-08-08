@@ -1,5 +1,6 @@
 all: cs dunit unit
-travis: cs travis-unit benchmark-travis benchmark-previous
+travis: cs travis-unit
+travis-benchmark: benchmark-travis benchmark-previous
 contrib: cs dunit unit
 
 init:
