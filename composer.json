@@ -1,5 +1,5 @@
 {
-  "name": "api-clients/foundation",
+  "name": "api-clients/hydrator",
   "license": "MIT",
   "authors": [
     {
@@ -17,7 +17,9 @@
     "reactivex/rxphp": "^1.2",
     "react/cache": "^0.4.1",
     "wyrihaximus/ticking-promise": "^1.6",
-    "doctrine/annotations": "^1.2"
+    "doctrine/annotations": "^1.2",
+    "phpbench/phpbench": "^0.11.2",
+    "api-clients/foundation": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.2.3",
@@ -35,13 +37,15 @@
       "ApiClients\\Foundation\\": "src/"
     },
     "files": [
-      "src/bootstrap.php",
-      "src/functions_include.php"
+      "src/bootstrap.php"
     ]
   },
   "autoload-dev": {
     "psr-4": {
       "ApiClients\\Tests\\Foundation\\": "tests/"
-    }
+    },
+    "classmap": [
+      "benchmarks/"
+    ]
   }
 }

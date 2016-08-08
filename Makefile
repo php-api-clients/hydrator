@@ -1,5 +1,5 @@
 all: cs dunit unit
-travis: cs travis-unit
+travis: cs travis-unit benchmark-travis benchmark-previous
 contrib: cs dunit unit
 
 init:
@@ -10,6 +10,15 @@ cs: init
 
 unit: init
 	./vendor/bin/phpunit --coverage-text --coverage-html covHtml
+
+benchmark: init
+	./vendor/bin/phpbench run benchmarks/ --report=aggregate --progress=dots --store
+
+benchmark-previous: init
+	./vendor/bin/phpbench show latest-1
+
+benchmark-travis: init
+	./vendor/bin/phpbench run benchmarks/ --report=aggregate --progress=travis
 
 dunit: init
 	./vendor/bin/dunit
