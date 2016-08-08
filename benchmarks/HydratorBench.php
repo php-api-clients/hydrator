@@ -2,6 +2,7 @@
 
 use ApiClients\Foundation\Transport\Hydrator;
 use ApiClients\Tests\Foundation\Resources\Sync\Resource;
+use ApiClients\Tests\Foundation\Resources\Sync\SubResource;
 use PhpBench\Benchmark\Metadata\Annotations\ParamProviders;
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
 use PhpBench\Benchmark\Metadata\Annotations\Warmup;
@@ -15,6 +16,13 @@ class HydratorBench extends AbstractBench
     public function provideObjects()
     {
         return [
+            'simple' => [
+                'resource' => SubResource::class,
+                'json' => [
+                    'id' => 1,
+                    'slug' => 'Wyrihaximus/php-travis-client',
+                ],
+            ],
             'complicated' => [
                 'resource' => Resource::class,
                 'json' => [
