@@ -1,5 +1,5 @@
 {
   "bootstrap": "vendor/autoload.php",
-  "time_unit": "milliseconds",
-  "xml_storage_path": ".phpbench_storage/store"
+  "xml_storage_path": ".phpbench_storage/store",
+  "time_unit": "milliseconds"
 }
