@@ -43,6 +43,7 @@ install:
 script:
   - if [ -z "$benchmark" ]; then make travis; fi;
   - if [ "$benchmark" = "true" ]; then make travis-benchmark; fi;
+  - if [ "$benchmark" = "true" ]; then make travis-benchmark-delimited; fi;
 
 ## Gather coverage and set it to coverage servers
 after_script: make travis-coverage

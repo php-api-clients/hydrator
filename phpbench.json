@@ -1,5 +1,12 @@
 {
   "bootstrap": "vendor/autoload.php",
   "time_unit": "milliseconds",
-  "xml_storage_path": ".phpbench_storage/store"
+  "xml_storage_path": ".phpbench_storage/store",
+  "outputs": {
+    "delimited": {
+      "renderer": "delimited",
+      "delimiter": ";",
+      "file": ".phpbench_storage/csv/previous.csv"
+    }
+  }
 }
