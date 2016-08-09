@@ -53,7 +53,7 @@ class HydratorBench extends AbstractBench
     
     /**
      * @Iterations(10)
-     * @Revs(1000)
+     * @Revs({1, 10, 100, 1000})
      * @ParamProviders({"provideObjects"})
      */
     public function benchPreHeatedHydrator(array $params)
@@ -63,7 +63,7 @@ class HydratorBench extends AbstractBench
 
     /**
      * @Iterations(10)
-     * @Revs(1000)
+     * @Revs({1, 10, 100, 1000})
      * @ParamProviders({"provideObjects"})
      */
     public function benchPreHeatedNoCacheHydrator(array $params)
@@ -74,7 +74,7 @@ class HydratorBench extends AbstractBench
     /**
      * @Warmup(10)
      * @Iterations(10)
-     * @Revs(1000)
+     * @Revs({1, 10, 100, 1000})
      * @ParamProviders({"provideObjects"})
      */
     public function benchFreshCachedHydrator(array $params)
@@ -84,7 +84,7 @@ class HydratorBench extends AbstractBench
 
     /**
      * @Iterations(10)
-     * @Revs(1000)
+     * @Revs({1, 10, 100, 1000})
      * @ParamProviders({"provideObjects"})
      */
     public function benchFreshNoCacheHydrator(array $params)
