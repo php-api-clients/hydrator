@@ -18,7 +18,7 @@ benchmark: init
 benchmark-travis: init
 	mkdir -p .phpbench_storage/xml
 	mkdir -p .phpbench_storage/store
-	./vendor/bin/phpbench run benchmarks/ --report=aggregate --progress=travis --store --dump-file=.phpbench_storage/xml/latest.xml --context=$(TRAVIS_BUILD_NUMBER)
+	./vendor/bin/phpbench run benchmarks/ --report=aggregate --progress=travis --store --dump-file=.phpbench_storage/xml/latest.xml --context=$(TRAVIS_BUILD_NUMBER) -vvv
 	if [ -f ".phpbench_storage/xml/previous.xml" ]; then ./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --file=.phpbench_storage/xml/latest.xml --report=compare; fi;
 	mv .phpbench_storage/xml/latest.xml .phpbench_storage/xml/previous.xml
 
