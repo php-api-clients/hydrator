@@ -18,8 +18,8 @@ benchmark: init
 benchmark-travis: init
 	mkdir -p .phpbench_storage/xml
 	mkdir -p .phpbench_storage/store
-	./vendor/bin/phpbench run benchmarks/ --progress=travis --store --dump-file=.phpbench_storage/xml/latest.xml --context=$(TRAVIS_BUILD_NUMBER) -vvv --report='generator: "table", cols: ["benchmark", "subject", "index", "revs", "its", "mem_peak", "best", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}'
-	if [ -f ".phpbench_storage/xml/previous.xml" ]; then ./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --file=.phpbench_storage/xml/latest.xml --report='generator: "table", compare: "revs", cols: ["subject", "index", "mean"], compare_fields: ["mean", "mode"], sort: {mean: "asc"}'; fi;
+	./vendor/bin/phpbench run benchmarks/ --progress=travis --store --dump-file=.phpbench_storage/xml/latest.xml --context=$(TRAVIS_BUILD_NUMBER) -vvv --report='generator: "table", cols: ["benchmark", "subject", "index", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}'
+	if [ -f ".phpbench_storage/xml/previous.xml" ]; then ./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --file=.phpbench_storage/xml/latest.xml --report='generator: "table", compare: "revs", cols: ["subject", "index", "mean"], compare_fields: ["best", "mean", "mode", "worst"]'; fi;
 	mv .phpbench_storage/xml/latest.xml .phpbench_storage/xml/previous.xml
 
 dunit: init
