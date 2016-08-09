@@ -13,7 +13,7 @@ unit: init
 	./vendor/bin/phpunit --coverage-text --coverage-html covHtml
 
 benchmark: init
-	./vendor/bin/phpbench run benchmarks/ --report=aggregate --progress=dots --store
+	./vendor/bin/phpbench run benchmarks/ --progress=dots --store --report='generator: "table", cols: ["benchmark", "subject", "index", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}'
 
 benchmark-travis: init
 	mkdir -p .phpbench_storage/xml
