@@ -16,7 +16,7 @@ class HydratorBench extends AbstractBench
     public function provideObjects()
     {
         $complicatedXxlSubs = [];
-        foreach ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $complicatedXxlSubs[] = [
                 'id' => $i,
                 'slug' => 'Wyrihaximus/php-travis-client',
