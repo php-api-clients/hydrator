@@ -15,6 +15,14 @@ class HydratorBench extends AbstractBench
 {
     public function provideObjects()
     {
+        $complicatedXxlSubs = [];
+        for ($i = 0; $i < 25; $i++) {
+            $complicatedXxlSubs[] = [
+                'id' => $i,
+                'slug' => 'Wyrihaximus/php-travis-client',
+            ];
+        }
+        
         return [
             'simple' => [
                 'resource' => SubResource::class,
@@ -46,6 +54,18 @@ class HydratorBench extends AbstractBench
                             'slug' => 'Wyrihaximus/php-travis-client',
                         ],
                     ],
+                ],
+            ],
+            'complicated_xxl' => [
+                'resource' => Resource::class,
+                'json' => [
+                    'id' => 1,
+                    'slog' => 'Wyrihaximus/php-travis-client',
+                    'sub' => [
+                        'id' => 1,
+                        'slug' => 'Wyrihaximus/php-travis-client',
+                    ],
+                    'subs' => $complicatedXxlSubs,
                 ],
             ],
         ];
