@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Tests\Foundation\Annotations;
+namespace ApiClients\Tests\Foundation\Hydrator\Annotations;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use ApiClients\Foundation\Annotations\Nested;
-use ApiClients\Tests\Foundation\Resource\DummyResource;
-use ApiClients\Tests\Foundation\TestCase;
+use ApiClients\Foundation\Hydrator\Annotations\Nested;
+use ApiClients\Tests\Foundation\Hydrator\DummyResource;
+use ApiClients\Tests\Foundation\Hydrator\TestCase;
 
 class NestedTest extends TestCase
 {

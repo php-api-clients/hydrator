@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Foundation\Resource;
+namespace ApiClients\Foundation\Hydrator;
 
+use ApiClients\Foundation\Resource\ResourceInterface;
 use function Clue\React\Block\await;
-use ApiClients\Foundation\Transport\Client;
 
 trait HydrateTrait
 {

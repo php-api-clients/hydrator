@@ -1,25 +1,23 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Tests\Foundation\Transport;
+namespace ApiClients\Tests\Foundation\Hydrator;
 
-use Phake;
-use ApiClients\Tests\Foundation\Resources\Async\Resource as AsyncResource;
-use ApiClients\Tests\Foundation\Resources\Async\SubResource as AsyncSubResource;
-use ApiClients\Tests\Foundation\Resources\Sync\Resource as SyncResource;
-use ApiClients\Tests\Foundation\TestCase;
-use ApiClients\Foundation\Transport\Client;
-use ApiClients\Foundation\Transport\Hydrator;
+use ApiClients\Foundation\Hydrator\Factory;
+use ApiClients\Foundation\Hydrator\Options;
+use ApiClients\Tests\Foundation\Hydrator\Resources\Async\Resource as AsyncResource;
+use ApiClients\Tests\Foundation\Hydrator\Resources\Async\SubResource as AsyncSubResource;
+use ApiClients\Tests\Foundation\Hydrator\Resources\Sync\Resource as SyncResource;
 
 class HydratorTest extends TestCase
 {
     public function testBuildAsyncFromSync()
     {
-        $hydrator = new Hydrator(Phake::mock(Client::class), [
-            'namespace' => 'ApiClients\Tests\Foundation\Resources',
-            'resource_namespace' => 'Async',
-            'resource_hydrator_cache_dir' => $this->getTmpDir(),
-            'resource_hydrator_namespace' => $this->getRandomNameSpace(),
+        $hydrator = Factory::create([
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Async',
+            Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
         ]);
         $syncRepository = $this->hydrate(
             SyncResource::class,
@@ -44,11 +42,11 @@ class HydratorTest extends TestCase
     public function testSetGeneratedClassesTargetDir()
     {
         $tmpDir = $this->getTmpDir();
-        $hydrator = new Hydrator(Phake::mock(Client::class), [
-            'namespace' => 'ApiClients\Tests\Foundation\Resources',
-            'resource_namespace' => 'Async',
-            'resource_hydrator_cache_dir' => $tmpDir,
-            'resource_hydrator_namespace' => $this->getRandomNameSpace(),
+        $hydrator = Factory::create([
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Async',
+            Options::RESOURCE_CACHE_DIR => $tmpDir,
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
         ]);
         $hydrator->hydrate(
             'Resource',
@@ -74,11 +72,11 @@ class HydratorTest extends TestCase
     {
         $json = $this->getJson();
         $tmpDir = $this->getTmpDir();
-        $hydrator = new Hydrator(Phake::mock(Client::class), [
-            'namespace' => 'ApiClients\Tests\Foundation\Resources',
-            'resource_namespace' => 'Async',
-            'resource_hydrator_cache_dir' => $tmpDir,
-            'resource_hydrator_namespace' => $this->getRandomNameSpace(),
+        $hydrator = Factory::create([
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Async',
+            Options::RESOURCE_CACHE_DIR => $tmpDir,
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
         ]);
         $repository = $hydrator->hydrate(
             'Resource',

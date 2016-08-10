@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
-use ApiClients\Foundation\Transport\Hydrator;
-use ApiClients\Tests\Foundation\Resources\Sync\Resource;
-use ApiClients\Tests\Foundation\Resources\Sync\SubResource;
+use ApiClients\Tests\Foundation\Hydrator\Resources\Sync\Resource;
+use ApiClients\Tests\Foundation\Hydrator\Resources\Sync\SubResource;
 use PhpBench\Benchmark\Metadata\Annotations\ParamProviders;
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
 use PhpBench\Benchmark\Metadata\Annotations\Warmup;

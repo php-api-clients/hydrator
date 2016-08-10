@@ -1,17 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Tests\Foundation\Resource;
+namespace ApiClients\Tests\Foundation\Hydrator\Resource;
 
+use ApiClients\Tests\Foundation\Hydrator\DummyResource;
 use Phake;
-use React\EventLoop\Factory;
-use React\Promise\FulfilledPromise;
-use React\Promise\PromiseInterface;
-use Rx\ObservableInterface;
 use ApiClients\Foundation\Resource\ResourceInterface;
-use ApiClients\Foundation\Transport\Client;
-use ApiClients\Foundation\Transport\Hydrator;
-use ApiClients\Tests\Foundation\TestCase;
+use ApiClients\Foundation\Hydrator\Hydrator;
+use ApiClients\Tests\Foundation\Hydrator\TestCase;
 
 class HydrateTraitTest extends TestCase
 {

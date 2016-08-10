@@ -4,9 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1b53251f54007ce01940f01a0b8885be",
-    "content-hash": "c3de4fe7a32d5c59424c72f91dd3e4b1",
+    "hash": "0179d3791f98bb21f746fc68752f49d2",
+    "content-hash": "dba3ea0301d8ada7dde7ef2ad904da51",
     "packages": [
+        {
+            "name": "api-clients/resource",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-api-clients/resource.git",
+                "reference": "2b448ab7fe7035a91abfc33d55de42587f8ecd72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/2b448ab7fe7035a91abfc33d55de42587f8ecd72",
+                "reference": "2b448ab7fe7035a91abfc33d55de42587f8ecd72",
+                "shasum": ""
+            },
+            "require": {
+                "api-clients/hydrator": "dev-master",
+                "clue/block-react": "^1.1",
+                "doctrine/annotations": "^1.2",
+                "guzzlehttp/guzzle": "^6.0",
+                "ocramius/generated-hydrator": "^2.0",
+                "php": "^7.0",
+                "react/cache": "^0.4.1",
+                "react/promise": "^2.2",
+                "reactivex/rxphp": "^1.2",
+                "wyrihaximus/react-guzzle-psr7": "^1.0",
+                "wyrihaximus/ticking-promise": "^1.6"
+            },
+            "require-dev": {
+                "phake/phake": "^2.3",
+                "phpunit/phpunit": "^5.2.3",
+                "squizlabs/php_codesniffer": "^2.6",
+                "vectorface/dunit": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ApiClients\\Foundation\\Resource\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "ceesjank@gmail.com"
+                }
+            ],
+            "time": "2016-08-10 11:16:59"
+        },
         {
             "name": "clue/block-react",
             "version": "v1.1.0",
@@ -3632,6 +3686,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "api-clients/resource": 20,
         "phpbench/phpbench": 20,
         "phpbench/container": 20,
         "phpbench/dom": 20

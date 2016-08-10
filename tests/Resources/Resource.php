@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Tests\Foundation\Resources;
+namespace ApiClients\Tests\Foundation\Hydrator\Resources;
 
-use ApiClients\Foundation\Annotations\Collection;
-use ApiClients\Foundation\Annotations\Nested;
-use ApiClients\Foundation\Annotations\Rename;
+use ApiClients\Foundation\Hydrator\Annotations\Collection;
+use ApiClients\Foundation\Hydrator\Annotations\Nested;
+use ApiClients\Foundation\Hydrator\Annotations\Rename;
 use ApiClients\Foundation\Resource\ResourceInterface;
-use ApiClients\Foundation\Transport\Client;
 
 /**
  * @Nested(sub="SubResource")
@@ -57,10 +56,6 @@ class Resource implements ResourceInterface
     }
 
     public function refresh()
-    {
-    }
-
-    public function setTransport(Client $client)
     {
     }
 }

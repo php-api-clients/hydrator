@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Tests\Foundation;
+namespace ApiClients\Tests\Foundation\Hydrator;
 
+use ApiClients\Foundation\Hydrator\Factory;
+use ApiClients\Foundation\Hydrator\Options;
 use GeneratedHydrator\Configuration;
 use Phake;
-use ApiClients\Foundation\Transport\Client;
-use ApiClients\Foundation\Transport\Hydrator;
+use ApiClients\Foundation\Hydrator\Hydrator;
 
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
@@ -71,12 +72,12 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     public function hydrate($class, $json, $namespace)
     {
-        return (new Hydrator(Phake::mock(Client::class), [
-            'namespace' => 'ApiClients\Tests\Foundation\Resources',
-            'resource_namespace' => $namespace,
-            'resource_hydrator_cache_dir' => $this->getTmpDir(),
-            'resource_hydrator_namespace' => $this->getRandomNameSpace(),
-        ]))->hydrateFQCN($class, $json);
+        return Factory::create([
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => $namespace,
+            Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+        ])->hydrateFQCN($class, $json);
     }
 
     protected function getJson()

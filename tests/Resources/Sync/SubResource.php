@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Tests\Foundation\Resources\Sync;
+namespace ApiClients\Tests\Foundation\Hydrator\Resources\Sync;
 
-use ApiClients\Tests\Foundation\Resources\SubResource as BaseResource;
+use ApiClients\Tests\Foundation\Hydrator\Resources\SubResource as BaseResource;
 
 class SubResource extends BaseResource
 {

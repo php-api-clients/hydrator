@@ -1,13 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Foundation\Annotations;
+namespace ApiClients\Foundation\Hydrator\Annotations;
+
+use ApiClients\Foundation\Hydrator\AnnotationInterface;
 
 /**
  * @Annotation
  * @Target({"CLASS"})
  */
-class Collection
+class Collection implements AnnotationInterface
 {
     /**
      * @var array

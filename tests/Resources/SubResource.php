@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Tests\Foundation\Resources;
+namespace ApiClients\Tests\Foundation\Hydrator\Resources;
 
 use ApiClients\Foundation\Resource\ResourceInterface;
-use ApiClients\Foundation\Transport\Client;
 
 class SubResource implements ResourceInterface
 {
@@ -29,10 +28,6 @@ class SubResource implements ResourceInterface
     }
 
     public function refresh()
-    {
-    }
-
-    public function setTransport(Client $client)
     {
     }
 }

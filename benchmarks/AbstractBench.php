@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-use ApiClients\Foundation\Transport\Hydrator;
-use ApiClients\Tests\Foundation\Resources\Sync\Resource;
-use ApiClients\Foundation\Transport\Client;
+use ApiClients\Foundation\Hydrator\Factory;
+use ApiClients\Foundation\Hydrator\Hydrator;
+use ApiClients\Foundation\Hydrator\Options;
 use GeneratedHydrator\Configuration;
 
 abstract class AbstractBench
@@ -28,21 +28,21 @@ abstract class AbstractBench
 
     protected function createHydrator(): Hydrator
     {
-        return (new Hydrator(\Phake::mock(Client::class), [
-            'namespace' => 'ApiClients\Tests\Foundation\Resources',
-            'resource_namespace' => 'Sync',
-            'resource_hydrator_cache_dir' => $this->getTmpDir(),
-            'resource_hydrator_namespace' => $this->getRandomNameSpace(),
-        ]));
+        return Factory::create([
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Sync',
+            Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+        ]);
     }
 
     protected function createNoCacheHydrator(): Hydrator
     {
-        return (new Hydrator(\Phake::mock(Client::class), [
-            'namespace' => 'ApiClients\Tests\Foundation\Resources',
-            'resource_namespace' => 'Sync',
-            'resource_hydrator_namespace' => $this->getRandomNameSpace(),
-        ]));
+        return Factory::create([
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Sync',
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+        ]);
     }
 
     public function cleanup()
