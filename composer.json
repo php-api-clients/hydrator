@@ -1,6 +1,8 @@
 {
   "name": "api-clients/hydrator",
   "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "authors": [
     {
       "name": "Cees-Jan Kiewiet",
