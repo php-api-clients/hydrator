@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-api-clients/resource.git",
-                "reference": "cc8fbbf433c439a98427a571e92cc864561598d2"
+                "reference": "653a8f089098bfb91504a7fc0954d7864b81fd02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/cc8fbbf433c439a98427a571e92cc864561598d2",
-                "reference": "cc8fbbf433c439a98427a571e92cc864561598d2",
+                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/653a8f089098bfb91504a7fc0954d7864b81fd02",
+                "reference": "653a8f089098bfb91504a7fc0954d7864b81fd02",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
                     "email": "ceesjank@gmail.com"
                 }
             ],
-            "time": "2016-08-10 14:12:47"
+            "time": "2016-08-10 17:07:04"
         },
         {
             "name": "clue/block-react",
