@@ -4,68 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "946b3874b74c877bb5843159e30b7ba2",
-    "content-hash": "6aff9d1a592b41749d0441c2b2457f60",
+    "hash": "1b53251f54007ce01940f01a0b8885be",
+    "content-hash": "c3de4fe7a32d5c59424c72f91dd3e4b1",
     "packages": [
-        {
-            "name": "api-clients/foundation",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-api-clients/foundation.git",
-                "reference": "8f64b91a1a21249f34886aebf138767c003dc62a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-api-clients/foundation/zipball/8f64b91a1a21249f34886aebf138767c003dc62a",
-                "reference": "8f64b91a1a21249f34886aebf138767c003dc62a",
-                "shasum": ""
-            },
-            "require": {
-                "clue/block-react": "^1.1",
-                "doctrine/annotations": "^1.2",
-                "guzzlehttp/guzzle": "^6.0",
-                "ocramius/generated-hydrator": "^2.0",
-                "php": "^7.0",
-                "react/cache": "^0.4.1",
-                "react/promise": "^2.2",
-                "reactivex/rxphp": "^1.2",
-                "wyrihaximus/react-guzzle-psr7": "^1.0",
-                "wyrihaximus/ticking-promise": "^1.6"
-            },
-            "require-dev": {
-                "phake/phake": "^2.3",
-                "phpunit/phpunit": "^5.2.3",
-                "squizlabs/php_codesniffer": "^2.6",
-                "vectorface/dunit": "~2.0"
-            },
-            "suggest": {
-                "api-clients/resource-generator": "Easy wireframing of resources",
-                "wyrihaximus/react-cache-filesystem": "Filesystem cache",
-                "wyrihaximus/react-cache-redis": "Redis cache"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ApiClients\\Foundation\\": "src/"
-                },
-                "files": [
-                    "src/bootstrap.php",
-                    "src/functions_include.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Cees-Jan Kiewiet",
-                    "email": "ceesjank@gmail.com"
-                }
-            ],
-            "time": "2016-08-07 20:10:23"
-        },
         {
             "name": "clue/block-react",
             "version": "v1.1.0",
@@ -616,51 +557,6 @@
                 "serializer"
             ],
             "time": "2016-01-12 11:39:06"
-        },
-        {
-            "name": "phpbench/dom",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpbench/dom.git",
-                "reference": "dca2b0e8d7358b5b0efec3dd04ecee832791654f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpbench/dom/zipball/dca2b0e8d7358b5b0efec3dd04ecee832791654f",
-                "reference": "dca2b0e8d7358b5b0efec3dd04ecee832791654f",
-                "shasum": ""
-            },
-            "require": {
-                "ext-dom": "*",
-                "php": "^5.4|^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.6"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpBench\\Dom\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniel Leech",
-                    "email": "daniel@dantleech.com"
-                }
-            ],
-            "description": "DOM wrapper to simplify working with the PHP DOM implementation",
-            "time": "2016-06-20 19:36:49"
         },
         {
             "name": "psr/http-message",
@@ -1869,17 +1765,62 @@
             "time": "2016-06-19 19:27:42"
         },
         {
+            "name": "phpbench/dom",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpbench/dom.git",
+                "reference": "dca2b0e8d7358b5b0efec3dd04ecee832791654f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpbench/dom/zipball/dca2b0e8d7358b5b0efec3dd04ecee832791654f",
+                "reference": "dca2b0e8d7358b5b0efec3dd04ecee832791654f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "php": "^5.4|^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpBench\\Dom\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Leech",
+                    "email": "daniel@dantleech.com"
+                }
+            ],
+            "description": "DOM wrapper to simplify working with the PHP DOM implementation",
+            "time": "2016-06-20 19:36:49"
+        },
+        {
             "name": "phpbench/phpbench",
             "version": "dev-feature-variant-index",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WyriHaximus/phpbench.git",
-                "reference": "a781e4c647c9cd425aa5d9e95a4ec671871e71e7"
+                "reference": "3ff0f415c586763c108e841b7ba065a2e897cdc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WyriHaximus/phpbench/zipball/a781e4c647c9cd425aa5d9e95a4ec671871e71e7",
-                "reference": "a781e4c647c9cd425aa5d9e95a4ec671871e71e7",
+                "url": "https://api.github.com/repos/WyriHaximus/phpbench/zipball/3ff0f415c586763c108e841b7ba065a2e897cdc9",
+                "reference": "3ff0f415c586763c108e841b7ba065a2e897cdc9",
                 "shasum": ""
             },
             "require": {
@@ -1946,7 +1887,7 @@
             "support": {
                 "source": "https://github.com/WyriHaximus/phpbench/tree/feature-variant-index"
             },
-            "time": "2016-08-09 00:47:11"
+            "time": "2016-08-09 02:18:21"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3639,28 +3580,29 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde"
+                "reference": "bb2d123231c095735130cc8f6d31385a44c7b308"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde",
-                "reference": "30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/bb2d123231c095735130cc8f6d31385a44c7b308",
+                "reference": "bb2d123231c095735130cc8f6d31385a44c7b308",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": "^5.3.3|^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.6"
+                "phpunit/phpunit": "^4.6",
+                "sebastian/version": "^1.0.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -3684,16 +3626,15 @@
                 "check",
                 "validate"
             ],
-            "time": "2015-08-24 13:29:44"
+            "time": "2016-08-09 15:02:57"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "api-clients/foundation": 20,
-        "phpbench/dom": 20,
         "phpbench/phpbench": 20,
-        "phpbench/container": 20
+        "phpbench/container": 20,
+        "phpbench/dom": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
