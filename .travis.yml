@@ -12,10 +12,6 @@ php:
   - hhvm
   - nightly
 
-## Force composer to use HEAD as project root version: https://getcomposer.org/doc/03-cli.md#composer-root-version
-env:
-  COMPOSER_ROOT_VERSION=HEAD
-
 ## Build matrix for lowest and highest possible targets
 matrix:
   include:
