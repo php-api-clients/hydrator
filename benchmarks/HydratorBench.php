@@ -21,7 +21,16 @@ class HydratorBench extends AbstractBench
                 'slug' => 'Wyrihaximus/php-travis-client',
             ];
         }
-        
+
+        $largeSlug = str_pad('Wyrihaximus/php-travis-client-', 1024, 'x');
+        $complicatedXxlLageSubs = [];
+        for ($i = 0; $i < 25; $i++) {
+            $complicatedXxlLageSubs[] = [
+                'id' => $i,
+                'slug' => $largeSlug,
+            ];
+        }
+
         return [
             'simple' => [
                 'resource' => SubResource::class,
@@ -65,6 +74,18 @@ class HydratorBench extends AbstractBench
                         'slug' => 'Wyrihaximus/php-travis-client',
                     ],
                     'subs' => $complicatedXxlSubs,
+                ],
+            ],
+            'complicated_xxl_large_subs' => [
+                'resource' => Resource::class,
+                'json' => [
+                    'id' => 1,
+                    'slog' => 'Wyrihaximus/php-travis-client',
+                    'sub' => [
+                        'id' => 1,
+                        'slug' => 'Wyrihaximus/php-travis-client',
+                    ],
+                    'subs' => $complicatedXxlLageSubs,
                 ],
             ],
         ];
