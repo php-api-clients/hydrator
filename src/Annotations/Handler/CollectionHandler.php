@@ -18,6 +18,11 @@ class CollectionHandler extends AbstractHandler implements HandlerInterface
 
         foreach ($annotation->properties() as $property) {
             $array = $json[$property];
+
+            if (!is_array($array)) {
+                continue;
+            }
+
             $json[$property] = [];
             foreach ($array as $resource) {
                 if ($resource === null) {
