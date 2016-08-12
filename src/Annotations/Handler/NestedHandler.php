@@ -17,7 +17,7 @@ class NestedHandler extends AbstractHandler implements HandlerInterface
         }
 
         foreach ($annotation->properties() as $property) {
-            if ($json[$property] === null) {
+            if (!is_array($json[$property])) {
                 continue;
             }
 
@@ -34,6 +34,10 @@ class NestedHandler extends AbstractHandler implements HandlerInterface
         }
 
         foreach ($annotation->properties() as $property) {
+            if (!($json[$property] instanceof ResourceInterface)) {
+                continue;
+            }
+
             $json[$property] = $this->getHydrator()->extract($annotation->get($property), $json[$property]);
         }
 
