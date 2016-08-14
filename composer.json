@@ -27,9 +27,7 @@
     "squizlabs/php_codesniffer": "^2.6",
     "vectorface/dunit": "~2.0",
     "phake/phake": "^2.3",
-    "phpbench/phpbench": "dev-feature-variant-index",
-    "phpbench/container": "dev-master",
-    "phpbench/dom": "dev-master"
+    "phpbench/phpbench": "^0.11"
   },
   "suggest": {
     "api-clients/resource-generator": "Easy wireframing of resources",
@@ -51,11 +49,5 @@
     "classmap": [
       "benchmarks/"
     ]
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/WyriHaximus/phpbench"
-    }
-  ]
+  }
 }

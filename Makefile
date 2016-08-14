@@ -13,18 +13,18 @@ unit: init
 	./vendor/bin/phpunit --coverage-text --coverage-html covHtml
 
 benchmark: init
-	./vendor/bin/phpbench run benchmarks/ --progress=dots --store --report='generator: "table", cols: ["benchmark", "subject", "index", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}'
+	./vendor/bin/phpbench run benchmarks/ --progress=dots --store --report='generator: "table", cols: ["benchmark", "subject", "params", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}'
 
 benchmark-travis: init
 	mkdir -p .phpbench_storage/xml
 	mkdir -p .phpbench_storage/store
 	mkdir -p .phpbench_storage/csv
-	./vendor/bin/phpbench run benchmarks/ --progress=travis --store --dump-file=.phpbench_storage/xml/latest.xml --context=$(TRAVIS_BUILD_NUMBER) -vvv --report='generator: "table", cols: ["benchmark", "subject", "index", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}'
-	if [ -f ".phpbench_storage/xml/previous.xml" ]; then ./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --file=.phpbench_storage/xml/latest.xml --report='generator: "table", compare: "revs", cols: ["subject", "index", "mean"], compare_fields: ["best", "mean", "mode", "worst"]'; fi;
+	./vendor/bin/phpbench run benchmarks/ --progress=travis --store --dump-file=.phpbench_storage/xml/latest.xml --context=$(TRAVIS_BUILD_NUMBER) -vvv --report='generator: "table", cols: ["benchmark", "subject", "params", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}'
+	if [ -f ".phpbench_storage/xml/previous.xml" ]; then ./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --file=.phpbench_storage/xml/latest.xml --report='generator: "table", compare: "revs", cols: ["subject", "params", "mean"], compare_fields: ["best", "mean", "mode", "worst"]'; fi;
 	mv .phpbench_storage/xml/latest.xml .phpbench_storage/xml/previous.xml
 
 travis-benchmark-delimited: init
-	if [ -f ".phpbench_storage/xml/previous.xml" ]; then ./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --report='generator: "table", cols: ["benchmark", "subject", "index", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}' --output=delimited; fi;
+	if [ -f ".phpbench_storage/xml/previous.xml" ]; then ./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --report='generator: "table", cols: ["benchmark", "subject", "params", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}' --output=delimited; fi;
 	if [ -f ".phpbench_storage/xml/previous.xml" ]; then cat .phpbench_storage/csv/previous.csv; fi;
 
 dunit: init
