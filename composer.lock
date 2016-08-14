@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "74a339a3cda5b8b080c96f6a798bea7f",
-    "content-hash": "02da95c2f1436b88dd249435ec76b0a8",
+    "hash": "4d528fcda71929a10e5510776d4625eb",
+    "content-hash": "10b2f06af94f233050639bb94a0b1b44",
     "packages": [
         {
             "name": "api-clients/resource",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-api-clients/resource.git",
-                "reference": "653a8f089098bfb91504a7fc0954d7864b81fd02"
+                "reference": "cf88809758c48b40b1a3be2816b8d9420af4107e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/653a8f089098bfb91504a7fc0954d7864b81fd02",
-                "reference": "653a8f089098bfb91504a7fc0954d7864b81fd02",
+                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/cf88809758c48b40b1a3be2816b8d9420af4107e",
+                "reference": "cf88809758c48b40b1a3be2816b8d9420af4107e",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
                     "email": "ceesjank@gmail.com"
                 }
             ],
-            "time": "2016-08-10 17:07:04"
+            "time": "2016-08-11 07:40:19"
         },
         {
             "name": "clue/block-react",
@@ -1347,92 +1347,6 @@
     ],
     "packages-dev": [
         {
-            "name": "beberlei/assert",
-            "version": "v2.6.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/beberlei/assert.git",
-                "reference": "51e9d654481fc00c8a376641c390ec4e35d8c1fc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/assert/zipball/51e9d654481fc00c8a376641c390ec4e35d8c1fc",
-                "reference": "51e9d654481fc00c8a376641c390ec4e35d8c1fc",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "@stable"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Assert": "lib/"
-                },
-                "files": [
-                    "lib/Assert/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Benjamin Eberlei",
-                    "email": "kontakt@beberlei.de",
-                    "role": "Lead Developer"
-                },
-                {
-                    "name": "Richard Quadling",
-                    "email": "rquadling@gmail.com",
-                    "role": "Collaborator"
-                }
-            ],
-            "description": "Thin assertion library for input validation in business models.",
-            "keywords": [
-                "assert",
-                "assertion",
-                "validation"
-            ],
-            "time": "2016-07-28 19:35:30"
-        },
-        {
-            "name": "container-interop/container-interop",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/container-interop/container-interop.git",
-                "reference": "fc08354828f8fd3245f77a66b9e23a6bca48297e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/container-interop/container-interop/zipball/fc08354828f8fd3245f77a66b9e23a6bca48297e",
-                "reference": "fc08354828f8fd3245f77a66b9e23a6bca48297e",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Interop\\Container\\": "src/Interop/Container/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
-            "time": "2014-12-30 15:22:37"
-        },
-        {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
             "source": {
@@ -1769,58 +1683,17 @@
             "time": "2016-03-04 18:49:33"
         },
         {
-            "name": "phpbench/container",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpbench/container.git",
-                "reference": "3f39828896700984473b34a9ec81875fb92322ad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpbench/container/zipball/3f39828896700984473b34a9ec81875fb92322ad",
-                "reference": "3f39828896700984473b34a9ec81875fb92322ad",
-                "shasum": ""
-            },
-            "require": {
-                "container-interop/container-interop": "^1.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpBench\\DependencyInjection\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniel Leech",
-                    "email": "daniel@dantleech.com"
-                }
-            ],
-            "description": "Simple, configurable, service container.",
-            "time": "2016-06-19 19:27:42"
-        },
-        {
             "name": "phpbench/dom",
-            "version": "dev-master",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpbench/dom.git",
-                "reference": "dca2b0e8d7358b5b0efec3dd04ecee832791654f"
+                "reference": "b135378dd0004c05ba5446aeddaf0b83339c1c4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpbench/dom/zipball/dca2b0e8d7358b5b0efec3dd04ecee832791654f",
-                "reference": "dca2b0e8d7358b5b0efec3dd04ecee832791654f",
+                "url": "https://api.github.com/repos/phpbench/dom/zipball/b135378dd0004c05ba5446aeddaf0b83339c1c4c",
+                "reference": "b135378dd0004c05ba5446aeddaf0b83339c1c4c",
                 "shasum": ""
             },
             "require": {
@@ -1852,24 +1725,23 @@
                 }
             ],
             "description": "DOM wrapper to simplify working with the PHP DOM implementation",
-            "time": "2016-06-20 19:36:49"
+            "time": "2016-02-27 12:15:56"
         },
         {
             "name": "phpbench/phpbench",
-            "version": "dev-feature-variant-index",
+            "version": "0.11.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/WyriHaximus/phpbench.git",
-                "reference": "3ff0f415c586763c108e841b7ba065a2e897cdc9"
+                "url": "https://github.com/phpbench/phpbench.git",
+                "reference": "6903f32e1a14f2e88b55b8582709b89ccaa67dc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WyriHaximus/phpbench/zipball/3ff0f415c586763c108e841b7ba065a2e897cdc9",
-                "reference": "3ff0f415c586763c108e841b7ba065a2e897cdc9",
+                "url": "https://api.github.com/repos/phpbench/phpbench/zipball/6903f32e1a14f2e88b55b8582709b89ccaa67dc7",
+                "reference": "6903f32e1a14f2e88b55b8582709b89ccaa67dc7",
                 "shasum": ""
             },
             "require": {
-                "beberlei/assert": "^2.4",
                 "doctrine/annotations": "^1.2.7",
                 "ext-dom": "*",
                 "ext-json": "*",
@@ -1877,10 +1749,9 @@
                 "ext-reflection": "*",
                 "ext-spl": "*",
                 "justinrainbow/json-schema": "^1.6",
-                "lstrojny/functional-php": "1.0|^1.2.3",
+                "lstrojny/functional-php": "^1.0",
                 "php": "^5.5|^7.0",
-                "phpbench/container": "dev-master",
-                "phpbench/dom": "dev-master",
+                "phpbench/dom": "~0.2.0",
                 "seld/jsonlint": "^1.0",
                 "symfony/console": "^2.4|^3.0",
                 "symfony/debug": "^2.4|^3.0",
@@ -1910,15 +1781,7 @@
                     "PhpBench\\Extensions\\XDebug\\": "extensions/xdebug/lib/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "PhpBench\\Tests\\": "tests/",
-                    "PhpBench\\Benchmarks\\": "benchmarks/",
-                    "PhpBench\\Extensions\\XDebug\\Tests\\": "extensions/xdebug/tests/",
-                    "PhpBench\\Extensions\\Dbal\\Tests\\": "extensions/dbal/tests/",
-                    "PhpBench\\Extensions\\Dbal\\Benchmarks\\": "extensions/dbal/benchmarks/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1929,10 +1792,7 @@
                 }
             ],
             "description": "PHP Benchmarking Framework",
-            "support": {
-                "source": "https://github.com/WyriHaximus/phpbench/tree/feature-variant-index"
-            },
-            "time": "2016-08-09 02:18:21"
+            "time": "2016-04-09 11:44:23"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3677,10 +3537,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "api-clients/resource": 20,
-        "phpbench/phpbench": 20,
-        "phpbench/container": 20,
-        "phpbench/dom": 20
+        "api-clients/resource": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
