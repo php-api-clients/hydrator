@@ -22,6 +22,7 @@ cache:
 
 ## Set up environment varriables
 init:
+    - SET COMPOSER_ROOT_VERSION=dev-master ## Temporary until we tag first versions
     - SET PATH=C:\Program Files\OpenSSL;c:\tools\php;%PATH%
     - SET COMPOSER_NO_INTERACTION=1
     - SET PHP=1
