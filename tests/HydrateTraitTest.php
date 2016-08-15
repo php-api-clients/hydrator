@@ -11,7 +11,7 @@ use ApiClients\Tests\Foundation\Hydrator\TestCase;
 
 class HydrateTraitTest extends TestCase
 {
-    public function testHydrate()
+    public function _testHydrate()
     {
         $resourceName = 'Beer';
         $resourceJson = [
