@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4d528fcda71929a10e5510776d4625eb",
-    "content-hash": "10b2f06af94f233050639bb94a0b1b44",
+    "hash": "c4800ebfdf7b0f71824af4c5429b3053",
+    "content-hash": "42178226484cec09c5a988b68b9e87b1",
     "packages": [
         {
             "name": "api-clients/resource",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-api-clients/resource.git",
-                "reference": "cf88809758c48b40b1a3be2816b8d9420af4107e"
+                "reference": "049868daa9529ca3c4bc70c1041b6c883519603e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/cf88809758c48b40b1a3be2816b8d9420af4107e",
-                "reference": "cf88809758c48b40b1a3be2816b8d9420af4107e",
+                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/049868daa9529ca3c4bc70c1041b6c883519603e",
+                "reference": "049868daa9529ca3c4bc70c1041b6c883519603e",
                 "shasum": ""
             },
             "require": {
@@ -28,8 +28,7 @@
             "require-dev": {
                 "phake/phake": "^2.3",
                 "phpunit/phpunit": "^5.2.3",
-                "squizlabs/php_codesniffer": "^2.6",
-                "vectorface/dunit": "~2.0"
+                "squizlabs/php_codesniffer": "^2.6"
             },
             "type": "library",
             "autoload": {
@@ -50,7 +49,7 @@
                     "email": "ceesjank@gmail.com"
                 }
             ],
-            "time": "2016-08-11 07:40:19"
+            "time": "2016-08-15 20:00:57"
         },
         {
             "name": "clue/block-react",
