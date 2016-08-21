@@ -6,6 +6,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use GeneratedHydrator\Configuration;
 use ReflectionClass;
 use ApiClients\Foundation\Resource\ResourceInterface;
+use ApiClients\Foundation\Resource\AbstractResource;
 use Zend\Hydrator\HydratorInterface;
 
 class Hydrator
@@ -44,6 +45,7 @@ class Hydrator
         $this->annotationReader = new AnnotationReader();
 
         $this->setUpAnnotations();
+        $this->addSelfToExtraProperties();
     }
 
     protected function setUpAnnotations()
@@ -55,6 +57,11 @@ class Hydrator
         foreach ($this->options[Options::ANNOTATIONS] as $annotationClass => $handler) {
             $this->annotationHandlers[$annotationClass] = new $handler($this);
         }
+    }
+
+    protected function addSelfToExtraProperties()
+    {
+        $this->options[Options::EXTRA_PROPERTIES]['hydrator'] = $this;
     }
 
     /**
@@ -85,7 +92,11 @@ class Hydrator
         $hydrator = $this->getHydrator($class);
         $object = new $class();
         $json = $this->hydrateApplyAnnotations($json, $object);
-        return $hydrator->hydrate($json, $object);
+        $resource = $hydrator->hydrate($json, $object);
+        if ($resource instanceof AbstractResource) {
+            $resource->setExtraProperties($this->options[Options::EXTRA_PROPERTIES]);
+        }
+        return $resource;
     }
 
     /**
