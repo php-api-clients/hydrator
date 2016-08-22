@@ -5,7 +5,7 @@ namespace ApiClients\Tests\Foundation\Hydrator\Annotations;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use ApiClients\Foundation\Hydrator\Annotations\Collection;
-use ApiClients\Tests\Foundation\Hydrator\DummyResource;
+use ApiClients\Foundation\Resource\DummyResource;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
 
 class CollectionTest extends TestCase

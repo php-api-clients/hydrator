@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ApiClients\Tests\Foundation\Hydrator\Resource;
 
-use ApiClients\Tests\Foundation\Hydrator\DummyResource;
+use ApiClients\Foundation\Resource\DummyResource;
 use Phake;
 use ApiClients\Foundation\Resource\ResourceInterface;
 use ApiClients\Foundation\Hydrator\Hydrator;
