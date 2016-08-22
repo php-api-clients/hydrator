@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-api-clients/resource.git",
-                "reference": "857a5b802986df993378889b45a352ba708cdb3f"
+                "reference": "3bbd230620049f8ce6ffc86ee8cea36bc0f853f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/857a5b802986df993378889b45a352ba708cdb3f",
-                "reference": "857a5b802986df993378889b45a352ba708cdb3f",
+                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/3bbd230620049f8ce6ffc86ee8cea36bc0f853f1",
+                "reference": "3bbd230620049f8ce6ffc86ee8cea36bc0f853f1",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                     "email": "ceesjank@gmail.com"
                 }
             ],
-            "time": "2016-08-21 11:59:20"
+            "time": "2016-08-22 14:42:41"
         },
         {
             "name": "clue/block-react",
@@ -989,16 +989,16 @@
         },
         {
             "name": "react/stream",
-            "version": "v0.4.3",
+            "version": "v0.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/stream.git",
-                "reference": "305b2328d2a2e157bc13b61a0f5c6e41b666b188"
+                "reference": "fcc9e7cea126962cff303c90c05e2efdcec09a27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/stream/zipball/305b2328d2a2e157bc13b61a0f5c6e41b666b188",
-                "reference": "305b2328d2a2e157bc13b61a0f5c6e41b666b188",
+                "url": "https://api.github.com/repos/reactphp/stream/zipball/fcc9e7cea126962cff303c90c05e2efdcec09a27",
+                "reference": "fcc9e7cea126962cff303c90c05e2efdcec09a27",
                 "shasum": ""
             },
             "require": {
@@ -1006,6 +1006,7 @@
                 "php": ">=5.3.8"
             },
             "require-dev": {
+                "clue/stream-filter": "~1.2",
                 "react/event-loop": "^0.4|^0.3",
                 "react/promise": "^2.0|^1.0"
             },
@@ -1014,11 +1015,6 @@
                 "react/promise": "^2.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.5-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "React\\Stream\\": "src"
@@ -1033,7 +1029,7 @@
                 "pipe",
                 "stream"
             ],
-            "time": "2015-10-07 18:32:58"
+            "time": "2016-08-22 09:51:07"
         },
         {
             "name": "reactivex/rxphp",
