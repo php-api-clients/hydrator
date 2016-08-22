@@ -25,16 +25,8 @@ trait HydrateTrait
     /**
      * @param Hydrator $hydrator
      */
-    protected function setHydrator(Hydrator $hydrator)
+    protected function hydratorSetter(Hydrator $hydrator)
     {
         $this->hydrator = $hydrator;
-    }
-
-    /**
-     * @return string
-     */
-    protected function hydratorSetter(): string
-    {
-        return 'setHydrator';
     }
 }
