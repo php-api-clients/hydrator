@@ -11,7 +11,7 @@ use ApiClients\Tests\Foundation\Hydrator\TestCase;
 
 class HydrateTraitTest extends TestCase
 {
-    public function _testHydrate()
+    public function testHydrate()
     {
         $resourceName = 'Beer';
         $resourceJson = [
@@ -22,12 +22,13 @@ class HydrateTraitTest extends TestCase
         $resource = new DummyResource();
 
         $hydrator = Phake::mock(Hydrator::class);
+
+        $resource->setExtraProperties([
+            'hydrator' => $hydrator,
+        ]);
+
         Phake::when($hydrator)->hydrate($resourceName, $resourceJson)->thenReturn(Phake::mock(ResourceInterface::class));
 
-        $transport = Phake::mock(Client::class);
-        Phake::when($transport)->getHydrator()->thenReturn($hydrator);
-
-        $resource->setTransport($transport);
         $resource->hydrateWrapper($resourceName, $resourceJson);
 
         Phake::verify($hydrator)->hydrate($resourceName, $resourceJson);
