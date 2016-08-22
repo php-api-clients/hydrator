@@ -33,7 +33,7 @@ trait HydrateTrait
     /**
      * @return string
      */
-    protected function hydratorSettor(): string
+    protected function hydratorSetter(): string
     {
         return 'setHydrator';
     }
