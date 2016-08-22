@@ -13,8 +13,8 @@ use ApiClients\Foundation\Resource\ResourceInterface;
  */
 class DummyResource extends AbstractResource implements ResourceInterface
 {
-    public function hydrateWrapper($resourceName, $resourceJson)
+    public function wrapper($method, ...$args)
     {
-        return $this->hydrate($resourceName, $resourceJson);
+        return $this->$method(...$args);
     }
 }
