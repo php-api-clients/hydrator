@@ -1,7 +1,7 @@
-all: cs dunit unit
+all: cs unit
 travis: cs travis-unit
 travis-benchmark: benchmark-travis
-contrib: cs dunit unit
+contrib: cs unit
 
 init:
 	if [ ! -d vendor ]; then composer install; fi;
@@ -26,9 +26,6 @@ benchmark-travis: init
 travis-benchmark-delimited: init
 	if [ -f ".phpbench_storage/xml/previous.xml" ]; then ./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --report='generator: "table", cols: ["benchmark", "subject", "params", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}' --output=delimited; fi;
 	if [ -f ".phpbench_storage/xml/previous.xml" ]; then cat .phpbench_storage/csv/previous.csv; fi;
-
-dunit: init
-	./vendor/bin/dunit
 
 travis-unit: init
 	./vendor/bin/phpunit --coverage-text --coverage-clover ./build/logs/clover.xml

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c4800ebfdf7b0f71824af4c5429b3053",
-    "content-hash": "42178226484cec09c5a988b68b9e87b1",
+    "hash": "9caf7e34420e771815dcb37a1ec19ee2",
+    "content-hash": "746daf3acd77327cbfa33332625e1448",
     "packages": [
         {
             "name": "api-clients/resource",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-api-clients/resource.git",
-                "reference": "3bbd230620049f8ce6ffc86ee8cea36bc0f853f1"
+                "reference": "cf7a41afdfbc05fdc619362e231cec0b2c546cd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/3bbd230620049f8ce6ffc86ee8cea36bc0f853f1",
-                "reference": "3bbd230620049f8ce6ffc86ee8cea36bc0f853f1",
+                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/cf7a41afdfbc05fdc619362e231cec0b2c546cd3",
+                "reference": "cf7a41afdfbc05fdc619362e231cec0b2c546cd3",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                     "email": "ceesjank@gmail.com"
                 }
             ],
-            "time": "2016-08-22 14:42:41"
+            "time": "2016-08-22 18:37:55"
         },
         {
             "name": "clue/block-react",
@@ -3424,59 +3424,6 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2016-07-17 14:02:08"
-        },
-        {
-            "name": "vectorface/dunit",
-            "version": "v2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Vectorface/dunit.git",
-                "reference": "3f04c7a8bef5ff100666e92db96e93f80a6640bf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Vectorface/dunit/zipball/3f04c7a8bef5ff100666e92db96e93f80a6640bf",
-                "reference": "3f04c7a8bef5ff100666e92db96e93f80a6640bf",
-                "shasum": ""
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.3",
-                "symfony/console": "~2.5"
-            },
-            "bin": [
-                "bin/dunit"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Vectorface\\Dunit\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniel Bruce",
-                    "email": "dbruce@vectorface.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Cory Darby",
-                    "email": "ckdarby@vectorface.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Test code against multiple versions of PHP with the help of docker",
-            "homepage": "https://github.com/Vectorface/dunit",
-            "keywords": [
-                "docker",
-                "php",
-                "phpunit",
-                "testing"
-            ],
-            "time": "2015-03-31 19:30:02"
         },
         {
             "name": "webmozart/assert",
