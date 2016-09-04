@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace ApiClients\Foundation\Hydrator;
 
-use ApiClients\Foundation\Resource\ResourceInterface;
-
 trait HydrateTrait
 {
     /**
@@ -13,13 +11,11 @@ trait HydrateTrait
     private $hydrator;
 
     /**
-     * @param string $class
-     * @param array $json
-     * @return ResourceInterface
+     * @return Hydrator
      */
-    protected function hydrate(string $class, array $json): ResourceInterface
+    protected function hydrator(): Hydrator
     {
-        return $this->hydrator->hydrate($class, $json);
+        return $this->hydrator;
     }
 
     /**
