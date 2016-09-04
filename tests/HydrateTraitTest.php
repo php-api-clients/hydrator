@@ -29,7 +29,7 @@ class HydrateTraitTest extends TestCase
 
         Phake::when($hydrator)->hydrate($resourceName, $resourceJson)->thenReturn(Phake::mock(ResourceInterface::class));
 
-        $resource->wrapper('hydrate', $resourceName, $resourceJson);
+        $resource->wrapper('hydrateResource', $resourceName, $resourceJson);
 
         Phake::verify($hydrator)->hydrate($resourceName, $resourceJson);
     }

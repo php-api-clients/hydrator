@@ -17,7 +17,7 @@ trait HydrateTrait
      * @param array $json
      * @return ResourceInterface
      */
-    protected function hydratorResource(string $class, $json): ResourceInterface
+    protected function hydrateResource(string $class, $json): ResourceInterface
     {
         return $this->hydrator->hydrate($class, $json);
     }
