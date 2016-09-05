@@ -4,6 +4,7 @@ namespace ApiClients\Foundation\Hydrator;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
+use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
 use ReflectionClass;
@@ -34,7 +35,7 @@ class Hydrator
     protected $annotationHandlers = [];
 
     /**
-     * @var AnnotationReader
+     * @var Reader
      */
     protected $annotationReader;
 
