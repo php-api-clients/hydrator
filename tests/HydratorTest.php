@@ -76,31 +76,35 @@ class HydratorTest extends TestCase
 
     public function testAnnotationCache()
     {
-
         $json = $this->getJson();
         $tmpDir = $this->getTmpDir();
+        $annotationCache = $tmpDir . 'annotation' . DIRECTORY_SEPARATOR;
+        mkdir($annotationCache);
+        $resourceCache = $tmpDir . 'resource' . DIRECTORY_SEPARATOR;
+        mkdir($resourceCache);
         $hydrator = Factory::create([
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_SUFFIX => 'Async',
+            Options::RESOURCE_CACHE_DIR => $resourceCache,
             Options::ANNOTATION_CACHE => new FilesystemCache(
-                $tmpDir
+                $annotationCache
             ),
             Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
 
         ]);
-        $files = $this->getFilesInDirectory($tmpDir);
+        $files = $this->getFilesInDirectory($annotationCache);
         $this->assertSame(0, count($files));
         $hydrator->hydrate(
             'Resource',
             $json
         );
-        $files = $this->getFilesInDirectory($tmpDir);
+        $files = $this->getFilesInDirectory($annotationCache);
         $this->assertSame(4, count($files));
         $hydrator->hydrate(
             'Resource',
             $json
         );
-        $files = $this->getFilesInDirectory($tmpDir);
+        $files = $this->getFilesInDirectory($annotationCache);
         $this->assertSame(4, count($files));
     }
 }
