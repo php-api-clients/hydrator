@@ -21,6 +21,7 @@
     "react/cache": "^0.4.1",
     "wyrihaximus/ticking-promise": "^1.6",
     "doctrine/annotations": "^1.2",
+    "doctrine/cache": "^1.2",
     "api-clients/resource": "dev-master"
   },
   "require-dev": {
