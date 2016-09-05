@@ -6,8 +6,8 @@ namespace ApiClients\Tests\Foundation\Hydrator;
 use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Options;
 use GeneratedHydrator\Configuration;
-use Phake;
-use ApiClients\Foundation\Hydrator\Hydrator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
@@ -104,5 +104,23 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
                 ],
             ],
         ];
+    }
+
+    protected function getFilesInDirectory(string $path): array
+    {
+        $files = [];
+
+        $directory = new RecursiveDirectoryIterator($path);
+        $directory = new RecursiveIteratorIterator($directory);
+
+        foreach ($directory as $node) {
+            if (!is_file($node->getPathname())) {
+                continue;
+            }
+
+            $files[] = $node->getPathname();
+        }
+
+        return $files;
     }
 }

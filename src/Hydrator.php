@@ -3,6 +3,9 @@
 namespace ApiClients\Foundation\Hydrator;
 
 use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Annotations\CachedReader;
+use Doctrine\Common\Annotations\Reader;
+use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
 use ReflectionClass;
 use ApiClients\Foundation\Resource\ResourceInterface;
@@ -32,7 +35,7 @@ class Hydrator
     protected $annotationHandlers = [];
 
     /**
-     * @var AnnotationReader
+     * @var Reader
      */
     protected $annotationReader;
 
@@ -42,7 +45,17 @@ class Hydrator
     public function __construct(array $options)
     {
         $this->options = $options;
-        $this->annotationReader = new AnnotationReader();
+
+        $reader = new AnnotationReader();
+        if (isset($this->options[Options::ANNOTATION_CACHE]) &&
+            $this->options[Options::ANNOTATION_CACHE] instanceof Cache
+        ) {
+            $reader = new CachedReader(
+                $reader,
+                $this->options[Options::ANNOTATION_CACHE]
+            );
+        }
+        $this->annotationReader = $reader;
 
         $this->setUpAnnotations();
         $this->addSelfToExtraProperties();

@@ -8,6 +8,7 @@ use ApiClients\Foundation\Hydrator\Options;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\Resource as AsyncResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\SubResource as AsyncSubResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Sync\Resource as SyncResource;
+use Doctrine\Common\Cache\FilesystemCache;
 
 class HydratorTest extends TestCase
 {
@@ -52,19 +53,7 @@ class HydratorTest extends TestCase
             'Resource',
             $this->getJson()
         );
-        $files = [];
-        $directory = dir($tmpDir);
-        while (false !== ($entry = $directory->read())) {
-            if (in_array($entry, ['.', '..'])) {
-                continue;
-            }
-
-            if (is_file($tmpDir . $entry)) {
-                $files[] = $tmpDir . $entry;
-                continue;
-            }
-        }
-        $directory->close();
+        $files = $this->getFilesInDirectory($tmpDir);
         $this->assertSame(2, count($files));
     }
 
@@ -83,5 +72,39 @@ class HydratorTest extends TestCase
             $json
         );
         $this->assertEquals($json, $hydrator->extract('Resource', $repository));
+    }
+
+    public function testAnnotationCache()
+    {
+        $json = $this->getJson();
+        $tmpDir = $this->getTmpDir();
+        $annotationCache = $tmpDir . 'annotation' . DIRECTORY_SEPARATOR;
+        mkdir($annotationCache);
+        $resourceCache = $tmpDir . 'resource' . DIRECTORY_SEPARATOR;
+        mkdir($resourceCache);
+        $hydrator = Factory::create([
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Async',
+            Options::RESOURCE_CACHE_DIR => $resourceCache,
+            Options::ANNOTATION_CACHE => new FilesystemCache(
+                $annotationCache
+            ),
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+
+        ]);
+        $files = $this->getFilesInDirectory($annotationCache);
+        $this->assertSame(0, count($files));
+        $hydrator->hydrate(
+            'Resource',
+            $json
+        );
+        $files = $this->getFilesInDirectory($annotationCache);
+        $this->assertSame(4, count($files));
+        $hydrator->hydrate(
+            'Resource',
+            $json
+        );
+        $files = $this->getFilesInDirectory($annotationCache);
+        $this->assertSame(4, count($files));
     }
 }
