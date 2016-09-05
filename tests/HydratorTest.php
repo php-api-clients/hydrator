@@ -8,6 +8,7 @@ use ApiClients\Foundation\Hydrator\Options;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\Resource as AsyncResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\SubResource as AsyncSubResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Sync\Resource as SyncResource;
+use Doctrine\Common\Cache\FilesystemCache;
 
 class HydratorTest extends TestCase
 {
@@ -71,5 +72,35 @@ class HydratorTest extends TestCase
             $json
         );
         $this->assertEquals($json, $hydrator->extract('Resource', $repository));
+    }
+
+    public function testAnnotationCache()
+    {
+
+        $json = $this->getJson();
+        $tmpDir = $this->getTmpDir();
+        $hydrator = Factory::create([
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Async',
+            Options::ANNOTATION_CACHE => new FilesystemCache(
+                $tmpDir
+            ),
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+
+        ]);
+        $files = $this->getFilesInDirectory($tmpDir);
+        $this->assertSame(0, count($files));
+        $hydrator->hydrate(
+            'Resource',
+            $json
+        );
+        $files = $this->getFilesInDirectory($tmpDir);
+        $this->assertSame(4, count($files));
+        $hydrator->hydrate(
+            'Resource',
+            $json
+        );
+        $files = $this->getFilesInDirectory($tmpDir);
+        $this->assertSame(4, count($files));
     }
 }
