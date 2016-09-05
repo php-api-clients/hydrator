@@ -40,6 +40,7 @@ install:
 
 ## Run the actual test and benchmark
 script:
+  - php -r "\$lock = json_decode(file_get_contents('composer.lock'))->hash; \$json = md5(file_get_contents('composer.json')); if (\$lock !== \$json) { echo \"Lock file out of date\\n\"; exit(1); } echo \"Lock file up to date\\n\"; exit(0);"
   - if [ -z "$benchmark" ]; then make travis; fi;
   - if [ "$benchmark" = "true" ]; then make travis-benchmark; fi;
   - if [ "$benchmark" = "true" ]; then make travis-benchmark-delimited; fi;
