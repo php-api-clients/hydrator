@@ -77,6 +77,11 @@ class Hydrator
         $this->options[Options::EXTRA_PROPERTIES]['hydrator'] = $this;
     }
 
+    public function preheat()
+    {
+        // TODO
+    }
+
     /**
      * @param string $class
      * @param array $json
