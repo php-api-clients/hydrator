@@ -105,4 +105,22 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
             ],
         ];
     }
+
+    protected function getFilesInDirectory(string $path): array
+    {
+        $directory = dir($path);
+        while (false !== ($entry = $directory->read())) {
+            if (in_array($entry, ['.', '..'])) {
+                continue;
+            }
+
+            if (is_file($path . $entry)) {
+                $files[] = $path . $entry;
+                continue;
+            }
+        }
+        $directory->close();
+
+        return $files;
+    }
 }

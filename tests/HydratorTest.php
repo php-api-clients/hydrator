@@ -52,19 +52,7 @@ class HydratorTest extends TestCase
             'Resource',
             $this->getJson()
         );
-        $files = [];
-        $directory = dir($tmpDir);
-        while (false !== ($entry = $directory->read())) {
-            if (in_array($entry, ['.', '..'])) {
-                continue;
-            }
-
-            if (is_file($tmpDir . $entry)) {
-                $files[] = $tmpDir . $entry;
-                continue;
-            }
-        }
-        $directory->close();
+        $files = $this->getFilesInDirectory($tmpDir);
         $this->assertSame(2, count($files));
     }
 
