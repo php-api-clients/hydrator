@@ -33,6 +33,7 @@ matrix:
 ## Install or update dependencies
 install:
   - export COMPOSER_ROOT_VERSION='dev-master' ## Temporary until we tag first versions
+  - composer validate
   - if [ -z "$dependencies" ]; then composer install --prefer-dist -n; fi;
   - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-dist -n; fi;
   - if [ "$dependencies" = "highest" ]; then composer update --prefer-dist -n; fi;
@@ -40,7 +41,6 @@ install:
 
 ## Run the actual test and benchmark
 script:
-  - composer validate
   - if [ -z "$benchmark" ]; then make travis; fi;
   - if [ "$benchmark" = "true" ]; then make travis-benchmark; fi;
   - if [ "$benchmark" = "true" ]; then make travis-benchmark-delimited; fi;
