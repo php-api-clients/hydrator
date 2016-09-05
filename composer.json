@@ -1,5 +1,6 @@
 {
   "name": "api-clients/hydrator",
+  "description": "Hydrator wrapping ocramius/generated-hydrator specifically for api clients",
   "license": "MIT",
   "minimum-stability": "dev",
   "prefer-stable": true,
