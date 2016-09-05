@@ -46,8 +46,7 @@ class Hydrator
         $this->options = $options;
 
         $reader = new AnnotationReader();
-        if (
-            isset($this->options[Options::ANNOTATION_CACHE]) &&
+        if (isset($this->options[Options::ANNOTATION_CACHE]) &&
             $this->options[Options::ANNOTATION_CACHE] instanceof Cache
         ) {
             $reader = new CachedReader(
