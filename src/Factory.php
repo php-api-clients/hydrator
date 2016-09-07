@@ -38,9 +38,9 @@ class Factory
 
     protected static function preheat(Hydrator $hydrator, array $options)
     {
-        $hasNamespaceDir = !isset($options[Options::NAMESPACE_DIR]);
-        $hasNamespace = !isset($options[Options::NAMESPACE]);
-        if ($hasNamespaceDir || $hasNamespace) {
+        $hasNamespaceDir = isset($options[Options::NAMESPACE_DIR]);
+        $hasNamespace = isset($options[Options::NAMESPACE]);
+        if (!$hasNamespaceDir || !$hasNamespace) {
             return;
         }
 
