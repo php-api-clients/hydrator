@@ -8,6 +8,8 @@ use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
 use ReflectionClass;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use ApiClients\Foundation\Resource\ResourceInterface;
 use ApiClients\Foundation\Resource\AbstractResource;
 use Zend\Hydrator\HydratorInterface;
@@ -75,6 +77,35 @@ class Hydrator
     protected function addSelfToExtraProperties()
     {
         $this->options[Options::EXTRA_PROPERTIES]['hydrator'] = $this;
+    }
+
+    public function preheat(string $scanTarget, string $namespace)
+    {
+        $directory = new RecursiveDirectoryIterator($scanTarget);
+        $directory = new RecursiveIteratorIterator($directory);
+
+        foreach ($directory as $node) {
+            if (!is_file($node->getPathname())) {
+                continue;
+            }
+
+            $file = substr($node->getPathname(), strlen($scanTarget));
+            $file = ltrim($file, DIRECTORY_SEPARATOR);
+            $file = rtrim($file, '.php');
+
+            $class = $namespace . '\\' . str_replace(DIRECTORY_SEPARATOR, '\\', $file);
+
+            if (!class_exists($class)) {
+                continue;
+            }
+
+            if (!is_subclass_of($class, ResourceInterface::class)) {
+                continue;
+            }
+
+            $this->getHydrator($class);
+            $this->annotationReader->getClassAnnotations(new ReflectionClass($class));
+        }
     }
 
     /**
