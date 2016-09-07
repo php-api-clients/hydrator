@@ -125,4 +125,27 @@ class HydratorTest extends TestCase
         );
         $this->assertFalse($classCount === count(get_declared_classes()));
     }
+
+    public function testPreheatFactory()
+    {
+        $tmpDir = $this->getTmpDir();
+        Factory::create([
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Async',
+            Options::RESOURCE_CACHE_DIR => $tmpDir,
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+        ]);
+
+        $classCount = count(get_declared_classes());
+
+        Factory::create([
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_DIR => __DIR__ . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR,
+            Options::NAMESPACE_SUFFIX => 'Async',
+            Options::RESOURCE_CACHE_DIR => $tmpDir,
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+        ]);
+
+        $this->assertFalse($classCount === count(get_declared_classes()));
+    }
 }

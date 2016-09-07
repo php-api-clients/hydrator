@@ -16,7 +16,11 @@ class Factory
     {
         $options[Options::ANNOTATIONS] = static::annotations($options[Options::ANNOTATIONS] ?? []);
 
-        return new Hydrator($options);
+        $hydrator = new Hydrator($options);
+
+        self::preheat($hydrator, $options);
+
+        return $hydrator;
     }
 
     protected static function annotations(array $annotations): array
@@ -30,5 +34,14 @@ class Factory
         }
 
         return $annotations;
+    }
+
+    protected static function preheat(Hydrator $hydrator, array $options)
+    {
+        if (!isset($options[Options::NAMESPACE_DIR]) || !isset($options[Options::NAMESPACE])) {
+            return;
+        }
+
+        $hydrator->preheat($options[Options::NAMESPACE_DIR], $options[Options::NAMESPACE]);
     }
 }
