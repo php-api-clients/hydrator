@@ -1,4 +1,4 @@
-# API Client Foundation for PHP 7.x
+# Hydrator for API Clients for PHP 7.x
 
 [![Build Status](https://travis-ci.org/php-api-clients/foundation.svg?branch=master)](https://travis-ci.org/php-api-clients/foundation)
 [![Latest Stable Version](https://poser.pugx.org/api-clients/foundation/v/stable.png)](https://packagist.org/packages/api-clients/foundation)
@@ -10,7 +10,7 @@
 
 # Goals
 
-* Foundation for creating synchronous and asynchronous API clients 
+* Hydrator for creating synchronous and asynchronous API clients 
 
 # License
 
