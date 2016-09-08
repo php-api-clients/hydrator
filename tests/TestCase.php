@@ -102,6 +102,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
                     'id' => 3,
                     'slug' => 'Wyrihaximus/php-travis-client',
                 ],
+                [],
             ],
         ];
     }

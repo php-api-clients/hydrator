@@ -7,6 +7,7 @@ use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Options;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\Resource as AsyncResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\SubResource as AsyncSubResource;
+use ApiClients\Tests\Foundation\Hydrator\Resources\Async\EmptySubResource as AsyncEmptySubResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Sync\Resource as SyncResource;
 use Doctrine\Common\Cache\FilesystemCache;
 
@@ -32,12 +33,14 @@ class HydratorTest extends TestCase
         $this->assertInstanceOf(AsyncSubResource::class, $asyncRepository->sub());
         $this->assertSame(1, $asyncRepository->sub()->id());
         $this->assertSame('Wyrihaximus/php-travis-client', $asyncRepository->sub()->slug());
-        $this->assertSame(3, count($asyncRepository->subs()));
-        for ($i = 0; $i < count($asyncRepository->subs()); $i++) {
+        $this->assertSame(4, count($asyncRepository->subs()));
+        for ($i = 0; $i < 3; $i++) {
             $this->assertInstanceOf(AsyncSubResource::class, $asyncRepository->subs()[$i]);
             $this->assertSame($i + 1, $asyncRepository->subs()[$i]->id());
             $this->assertSame('Wyrihaximus/php-travis-client', $asyncRepository->subs()[$i]->slug());
         }
+
+        $this->assertInstanceOf(AsyncEmptySubResource::class, $asyncRepository->subs()[3]);;
     }
 
     public function testSetGeneratedClassesTargetDir()
@@ -54,7 +57,7 @@ class HydratorTest extends TestCase
             $this->getJson()
         );
         $files = $this->getFilesInDirectory($tmpDir);
-        $this->assertSame(2, count($files));
+        $this->assertSame(3, count($files));
     }
 
     public function testExtract()
@@ -99,13 +102,13 @@ class HydratorTest extends TestCase
             $json
         );
         $files = $this->getFilesInDirectory($annotationCache);
-        $this->assertSame(4, count($files));
+        $this->assertSame(6, count($files));
         $hydrator->hydrate(
             'Resource',
             $json
         );
         $files = $this->getFilesInDirectory($annotationCache);
-        $this->assertSame(4, count($files));
+        $this->assertSame(6, count($files));
     }
 
     public function testPreheat()
