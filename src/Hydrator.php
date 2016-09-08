@@ -2,6 +2,8 @@
 
 namespace ApiClients\Foundation\Hydrator;
 
+use ApiClients\Foundation\Hydrator\Annotations\EmptyResource;
+use ApiClients\Foundation\Resource\EmptyResourceInterface;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
@@ -133,6 +135,7 @@ class Hydrator
      */
     public function hydrateFQCN(string $class, array $json): ResourceInterface
     {
+        $class = $this->getEmptyOrResource($class, $json);
         $hydrator = $this->getHydrator($class);
         $object = new $class();
         $json = $this->hydrateApplyAnnotations($json, $object);
@@ -162,6 +165,31 @@ class Hydrator
         return $json;
     }
 
+    protected function getEmptyOrResource(string $class, array $json): string
+    {
+        if (count($json) > 0) {
+            return $class;
+        }
+
+        $annotation = $this->getAnnotation(new $class(), EmptyResource::class);
+
+        if (!($annotation instanceof EmptyResource)) {
+            return $class;
+        }
+
+        $emptyClass = $this->options[Options::NAMESPACE] .
+            '\\' .
+            $this->options[Options::NAMESPACE_SUFFIX] .
+            '\\' .
+            $annotation->getEmptyReplacement();
+
+        if (!class_exists($emptyClass)) {
+            return $class;
+        }
+
+        return $emptyClass;
+    }
+
     /**
      * @param string $class
      * @param ResourceInterface $object
@@ -188,6 +216,10 @@ class Hydrator
      */
     public function extractFQCN(string $class, ResourceInterface $object): array
     {
+        if ($object instanceof EmptyResourceInterface) {
+            return [];
+        }
+
         $json = $this->getHydrator($class)->extract($object);
         $json = $this->extractApplyAnnotations($object, $json);
         return $json;
