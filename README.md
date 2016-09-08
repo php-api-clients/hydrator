@@ -1,11 +1,11 @@
 # Hydrator for API Clients for PHP 7.x
 
-[![Build Status](https://travis-ci.org/php-api-clients/foundation.svg?branch=master)](https://travis-ci.org/php-api-clients/foundation)
-[![Latest Stable Version](https://poser.pugx.org/api-clients/foundation/v/stable.png)](https://packagist.org/packages/api-clients/foundation)
-[![Total Downloads](https://poser.pugx.org/api-clients/foundation/downloads.png)](https://packagist.org/packages/api-clients/foundation/stats)
-[![Code Coverage](https://scrutinizer-ci.com/g/php-api-clients/foundation/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/php-api-clients/foundation/?branch=master)
-[![License](https://poser.pugx.org/api-clients/foundation/license.png)](https://packagist.org/packages/api-clients/foundation)
-[![PHP 7 ready](http://php7ready.timesplinter.ch/php-api-clients/foundation/badge.svg)](https://appveyor-ci.org/php-api-clients/foundation)
+[![Build Status](https://travis-ci.org/php-api-clients/hydrator.svg?branch=master)](https://travis-ci.org/php-api-clients/hydrator)
+[![Latest Stable Version](https://poser.pugx.org/api-clients/hydrator/v/stable.png)](https://packagist.org/packages/api-clients/hydrator)
+[![Total Downloads](https://poser.pugx.org/api-clients/hydrator/downloads.png)](https://packagist.org/packages/api-clients/hydrator/stats)
+[![Code Coverage](https://scrutinizer-ci.com/g/php-api-clients/hydrator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/php-api-clients/hydrator/?branch=master)
+[![License](https://poser.pugx.org/api-clients/hydrator/license.png)](https://packagist.org/packages/api-clients/hydrator)
+[![PHP 7 ready](http://php7ready.timesplinter.ch/php-api-clients/hydrator/badge.svg)](https://travis-ci.org/php-api-clients/hydrator)
 
 
 # Goals
