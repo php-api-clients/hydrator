@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9f95d1d55d6e54c6f0c96e59d86b7728",
-    "content-hash": "63c63fa09c5ad376389697cbead7d2b2",
+    "hash": "84ee32dde6c41561d4b7c3769528d658",
+    "content-hash": "c18b8c71068b2690630184f4f38c9514",
     "packages": [
         {
             "name": "api-clients/resource",
@@ -13,16 +13,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-api-clients/resource.git",
-                "reference": "675f27985edbc51348724ddd601a7800229365b4"
+                "reference": "31ba755ec5a3aff6a6d1d80e765321264abbbcab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/675f27985edbc51348724ddd601a7800229365b4",
-                "reference": "675f27985edbc51348724ddd601a7800229365b4",
+                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/31ba755ec5a3aff6a6d1d80e765321264abbbcab",
+                "reference": "31ba755ec5a3aff6a6d1d80e765321264abbbcab",
                 "shasum": ""
             },
             "require": {
-                "api-clients/hydrator": "dev-master",
+                "league/tactician": "^1.0",
                 "php": "^7.0"
             },
             "require-dev": {
@@ -49,7 +49,7 @@
                     "email": "ceesjank@gmail.com"
                 }
             ],
-            "time": "2016-09-07 21:34:45"
+            "time": "2016-09-17 13:03:54"
         },
         {
             "name": "clue/block-react",
@@ -507,6 +507,57 @@
                 "uri"
             ],
             "time": "2016-06-24 23:00:38"
+        },
+        {
+            "name": "league/tactician",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/tactician.git",
+                "reference": "1f3aaad497f07a8bef147a37c7e3f2f7c23fcd21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/tactician/zipball/1f3aaad497f07a8bef147a37c7e3f2f7c23fcd21",
+                "reference": "1f3aaad497f07a8bef147a37c7e3f2f7c23fcd21",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.3",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Tactician\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ross Tuck",
+                    "homepage": "http://tactician.thephpleague.com"
+                }
+            ],
+            "description": "A small, flexible command bus. Handy for building service layers.",
+            "keywords": [
+                "command",
+                "command bus",
+                "service layer"
+            ],
+            "time": "2016-02-20 11:14:36"
         },
         {
             "name": "nikic/php-parser",
