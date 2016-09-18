@@ -95,13 +95,13 @@ class Hydrator
 
     protected function createCommandBus()
     {
-        $this->options[Options::COMMAND_BUS_MAP][BuildAsyncFromSyncCommand::class] =
+        $this->options[Options::COMMAND_BUS][BuildAsyncFromSyncCommand::class] =
             new BuildAsyncFromSyncHandler($this);
-        $this->options[Options::COMMAND_BUS_MAP][ExtractCommand::class] = new ExtractHandler($this);
-        $this->options[Options::COMMAND_BUS_MAP][ExtractFQCNCommand::class] = new ExtractFQCNHandler($this);
-        $this->options[Options::COMMAND_BUS_MAP][HydrateCommand::class] = new HydrateHandler($this);
-        $this->options[Options::COMMAND_BUS_MAP][HydrateFQCNCommand::class] = new HydrateFQCNHandler($this);
-        $this->commandBus = QuickStart::create($this->options[Options::COMMAND_BUS_MAP]);
+        $this->options[Options::COMMAND_BUS][ExtractCommand::class] = new ExtractHandler($this);
+        $this->options[Options::COMMAND_BUS][ExtractFQCNCommand::class] = new ExtractFQCNHandler($this);
+        $this->options[Options::COMMAND_BUS][HydrateCommand::class] = new HydrateHandler($this);
+        $this->options[Options::COMMAND_BUS][HydrateFQCNCommand::class] = new HydrateFQCNHandler($this);
+        $this->commandBus = QuickStart::create($this->options[Options::COMMAND_BUS]);
     }
 
     public function preheat(string $scanTarget, string $namespace)

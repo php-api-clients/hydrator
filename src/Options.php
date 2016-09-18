@@ -12,5 +12,4 @@ class Options
     const RESOURCE_NAMESPACE = 'resource_namespace';
     const ANNOTATIONS =        'annotations';
     const COMMAND_BUS =        'command_bus';
-    const COMMAND_BUS_MAP =    'command_bus_map';
 }
