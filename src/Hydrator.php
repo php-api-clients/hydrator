@@ -3,12 +3,24 @@
 namespace ApiClients\Foundation\Hydrator;
 
 use ApiClients\Foundation\Hydrator\Annotations\EmptyResource;
+use ApiClients\Foundation\Hydrator\CommandBus\Command\BuildAsyncFromSyncCommand;
+use ApiClients\Foundation\Hydrator\CommandBus\Command\ExtractCommand;
+use ApiClients\Foundation\Hydrator\CommandBus\Command\ExtractFQCNCommand;
+use ApiClients\Foundation\Hydrator\CommandBus\Command\HydrateCommand;
+use ApiClients\Foundation\Hydrator\CommandBus\Command\HydrateFQCNCommand;
+use ApiClients\Foundation\Hydrator\CommandBus\Handler\BuildAsyncFromSyncHandler;
+use ApiClients\Foundation\Hydrator\CommandBus\Handler\ExtractFQCNHandler;
+use ApiClients\Foundation\Hydrator\CommandBus\Handler\ExtractHandler;
+use ApiClients\Foundation\Hydrator\CommandBus\Handler\HydrateFQCNHandler;
+use ApiClients\Foundation\Hydrator\CommandBus\Handler\HydrateHandler;
 use ApiClients\Foundation\Resource\EmptyResourceInterface;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
+use League\Tactician\CommandBus;
+use League\Tactician\Setup\QuickStart;
 use ReflectionClass;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -39,6 +51,11 @@ class Hydrator
     protected $annotationHandlers = [];
 
     /**
+     * @var CommandBus
+     */
+    protected $commandBus;
+
+    /**
      * @var Reader
      */
     protected $annotationReader;
@@ -62,7 +79,7 @@ class Hydrator
         $this->annotationReader = $reader;
 
         $this->setUpAnnotations();
-        $this->addSelfToExtraProperties();
+        $this->createCommandBus();
     }
 
     protected function setUpAnnotations()
@@ -76,9 +93,15 @@ class Hydrator
         }
     }
 
-    protected function addSelfToExtraProperties()
+    protected function createCommandBus()
     {
-        $this->options[Options::EXTRA_PROPERTIES]['hydrator'] = $this;
+        $this->options[Options::COMMAND_BUS_MAP][BuildAsyncFromSyncCommand::class] =
+            new BuildAsyncFromSyncHandler($this);
+        $this->options[Options::COMMAND_BUS_MAP][ExtractCommand::class] = new ExtractHandler($this);
+        $this->options[Options::COMMAND_BUS_MAP][ExtractFQCNCommand::class] = new ExtractFQCNHandler($this);
+        $this->options[Options::COMMAND_BUS_MAP][HydrateCommand::class] = new HydrateHandler($this);
+        $this->options[Options::COMMAND_BUS_MAP][HydrateFQCNCommand::class] = new HydrateFQCNHandler($this);
+        $this->commandBus = QuickStart::create($this->options[Options::COMMAND_BUS_MAP]);
     }
 
     public function preheat(string $scanTarget, string $namespace)
@@ -137,12 +160,9 @@ class Hydrator
     {
         $class = $this->getEmptyOrResource($class, $json);
         $hydrator = $this->getHydrator($class);
-        $object = new $class();
+        $object = new $class($this->commandBus);
         $json = $this->hydrateApplyAnnotations($json, $object);
         $resource = $hydrator->hydrate($json, $object);
-        if ($resource instanceof AbstractResource) {
-            $resource->setExtraProperties($this->options[Options::EXTRA_PROPERTIES]);
-        }
         return $resource;
     }
 
@@ -171,7 +191,7 @@ class Hydrator
             return $class;
         }
 
-        $annotation = $this->getAnnotation(new $class(), EmptyResource::class);
+        $annotation = $this->getAnnotation(new $class($this->commandBus), EmptyResource::class);
 
         if (!($annotation instanceof EmptyResource)) {
             return $class;
