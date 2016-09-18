@@ -26,10 +26,11 @@
     "league/tactician": "^1.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.5",
-    "squizlabs/php_codesniffer": "^2.6",
     "phake/phake": "^2.3",
-    "phpbench/phpbench": "^0.11"
+    "phpbench/phpbench": "^0.11",
+    "phpspec/prophecy": "^1.6",
+    "phpunit/phpunit": "^5.5",
+    "squizlabs/php_codesniffer": "^2.6"
   },
   "suggest": {
     "api-clients/resource-generator": "Easy wireframing of resources",
