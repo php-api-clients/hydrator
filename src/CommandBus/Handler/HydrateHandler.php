@@ -24,7 +24,7 @@ class HydrateHandler
 
     public function handle(HydrateCommand $command): ResourceInterface
     {
-        return $this->hydrator->hydrateFQCN(
+        return $this->hydrator->hydrate(
             $command->getClass(),
             $command->getJson()
         );
