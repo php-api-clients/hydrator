@@ -6,6 +6,7 @@ namespace ApiClients\Tests\Foundation\Hydrator\Resources;
 use ApiClients\Foundation\Hydrator\Annotations\Collection;
 use ApiClients\Foundation\Hydrator\Annotations\Nested;
 use ApiClients\Foundation\Hydrator\Annotations\Rename;
+use ApiClients\Foundation\Resource\AbstractResource;
 use ApiClients\Foundation\Resource\ResourceInterface;
 
 /**
@@ -13,7 +14,7 @@ use ApiClients\Foundation\Resource\ResourceInterface;
  * @Collection(subs="SubResource")
  * @Rename(slug="slog")
  */
-class Resource implements ResourceInterface
+class Resource extends AbstractResource implements ResourceInterface
 {
     /**
      * @var int
