@@ -7,6 +7,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use ApiClients\Foundation\Hydrator\Annotations\Nested;
 use ApiClients\Foundation\Resource\DummyResource;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
+use League\Tactician\Setup\QuickStart;
 
 class NestedTest extends TestCase
 {
@@ -79,7 +80,7 @@ class NestedTest extends TestCase
 
     public function testDummyResourceAnnotation()
     {
-        $dummy = new DummyResource();
+        $dummy = new DummyResource(QuickStart::create([]));
         $reader = new AnnotationReader();
         $annotaion = $reader->getClassAnnotation(new \ReflectionClass($dummy), Nested::class);
         $this->assertInstanceOf(Nested::class, $annotaion);
