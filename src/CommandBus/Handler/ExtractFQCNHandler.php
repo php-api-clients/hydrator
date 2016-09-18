@@ -23,7 +23,7 @@ class ExtractFQCNHandler
 
     public function handle(ExtractFQCNCommand $command): array
     {
-        return $this->hydrator->extract(
+        return $this->hydrator->extractFQCN(
             $command->getClass(),
             $command->getObject()
         );
