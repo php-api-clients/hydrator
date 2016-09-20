@@ -339,4 +339,12 @@ class Hydrator
 
         return $this->hydrators[$class];
     }
+
+    /**
+     * @return CommandBus
+     */
+    public function getCommandBus(): CommandBus
+    {
+        return $this->commandBus;
+    }
 }
