@@ -9,10 +9,13 @@ environment:
   matrix:
   - dependencies: lowest
     php_ver: 7.0.9
+    php_ver_target: 7.0
   - dependencies: current
     php_ver: 7.0.9
+    php_ver_target: 7.0
   - dependencies: highest
     php_ver: 7.0.9
+    php_ver_target: 7.0
 
 ## Cache composer bits
 cache:
@@ -30,6 +33,9 @@ init:
 ## Install PHP and composer, and run the appropriate composer command
 install:
     - IF EXIST c:\tools\php (SET PHP=0)
+    - ps: $php_ver = choco search php --exact --all-versions -r | select-string -pattern %php_ver_target% | Select-Object -first 1
+    - ps: $php_ver = $php_ver -replace ‘[php|]’,”
+    - ps: $php_ver
     - IF %PHP%==1 appveyor-retry cinst -y php --version %php_ver%
     - cd c:\tools\php
     - IF %PHP%==1 copy php.ini-production php.ini /Y
