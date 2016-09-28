@@ -19,7 +19,8 @@ environment:
 
 ## Cache composer bits
 cache:
-    - c:\tools\php -> appveyor.yml
+    - C:\ProgramData\chocolatey\bin -> appveyor.yml
+    - C:\ProgramData\chocolatey\lib -> appveyor.yml
     - '%LOCALAPPDATA%\Composer\files -> composer.lock'
 
 ## Set up environment varriables
