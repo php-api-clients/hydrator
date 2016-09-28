@@ -35,7 +35,7 @@ install:
     - IF EXIST c:\tools\php (SET PHP=0)
     - ps: $php_ver = choco search php --exact --all-versions -r | select-string -pattern %php_ver_target% | Select-Object -first 1
     - ps: $php_ver = $php_ver -replace '[php|]',''
-    - ps: $php_ver
+    - ps: echo $php_ver
     - IF %PHP%==1 appveyor-retry cinst -y php --version %php_ver%
     - cd c:\tools\php
     - IF %PHP%==1 copy php.ini-production php.ini /Y
