@@ -7,7 +7,6 @@
 [![License](https://poser.pugx.org/api-clients/hydrator/license.png)](https://packagist.org/packages/api-clients/hydrator)
 [![PHP 7 ready](http://php7ready.timesplinter.ch/php-api-clients/hydrator/badge.svg)](https://travis-ci.org/php-api-clients/hydrator)
 
-
 # Goals
 
 * Hydrator for creating synchronous and asynchronous API clients 
