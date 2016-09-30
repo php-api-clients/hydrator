@@ -8,13 +8,10 @@ clone_folder: c:\projects\php-api-client
 environment:
   matrix:
   - dependencies: lowest
-    php_ver: 7.0.9
     php_ver_target: 7.0
   - dependencies: current
-    php_ver: 7.0.9
     php_ver_target: 7.0
   - dependencies: highest
-    php_ver: 7.0.9
     php_ver_target: 7.0
 
 ## Cache composer bits
