@@ -34,18 +34,7 @@ init:
 
 ## Install PHP and composer, and run the appropriate composer command
 install:
-    - ps: IF (!(Test-Path c:\tools\php)) {
-        appveyor-retry cinst -y php --version ((choco search php --exact --all-versions -r | select-string -pattern %php_ver_target% | Select-Object -first 1) -replace '[php|]','')
-        cd c:\tools\php
-        copy php.ini-production php.ini /Y
-        echo date.timezone="UTC" >> php.ini
-        echo extension_dir=ext >> php.ini
-        echo extension=php_openssl.dll >> php.ini
-        echo extension=php_mbstring.dll >> php.ini
-        echo extension=php_fileinfo.dll >> php.ini
-        echo @php %%~dp0composer.phar %%* > composer.bat
-        appveyor-retry appveyor DownloadFile https://getcomposer.org/composer.phar
-    }
+    - ps: IF (!(Test-Path c:\tools\php)) {appveyor-retry cinst -y php --version ((choco search php --exact --all-versions -r | select-string -pattern %php_ver_target% | Select-Object -first 1) -replace '[php|]',''); cd c:\tools\php; copy php.ini-production php.ini /Y; echo date.timezone="UTC" >> php.ini; echo extension_dir=ext >> php.ini; echo extension=php_openssl.dll >> php.ini; echo extension=php_mbstring.dll >> php.ini; echo extension=php_fileinfo.dll >> php.ini; echo @php %%~dp0composer.phar %%* > composer.bat; appveyor-retry appveyor DownloadFile https://getcomposer.org/composer.phar}
     - cd c:\projects\php-api-client
     - IF %dependencies%==lowest appveyor-retry composer update --prefer-lowest --no-progress -n
     - IF %dependencies%==current appveyor-retry composer install --no-progress
