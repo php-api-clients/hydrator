@@ -40,7 +40,7 @@ install:
     - IF %dependencies%==lowest appveyor-retry C:\tools\php\composer.phar update --prefer-lowest --no-progress -n
     - IF %dependencies%==current appveyor-retry C:\tools\php\composer.phar install --no-progress
     - IF %dependencies%==highest appveyor-retry C:\tools\php\composer.phar update --no-progress -n
-    - composer show
+    - C:\tools\php\composer.phar show
 
 ## Run the actual test
 test_script:
