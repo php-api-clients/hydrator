@@ -23,7 +23,6 @@ init:
     - SET COMPOSER_ROOT_VERSION=dev-master ## Temporary until we tag first versions
     - SET PATH=C:\Program Files\OpenSSL;C:\tools\php;%PATH%
     - SET COMPOSER_NO_INTERACTION=1
-    - SET PHP=1
     - SET ANSICON=121x90 (121x90)
 
 ## Install PHP and composer, and run the appropriate composer command
@@ -36,12 +35,11 @@ install:
     - echo extension=php_openssl.dll >> php.ini
     - echo extension=php_mbstring.dll >> php.ini
     - echo extension=php_fileinfo.dll >> php.ini
-    - echo @php %%~dp0composer.phar %%* > composer.bat
     - appveyor-retry appveyor DownloadFile https://getcomposer.org/composer.phar
     - cd C:\projects\php-project-workspace
-    - IF %dependencies%==lowest appveyor-retry composer update --prefer-lowest --no-progress -n
-    - IF %dependencies%==current appveyor-retry composer install --no-progress
-    - IF %dependencies%==highest appveyor-retry composer update --no-progress -n
+    - IF %dependencies%==lowest appveyor-retry C:\tools\php\composer.phar update --prefer-lowest --no-progress -n
+    - IF %dependencies%==current appveyor-retry C:\tools\php\composer.phar install --no-progress
+    - IF %dependencies%==highest appveyor-retry C:\tools\php\composer.phar update --no-progress -n
     - composer show
 
 ## Run the actual test
