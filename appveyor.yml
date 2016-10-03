@@ -3,7 +3,6 @@ platform:
   - x64
 clone_folder: c:\projects\php-project-workspace
 
-
 ## Build matrix for lowest and highest possible targets
 environment:
   matrix:
@@ -13,6 +12,7 @@ environment:
     php_ver_target: 7.0
   - dependencies: highest
     php_ver_target: 7.0
+
 ## Cache composer bits
 cache:
     - '%LOCALAPPDATA%\Composer\files -> composer.lock'
@@ -21,21 +21,19 @@ cache:
 init:
     - SET PATH=C:\Program Files\OpenSSL;c:\tools\php;%PATH%
     - SET COMPOSER_NO_INTERACTION=1
-    - SET PHP=1
     - SET ANSICON=121x90 (121x90)
 
 ## Install PHP and composer, and run the appropriate composer command
 install:
-    - IF EXIST c:\tools\php (SET PHP=0)
     - ps: appveyor-retry cinst -y php --version ((choco search php --exact --all-versions -r | select-string -pattern $Env:php_ver_target | Select-Object -first 1) -replace '[php|]','')
     - cd c:\tools\php
-    - IF %PHP%==1 copy php.ini-production php.ini /Y
-    - IF %PHP%==1 echo date.timezone="UTC" >> php.ini
-    - IF %PHP%==1 echo extension_dir=ext >> php.ini
-    - IF %PHP%==1 echo extension=php_openssl.dll >> php.ini
-    - IF %PHP%==1 echo extension=php_mbstring.dll >> php.ini
-    - IF %PHP%==1 echo extension=php_fileinfo.dll >> php.ini
-    - IF %PHP%==1 echo @php %%~dp0composer.phar %%* > composer.bat
+    - copy php.ini-production php.ini /Y
+    - echo date.timezone="UTC" >> php.ini
+    - echo extension_dir=ext >> php.ini
+    - echo extension=php_openssl.dll >> php.ini
+    - echo extension=php_mbstring.dll >> php.ini
+    - echo extension=php_fileinfo.dll >> php.ini
+    - echo @php %%~dp0composer.phar %%* > composer.bat
     - appveyor-retry appveyor DownloadFile https://getcomposer.org/composer.phar
     - cd c:\projects\php-project-workspace
     - IF %dependencies%==lowest appveyor-retry composer update --prefer-lowest --no-progress --profile -n
