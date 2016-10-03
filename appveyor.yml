@@ -1,7 +1,7 @@
 build: false
 platform:
   - x64
-clone_folder: c:\projects\php-project-workspace
+clone_folder: C:\projects\php-project-workspace
 
 
 ## Build matrix for lowest and highest possible targets
@@ -21,14 +21,15 @@ cache:
 ## Set up environment varriables
 init:
     - SET COMPOSER_ROOT_VERSION=dev-master ## Temporary until we tag first versions
-    - SET PATH=C:\Program Files\OpenSSL;c:\tools\php;%PATH%
+    - SET PATH=C:\Program Files\OpenSSL;C:\tools\php;%PATH%
     - SET COMPOSER_NO_INTERACTION=1
+    - SET PHP=1
     - SET ANSICON=121x90 (121x90)
 
 ## Install PHP and composer, and run the appropriate composer command
 install:
     - ps: appveyor-retry cinst -y php --version ((choco search php --exact --all-versions -r | select-string -pattern $Env:php_ver_target | Select-Object -first 1) -replace '[php|]','')
-    - cd c:\tools\php
+    - cd C:\tools\php
     - copy php.ini-production php.ini /Y
     - echo date.timezone="UTC" >> php.ini
     - echo extension_dir=ext >> php.ini
@@ -36,8 +37,8 @@ install:
     - echo extension=php_mbstring.dll >> php.ini
     - echo extension=php_fileinfo.dll >> php.ini
     - echo @php %%~dp0composer.phar %%* > composer.bat
-    - cd c:\projects\php-project-workspace
     - appveyor-retry appveyor DownloadFile https://getcomposer.org/composer.phar
+    - cd C:\projects\php-project-workspace
     - IF %dependencies%==lowest appveyor-retry composer.phar update --prefer-lowest --no-progress -n
     - IF %dependencies%==current appveyor-retry composer.phar install --no-progress
     - IF %dependencies%==highest appveyor-retry composer.phar update --no-progress -n
@@ -45,5 +46,5 @@ install:
 
 ## Run the actual test
 test_script:
-    - cd c:\projects\php-project-workspace
+    - cd C:\projects\php-project-workspace
     - vendor/bin/phpunit -c phpunit.xml.dist
