@@ -6,6 +6,9 @@ namespace ApiClients\Tests\Foundation\Hydrator;
 use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Options;
 use GeneratedHydrator\Configuration;
+use League\Container\Container;
+use League\Event\Emitter;
+use League\Event\EmitterInterface;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -72,7 +75,9 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     public function hydrate($class, $json, $namespace)
     {
-        return Factory::create([
+        $container = new Container();
+        $container->share(EmitterInterface::class, new Emitter());
+        return Factory::create($container, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_SUFFIX => $namespace,
             Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),

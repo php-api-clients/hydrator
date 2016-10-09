@@ -19,6 +19,7 @@ use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
+use Interop\Container\ContainerInterface;
 use League\Tactician\CommandBus;
 use League\Tactician\Setup\QuickStart;
 use ReflectionClass;
@@ -30,6 +31,11 @@ use Zend\Hydrator\HydratorInterface;
 
 class Hydrator
 {
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
     /**
      * @var array
      */
@@ -51,20 +57,17 @@ class Hydrator
     protected $annotationHandlers = [];
 
     /**
-     * @var CommandBus
-     */
-    protected $commandBus;
-
-    /**
      * @var Reader
      */
     protected $annotationReader;
 
     /**
+     * @param ContainerInterface $container
      * @param array $options
      */
-    public function __construct(array $options)
+    public function __construct(ContainerInterface $container, array $options)
     {
+        $this->container = $container;
         $this->options = $options;
 
         $reader = new AnnotationReader();
@@ -79,7 +82,6 @@ class Hydrator
         $this->annotationReader = $reader;
 
         $this->setUpAnnotations();
-        $this->createCommandBus();
     }
 
     protected function setUpAnnotations()
@@ -91,17 +93,6 @@ class Hydrator
         foreach ($this->options[Options::ANNOTATIONS] as $annotationClass => $handler) {
             $this->annotationHandlers[$annotationClass] = new $handler($this);
         }
-    }
-
-    protected function createCommandBus()
-    {
-        $this->options[Options::COMMAND_BUS][BuildAsyncFromSyncCommand::class] =
-            new BuildAsyncFromSyncHandler($this);
-        $this->options[Options::COMMAND_BUS][ExtractCommand::class] = new ExtractHandler($this);
-        $this->options[Options::COMMAND_BUS][ExtractFQCNCommand::class] = new ExtractFQCNHandler($this);
-        $this->options[Options::COMMAND_BUS][HydrateCommand::class] = new HydrateHandler($this);
-        $this->options[Options::COMMAND_BUS][HydrateFQCNCommand::class] = new HydrateFQCNHandler($this);
-        $this->commandBus = QuickStart::create($this->options[Options::COMMAND_BUS]);
     }
 
     public function preheat(string $scanTarget, string $namespace)
@@ -160,7 +151,7 @@ class Hydrator
     {
         $class = $this->getEmptyOrResource($class, $json);
         $hydrator = $this->getHydrator($class);
-        $object = new $class($this->commandBus);
+        $object = new $class($this->container->get(CommandBus::class));
         $json = $this->hydrateApplyAnnotations($json, $object);
         $resource = $hydrator->hydrate($json, $object);
         return $resource;
@@ -191,7 +182,7 @@ class Hydrator
             return $class;
         }
 
-        $annotation = $this->getAnnotation(new $class($this->commandBus), EmptyResource::class);
+        $annotation = $this->getAnnotation(new $class($this->container->get(CommandBus::class)), EmptyResource::class);
 
         if (!($annotation instanceof EmptyResource)) {
             return $class;

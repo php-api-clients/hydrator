@@ -2,7 +2,10 @@
 
 namespace ApiClients\Foundation\Hydrator;
 
+use ApiClients\Foundation\Events\CommandLocatorEvent;
 use ApiClients\Foundation\Hydrator\Annotations;
+use Interop\Container\ContainerInterface;
+use League\Event\EmitterInterface;
 
 class Factory
 {
@@ -12,11 +15,20 @@ class Factory
         Annotations\Rename::class => Annotations\Handler\RenameHandler::class,
     ];
 
-    public static function create(array $options = []): Hydrator
+    public static function create(ContainerInterface $container, array $options = []): Hydrator
     {
+        $container->get(EmitterInterface::class)->
+            addListener(CommandLocatorEvent::NAME, function (CommandLocatorEvent $event) {
+                $event->add(
+                    __DIR__ . DIRECTORY_SEPARATOR . 'CommandBus' . DIRECTORY_SEPARATOR,
+                    __NAMESPACE__ . '\CommandBus'
+                );
+            })
+        ;
+
         $options[Options::ANNOTATIONS] = static::annotations($options[Options::ANNOTATIONS] ?? []);
 
-        $hydrator = new Hydrator($options);
+        $hydrator = new Hydrator($container, $options);
 
         self::preheat($hydrator, $options);
 

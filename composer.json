@@ -12,11 +12,14 @@
   ],
   "require": {
     "php": "^7.0",
+    "api-clients/events": "dev-master",
     "api-clients/resource": "dev-master",
     "clue/block-react": "^1.1",
+    "container-interop/container-interop": "^1.1",
     "doctrine/annotations": "^1.2",
     "doctrine/cache": "^1.6",
     "guzzlehttp/guzzle": "^6.0",
+    "league/container": "^2.2",
     "league/tactician": "^1.0",
     "ocramius/generated-hydrator": "^2.0",
     "react/cache": "^0.4.1",
@@ -26,6 +29,7 @@
     "wyrihaximus/ticking-promise": "^1.6"
   },
   "require-dev": {
+    "api-clients/test-utilities": "dev-master",
     "phake/phake": "^2.3",
     "phpbench/phpbench": "^0.11",
     "phpspec/prophecy": "^1.6",
@@ -52,5 +56,8 @@
     "classmap": [
       "benchmarks/"
     ]
+  },
+  "config": {
+    "sort-packages": true
   }
 }

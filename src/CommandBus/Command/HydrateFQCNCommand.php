@@ -2,7 +2,12 @@
 
 namespace ApiClients\Foundation\Hydrator\CommandBus\Command;
 
-class HydrateFQCNCommand
+use WyriHaximus\Tactician\CommandHandler\Annotations\Handler;
+
+/**
+ * @Handler("ApiClients\Foundation\Hydrator\CommandBus\handler\HydrateFQCNHandler")
+ */
+final class HydrateFQCNCommand
 {
     /**
      * @var string
