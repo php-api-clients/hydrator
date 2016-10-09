@@ -4,6 +4,11 @@ use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Hydrator;
 use ApiClients\Foundation\Hydrator\Options;
 use GeneratedHydrator\Configuration;
+use League\Container\Container;
+use League\Event\Emitter;
+use League\Event\EmitterInterface;
+use League\Tactician\CommandBus;
+use League\Tactician\Setup\QuickStart;
 
 abstract class AbstractBench
 {
@@ -28,21 +33,33 @@ abstract class AbstractBench
 
     protected function createHydrator(): Hydrator
     {
-        return Factory::create([
-            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
-            Options::NAMESPACE_SUFFIX => 'Sync',
-            Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
-            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
-        ]);
+        $container = new Container();
+        $container->share(EmitterInterface::class, new Emitter());
+        $container->share(CommandBus::class, QuickStart::create([]));
+        return Factory::create(
+            $container,
+            [
+                Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+                Options::NAMESPACE_SUFFIX => 'Sync',
+                Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
+                Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+            ]
+        );
     }
 
     protected function createNoCacheHydrator(): Hydrator
     {
-        return Factory::create([
-            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
-            Options::NAMESPACE_SUFFIX => 'Sync',
-            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
-        ]);
+        $container = new Container();
+        $container->share(EmitterInterface::class, new Emitter());
+        $container->share(CommandBus::class, QuickStart::create([]));
+        return Factory::create(
+            $container,
+            [
+                Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+                Options::NAMESPACE_SUFFIX => 'Sync',
+                Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+            ]
+        );
     }
 
     public function cleanup()
