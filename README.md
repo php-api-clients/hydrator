@@ -1,10 +1,11 @@
 # Hydrator for API Clients for PHP 7.x
 
-[![Build Status](https://travis-ci.org/php-api-clients/hydrator.svg?branch=master)](https://travis-ci.org/php-api-clients/hydrator)
+[![License](https://poser.pugx.org/api-clients/hydrator/license.png)](https://packagist.org/packages/api-clients/hydrator)
+![Linux Build](https://blog.wyrihaximus.net/images/linux-logo-icon-20.png)[![Build Status](https://travis-ci.org/php-api-clients/hydrator.svg?branch=master)](https://travis-ci.org/php-api-clients/hydrator)
+![Windows Build](https://blog.wyrihaximus.net/images/windows-logo-icon-20.png)[![Build status](https://ci.appveyor.com/api/projects/status/jp1hmn4wrcjnnwpl?svg=true)](https://ci.appveyor.com/project/WyriHaximus/hydrator)
+[![Code Coverage](https://scrutinizer-ci.com/g/php-api-clients/hydrator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/php-api-clients/hydrator/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/api-clients/hydrator/v/stable.png)](https://packagist.org/packages/api-clients/hydrator)
 [![Total Downloads](https://poser.pugx.org/api-clients/hydrator/downloads.png)](https://packagist.org/packages/api-clients/hydrator/stats)
-[![Code Coverage](https://scrutinizer-ci.com/g/php-api-clients/hydrator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/php-api-clients/hydrator/?branch=master)
-[![License](https://poser.pugx.org/api-clients/hydrator/license.png)](https://packagist.org/packages/api-clients/hydrator)
 [![PHP 7 ready](http://php7ready.timesplinter.ch/php-api-clients/hydrator/badge.svg)](https://travis-ci.org/php-api-clients/hydrator)
 
 
