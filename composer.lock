@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8569bfddd37a6c17c00cd54a6e27952a",
-    "content-hash": "25c25353584d15c2c2b1eaeedb11b6a9",
+    "hash": "890fa827ed53670bceaa8524b16cc98d",
+    "content-hash": "febe762420b918f386b5dbbb87e0fe1c",
     "packages": [
         {
             "name": "api-clients/events",
@@ -2447,69 +2447,6 @@
                 "stream"
             ],
             "time": "2016-08-22 09:51:07"
-        },
-        {
-            "name": "reactivex/rxphp",
-            "version": "1.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ReactiveX/RxPHP.git",
-                "reference": "3cbdf48fe1027da5b64a9c4378825dd02d107d2b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ReactiveX/RxPHP/zipball/3cbdf48fe1027da5b64a9c4378825dd02d107d2b",
-                "reference": "3cbdf48fe1027da5b64a9c4378825dd02d107d2b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~5.5|~7.0"
-            },
-            "require-dev": {
-                "react/event-loop": "~0.4.1",
-                "react/promise": "~2.2"
-            },
-            "suggest": {
-                "react/event-loop": "For using event-loop based scheduling.",
-                "react/promise": "For converting promises to and from observables."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Rx\\": "lib/Rx"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander",
-                    "email": "iam.asm89@gmail.com"
-                },
-                {
-                    "name": "David Dan",
-                    "email": "davidwdan@gmail.com"
-                },
-                {
-                    "name": "Matt Bonneau",
-                    "email": "matt@bonneau.net"
-                }
-            ],
-            "description": "Reactive extensions for php.",
-            "homepage": "https://github.com/ReactiveX/RxPHP",
-            "keywords": [
-                "extensions",
-                "reactive",
-                "rx"
-            ],
-            "time": "2016-08-23 17:17:58"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
