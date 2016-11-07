@@ -7,7 +7,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use ApiClients\Foundation\Hydrator\Annotations\Collection;
 use ApiClients\Foundation\Resource\DummyResource;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
-use League\Tactician\Setup\QuickStart;
+use React\EventLoop\Factory;
 
 class CollectionTest extends TestCase
 {
@@ -80,7 +80,8 @@ class CollectionTest extends TestCase
 
     public function testDummyResourceAnnotation()
     {
-        $dummy = new DummyResource(QuickStart::create([]));
+        $loop = Factory::create();
+        $dummy = new DummyResource($this->createCommandBus($loop));
         $reader = new AnnotationReader();
         $annotaion = $reader->getClassAnnotation(new \ReflectionClass($dummy), Collection::class);
         $this->assertInstanceOf(Collection::class, $annotaion);
