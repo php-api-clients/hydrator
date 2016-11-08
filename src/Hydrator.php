@@ -266,7 +266,9 @@ class Hydrator
             )
         ;
 
-        if ($this->annotations[$class][$annotationClass] !== null && get_class($this->annotations[$class][$annotationClass]) === $annotationClass) {
+        if ($this->annotations[$class][$annotationClass] !== null &&
+            get_class($this->annotations[$class][$annotationClass]) === $annotationClass
+        ) {
             return $this->annotations[$class][$annotationClass];
         }
 
