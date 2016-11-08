@@ -27,11 +27,7 @@
   },
   "require-dev": {
     "api-clients/test-utilities": "dev-master",
-    "phake/phake": "^2.3",
-    "phpbench/phpbench": "^0.11",
-    "phpspec/prophecy": "^1.6",
-    "phpunit/phpunit": "^5.5",
-    "squizlabs/php_codesniffer": "^2.6"
+    "phpbench/phpbench": "^0.11"
   },
   "suggest": {
     "api-clients/resource-generator": "Easy wireframing of resources",
