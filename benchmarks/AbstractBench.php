@@ -3,12 +3,17 @@
 use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Hydrator;
 use ApiClients\Foundation\Hydrator\Options;
+use ApiClients\Tools\CommandBus\CommandBus;
 use GeneratedHydrator\Configuration;
 use League\Container\Container;
 use League\Event\Emitter;
 use League\Event\EmitterInterface;
-use League\Tactician\CommandBus;
-use League\Tactician\Setup\QuickStart;
+use League\Tactician\Handler\CommandHandlerMiddleware;
+use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
+use League\Tactician\Handler\Locator\InMemoryLocator;
+use League\Tactician\Handler\MethodNameInflector\HandleInflector;
+use React\EventLoop\Factory as LoopFactory;
+use React\EventLoop\LoopInterface;
 
 abstract class AbstractBench
 {
@@ -35,7 +40,7 @@ abstract class AbstractBench
     {
         $container = new Container();
         $container->share(EmitterInterface::class, new Emitter());
-        $container->share(CommandBus::class, QuickStart::create([]));
+        $container->share(CommandBus::class, $this->createCommandBus(LoopFactory::create()));
         return Factory::create(
             $container,
             [
@@ -51,7 +56,7 @@ abstract class AbstractBench
     {
         $container = new Container();
         $container->share(EmitterInterface::class, new Emitter());
-        $container->share(CommandBus::class, QuickStart::create([]));
+        $container->share(CommandBus::class, $this->createCommandBus(LoopFactory::create()));
         return Factory::create(
             $container,
             [
@@ -97,5 +102,19 @@ abstract class AbstractBench
         }
         $directory->close();
         rmdir($dir);
+    }
+
+    protected function createCommandBus(LoopInterface $loop, array $map = []): CommandBus
+    {
+        $commandHandlerMiddleware = new CommandHandlerMiddleware(
+            new ClassNameExtractor(),
+            new InMemoryLocator($map),
+            new HandleInflector()
+        );
+
+        return new CommandBus(
+            $loop,
+            $commandHandlerMiddleware
+        );
     }
 }
