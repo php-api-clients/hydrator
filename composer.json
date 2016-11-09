@@ -12,6 +12,7 @@
   ],
   "require": {
     "php": "^7.0",
+    "api-clients/command-bus": "dev-master",
     "api-clients/events": "dev-master",
     "api-clients/resource": "dev-master",
     "clue/block-react": "^1.1",
@@ -19,7 +20,6 @@
     "doctrine/annotations": "^1.2",
     "doctrine/cache": "^1.6",
     "league/container": "^2.2",
-    "league/tactician": "^1.0",
     "ocramius/generated-hydrator": "^2.0",
     "react/promise": "^2.2",
     "wyrihaximus/react-guzzle-psr7": "^1.0",
@@ -27,11 +27,7 @@
   },
   "require-dev": {
     "api-clients/test-utilities": "dev-master",
-    "phake/phake": "^2.3",
-    "phpbench/phpbench": "^0.11",
-    "phpspec/prophecy": "^1.6",
-    "phpunit/phpunit": "^5.5",
-    "squizlabs/php_codesniffer": "^2.6"
+    "phpbench/phpbench": "^0.11"
   },
   "suggest": {
     "api-clients/resource-generator": "Easy wireframing of resources",

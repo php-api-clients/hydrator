@@ -3,30 +3,18 @@
 namespace ApiClients\Foundation\Hydrator;
 
 use ApiClients\Foundation\Hydrator\Annotations\EmptyResource;
-use ApiClients\Foundation\Hydrator\CommandBus\Command\BuildAsyncFromSyncCommand;
-use ApiClients\Foundation\Hydrator\CommandBus\Command\ExtractCommand;
-use ApiClients\Foundation\Hydrator\CommandBus\Command\ExtractFQCNCommand;
-use ApiClients\Foundation\Hydrator\CommandBus\Command\HydrateCommand;
-use ApiClients\Foundation\Hydrator\CommandBus\Command\HydrateFQCNCommand;
-use ApiClients\Foundation\Hydrator\CommandBus\Handler\BuildAsyncFromSyncHandler;
-use ApiClients\Foundation\Hydrator\CommandBus\Handler\ExtractFQCNHandler;
-use ApiClients\Foundation\Hydrator\CommandBus\Handler\ExtractHandler;
-use ApiClients\Foundation\Hydrator\CommandBus\Handler\HydrateFQCNHandler;
-use ApiClients\Foundation\Hydrator\CommandBus\Handler\HydrateHandler;
 use ApiClients\Foundation\Resource\EmptyResourceInterface;
+use ApiClients\Tools\CommandBus\CommandBus;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
 use Interop\Container\ContainerInterface;
-use League\Tactician\CommandBus;
-use League\Tactician\Setup\QuickStart;
 use ReflectionClass;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ApiClients\Foundation\Resource\ResourceInterface;
-use ApiClients\Foundation\Resource\AbstractResource;
 use Zend\Hydrator\HydratorInterface;
 
 class Hydrator
@@ -278,7 +266,9 @@ class Hydrator
             )
         ;
 
-        if (get_class($this->annotations[$class][$annotationClass]) === $annotationClass) {
+        if ($this->annotations[$class][$annotationClass] !== null &&
+            get_class($this->annotations[$class][$annotationClass]) === $annotationClass
+        ) {
             return $this->annotations[$class][$annotationClass];
         }
 
