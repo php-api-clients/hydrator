@@ -123,13 +123,13 @@ class HydratorTest extends TestCase
             $json
         );
         $files = $this->getFilesInDirectory($annotationCache);
-        $this->assertSame(6, count($files));
+        $this->assertSame(7, count($files));
         $hydrator->hydrate(
             'Resource',
             $json
         );
         $files = $this->getFilesInDirectory($annotationCache);
-        $this->assertSame(6, count($files));
+        $this->assertSame(7, count($files));
     }
 
     public function testPreheat()
