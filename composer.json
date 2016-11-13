@@ -13,20 +13,17 @@
   "require": {
     "php": "^7.0",
     "api-clients/command-bus": "dev-master",
-    "api-clients/events": "dev-master",
     "api-clients/resource": "dev-master",
-    "clue/block-react": "^1.1",
     "container-interop/container-interop": "^1.1",
     "doctrine/annotations": "^1.2",
     "doctrine/cache": "^1.6",
-    "league/container": "^2.2",
     "ocramius/generated-hydrator": "^2.0",
-    "react/promise": "^2.2",
-    "wyrihaximus/react-guzzle-psr7": "^1.0",
+    "react/promise": "^2.4",
     "wyrihaximus/ticking-promise": "^1.6"
   },
   "require-dev": {
     "api-clients/test-utilities": "dev-master",
+    "php-di/php-di": "^5.4",
     "phpbench/phpbench": "^0.11"
   },
   "suggest": {

@@ -2,20 +2,16 @@
 
 namespace ApiClients\Tests\Foundation\Hydrator;
 
-use ApiClients\Foundation\Events\CommandLocatorEvent;
 use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Hydrator;
 use ApiClients\Foundation\Hydrator\Options;
-use League\Container\Container;
-use League\Event\Emitter;
-use League\Event\EmitterInterface;
+use DI\ContainerBuilder;
 
 class FactoryTest extends TestCase
 {
     public function testCreate()
     {
-        $container = new Container();
-        $container->share(EmitterInterface::class, new Emitter());
+        $container = ContainerBuilder::buildDevContainer();
         $hydrator = Factory::create(
             $container,
             [
@@ -27,26 +23,5 @@ class FactoryTest extends TestCase
         );
 
         $this->assertInstanceOf(Hydrator::class, $hydrator);
-    }
-
-    public function testCommandBusEvent()
-    {
-        $emitter = new Emitter();
-        $container = new Container();
-        $container->share(EmitterInterface::class, $emitter);
-        Factory::create(
-            $container,
-            [
-                Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
-                Options::NAMESPACE_SUFFIX => 'Async',
-                Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
-                Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
-            ]
-        );
-
-        $event = CommandLocatorEvent::create();
-        $this->assertSame(0, count($event->getMap()));
-        $emitter->emit($event);
-        $this->assertSame(5, count($event->getMap()));
     }
 }
