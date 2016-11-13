@@ -52,5 +52,13 @@
   },
   "config": {
     "sort-packages": true
+  },
+  "extra": {
+    "api-clients": {
+      "command-bus": {
+        "path": "src/CommandBus",
+        "namespace": "ApiClients\\Foundation\\Hydrator\\CommandBus"
+      }
+    }
   }
 }
