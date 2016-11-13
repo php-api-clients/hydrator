@@ -259,27 +259,41 @@ class Hydrator
             $this->annotations[$class] = [];
         }
 
-        $this->annotations[$class][$annotationClass] = $this->annotationReader
-            ->getClassAnnotation(
-                new ReflectionClass($object),
-                $annotationClass
-            )
-        ;
+        $this->annotations[$class][$annotationClass] = $this->recursivelyGetAnnotation($class, $annotationClass);
+        return $this->annotations[$class][$annotationClass];
+    }
 
-        if ($this->annotations[$class][$annotationClass] !== null &&
-            get_class($this->annotations[$class][$annotationClass]) === $annotationClass
-        ) {
-            return $this->annotations[$class][$annotationClass];
+    /**
+     * @param string $class
+     * @param string $annotationClass
+     * @return null|AnnotationInterface
+     */
+    protected function recursivelyGetAnnotation(string $class, string $annotationClass)
+    {
+        if (!class_exists($class)) {
+            return null;
         }
 
-        $this->annotations[$class][$annotationClass] = $this->annotationReader
+        $annotation = $this->annotationReader
             ->getClassAnnotation(
-                new ReflectionClass(get_parent_class($object)),
+                new ReflectionClass($class),
                 $annotationClass
             )
         ;
 
-        return $this->annotations[$class][$annotationClass];
+        if ($annotation !== null &&
+            get_class($annotation) === $annotationClass
+        ) {
+            return $annotation;
+        }
+
+        $parentClass = get_parent_class($class);
+
+        if ($parentClass === false || !class_exists($parentClass)) {
+            return null;
+        }
+
+        return $this->recursivelyGetAnnotation($parentClass, $annotationClass);
     }
 
     /**
