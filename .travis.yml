@@ -37,6 +37,7 @@ install:
   - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-dist -n; fi;
   - if [ "$dependencies" = "highest" ]; then composer update --prefer-dist -n; fi;
   - composer show -l
+  - tput cols
 
 ## Run the actual test and benchmark
 script:
