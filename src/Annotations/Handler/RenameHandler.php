@@ -17,6 +17,10 @@ class RenameHandler extends AbstractHandler implements HandlerInterface
         }
 
         foreach ($annotation->properties() as $property) {
+            if (!isset($json[$annotation->get($property)])) {
+                continue;
+            }
+
             $json[$property] = $json[$annotation->get($property)];
             unset($json[$annotation->get($property)]);
         }
