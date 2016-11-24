@@ -11,11 +11,13 @@ use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
 use Interop\Container\ContainerInterface;
+use React\Promise\CancellablePromiseInterface;
 use ReflectionClass;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ApiClients\Foundation\Resource\ResourceInterface;
 use Zend\Hydrator\HydratorInterface;
+use function React\Promise\resolve;
 
 class Hydrator
 {
@@ -115,9 +117,9 @@ class Hydrator
     /**
      * @param string $class
      * @param array $json
-     * @return ResourceInterface
+     * @return CancellablePromiseInterface
      */
-    public function hydrate(string $class, array $json): ResourceInterface
+    public function hydrate(string $class, array $json): CancellablePromiseInterface
     {
         $fullClassName = implode(
             '\\',
@@ -133,35 +135,44 @@ class Hydrator
     /**
      * @param string $class
      * @param array $json
-     * @return ResourceInterface
+     * @return CancellablePromiseInterface
      */
-    public function hydrateFQCN(string $class, array $json): ResourceInterface
+    public function hydrateFQCN(string $class, array $json): CancellablePromiseInterface
     {
         $class = $this->getEmptyOrResource($class, $json);
         $hydrator = $this->getHydrator($class);
         $object = new $class($this->container->get(CommandBus::class));
-        $json = $this->hydrateApplyAnnotations($json, $object);
-        $resource = $hydrator->hydrate($json, $object);
-        return $resource;
+        return $this->hydrateApplyAnnotations($json, $object)->then(function ($json) use ($hydrator, $object) {
+            return $hydrator->hydrate($json, $object);
+        });
     }
 
     /**
      * @param array $json
      * @param ResourceInterface $object
-     * @return array
+     * @return CancellablePromiseInterface
      */
-    protected function hydrateApplyAnnotations(array $json, ResourceInterface $object): array
+    protected function hydrateApplyAnnotations(array $json, ResourceInterface $object): CancellablePromiseInterface
     {
+        $promiseChain = resolve($json);
         foreach ($this->annotationHandlers as $annotationClass => $handler) {
             $annotation = $this->getAnnotation($object, $annotationClass);
             if ($annotation === null) {
                 continue;
             }
 
-            $json = $handler->hydrate($annotation, $json, $object);
+            $req = [
+                'handler' => $handler,
+                'annotation' => $annotation,
+                'object' => $object,
+            ];
+
+            $promiseChain = $promiseChain->then(function (array $json) use ($req) {
+                return $req['handler']->hydrate($req['annotation'], $json, $req['object']);
+            });
         }
 
-        return $json;
+        return $promiseChain;
     }
 
     protected function getEmptyOrResource(string $class, array $json): string
@@ -192,9 +203,9 @@ class Hydrator
     /**
      * @param string $class
      * @param ResourceInterface $object
-     * @return array
+     * @return CancellablePromiseInterface
      */
-    public function extract(string $class, ResourceInterface $object): array
+    public function extract(string $class, ResourceInterface $object): CancellablePromiseInterface
     {
         $fullClassName = implode(
             '\\',
@@ -211,36 +222,45 @@ class Hydrator
      * Takes a fully qualified class name and extracts the data for that class from the given $object
      * @param string $class
      * @param ResourceInterface $object
-     * @return array
+     * @return CancellablePromiseInterface
      */
-    public function extractFQCN(string $class, ResourceInterface $object): array
+    public function extractFQCN(string $class, ResourceInterface $object): CancellablePromiseInterface
     {
         if ($object instanceof EmptyResourceInterface) {
             return [];
         }
 
-        $json = $this->getHydrator($class)->extract($object);
-        $json = $this->extractApplyAnnotations($object, $json);
-        return $json;
+        return $this->getHydrator($class)->extract($object)->then(function (array $json) use ($object) {
+            return $this->extractApplyAnnotations($object, $json);
+        });
     }
 
     /**
      * @param array $json
      * @param ResourceInterface $object
-     * @return array
+     * @return CancellablePromiseInterface
      */
-    protected function extractApplyAnnotations(ResourceInterface $object, array $json): array
+    protected function extractApplyAnnotations(ResourceInterface $object, array $json): CancellablePromiseInterface
     {
+        $promiseChain = resolve($json);
         foreach ($this->annotationHandlers as $annotationClass => $handler) {
             $annotation = $this->getAnnotation($object, $annotationClass);
             if ($annotation === null) {
                 continue;
             }
 
-            $json = $handler->extract($annotation, $object, $json);
+            $req = [
+                'handler' => $handler,
+                'annotation' => $annotation,
+                'object' => $object,
+            ];
+
+            $promiseChain = $promiseChain->then(function (array $json) use ($req) {
+                return $req['handler']->extract($req['annotation'], $req['object'], $json);
+            });
         }
 
-        return $json;
+        return $promiseChain;
     }
 
     /**
@@ -303,13 +323,15 @@ class Hydrator
      */
     public function buildAsyncFromSync(string $resource, ResourceInterface $object): ResourceInterface
     {
-        return $this->hydrateFQCN(
-            $this->options[Options::NAMESPACE] . '\\Async\\' . $resource,
-            $this->extractFQCN(
-                $this->options[Options::NAMESPACE] . '\\Sync\\' . $resource,
-                $object
-            )
-        );
+        return $this->extractFQCN(
+            $this->options[Options::NAMESPACE] . '\\Sync\\' . $resource,
+            $object
+        )->then(function ($json) use ($resource) {
+            return $this->hydrateFQCN(
+                $this->options[Options::NAMESPACE] . '\\Async\\' . $resource,
+                $json
+            );
+        });
     }
 
     /**
