@@ -13,6 +13,7 @@ use ApiClients\Tools\CommandBus\CommandBus;
 use DI\ContainerBuilder;
 use Doctrine\Common\Cache\FilesystemCache;
 use React\EventLoop\Factory as LoopFactory;
+use TypeError;
 
 class HydratorTest extends TestCase
 {
@@ -170,6 +171,9 @@ class HydratorTest extends TestCase
         $this->assertFalse($classCount === count(get_declared_classes()));
     }
 
+    /**
+     * @expectedException TypeError
+     */
     public function testHydrate()
     {
         $json = [
@@ -210,6 +214,6 @@ class HydratorTest extends TestCase
             'Async'
         );
 
-        $this->assertSame(null, $syncRepository->slug());
+        $syncRepository->id();
     }
 }
