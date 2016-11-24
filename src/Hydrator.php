@@ -11,6 +11,7 @@ use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
 use Interop\Container\ContainerInterface;
+use React\EventLoop\LoopInterface;
 use React\Promise\CancellablePromiseInterface;
 use ReflectionClass;
 use RecursiveDirectoryIterator;
@@ -18,6 +19,7 @@ use RecursiveIteratorIterator;
 use ApiClients\Foundation\Resource\ResourceInterface;
 use Zend\Hydrator\HydratorInterface;
 use function React\Promise\resolve;
+use function WyriHaximus\React\futurePromise;
 
 class Hydrator
 {
@@ -25,6 +27,11 @@ class Hydrator
      * @var ContainerInterface
      */
     protected $container;
+
+    /**
+     * @var LoopInterface
+     */
+    protected $loop;
 
     /**
      * @var array
@@ -58,6 +65,7 @@ class Hydrator
     public function __construct(ContainerInterface $container, array $options)
     {
         $this->container = $container;
+        $this->loop = $this->container->get(LoopInterface::class);
         $this->options = $options;
 
         $reader = new AnnotationReader();
@@ -142,7 +150,9 @@ class Hydrator
         $class = $this->getEmptyOrResource($class, $json);
         $hydrator = $this->getHydrator($class);
         $object = new $class($this->container->get(CommandBus::class));
-        return $this->hydrateApplyAnnotations($json, $object)->then(function ($json) use ($hydrator, $object) {
+        return $this->hydrateApplyAnnotations($json, $object)->then(function ($json) {
+            return futurePromise($this->loop, $json);
+        })->then(function (array $json) use ($hydrator, $object) {
             return $hydrator->hydrate($json, $object);
         });
     }
@@ -230,7 +240,9 @@ class Hydrator
             return [];
         }
 
-        return $this->getHydrator($class)->extract($object)->then(function (array $json) use ($object) {
+        return futurePromise($this->loop)->then(function () use ($class, $object) {
+            return $this->getHydrator($class)->extract($object);
+        })->then(function (array $json) use ($object) {
             return $this->extractApplyAnnotations($object, $json);
         });
     }
