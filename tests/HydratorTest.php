@@ -174,7 +174,7 @@ class HydratorTest extends TestCase
     /**
      * @expectedException TypeError
      */
-    public function testHydrate()
+    public function testHydrateEmptyValue()
     {
         $json = [
             'id' => 1,
@@ -214,6 +214,50 @@ class HydratorTest extends TestCase
             'Async'
         );
 
-        $syncRepository->id();
+        $syncRepository->slug();
+    }
+
+    public function testExtractEmptyValue()
+    {
+        $json = [
+            'id' => 1,
+            'sub' => [
+                'id' => 1,
+                'slug' => 'Wyrihaximus/php-travis-client',
+            ],
+            'subs' => [
+                [
+                    'id' => 1,
+                    'slug' => 'Wyrihaximus/php-travis-client',
+                ],
+                [
+                    'id' => 2,
+                    'slug' => 'Wyrihaximus/php-travis-client',
+                ],
+                [
+                    'id' => 3,
+                    'slug' => 'Wyrihaximus/php-travis-client',
+                ],
+                [],
+            ],
+        ];
+
+        $loop = LoopFactory::create();
+        $container = ContainerBuilder::buildDevContainer();
+        $container->set(CommandBus::class, $this->createCommandBus($loop));
+        $hydrator = Factory::create($container, [
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Async',
+            Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+        ]);
+        $syncRepository = $hydrator->hydrateFQCN(
+            SyncResource::class,
+            $json,
+            'Async'
+        );
+
+        $json['slog'] = null;
+        $this->assertEquals($json, $hydrator->extractFQCN(SyncResource::class, $syncRepository));
     }
 }
