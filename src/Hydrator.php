@@ -4,6 +4,7 @@ namespace ApiClients\Foundation\Hydrator;
 
 use ApiClients\Foundation\Hydrator\Annotations\EmptyResource;
 use ApiClients\Foundation\Resource\EmptyResourceInterface;
+use ApiClients\Foundation\Resource\ResourceInterface;
 use ApiClients\Tools\CommandBus\CommandBus;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
@@ -11,10 +12,9 @@ use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
 use Interop\Container\ContainerInterface;
-use ReflectionClass;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use ApiClients\Foundation\Resource\ResourceInterface;
+use ReflectionClass;
 use Zend\Hydrator\HydratorInterface;
 
 class Hydrator
