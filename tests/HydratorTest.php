@@ -13,6 +13,7 @@ use ApiClients\Tools\CommandBus\CommandBus;
 use DI\ContainerBuilder;
 use Doctrine\Common\Cache\FilesystemCache;
 use React\EventLoop\Factory as LoopFactory;
+use React\EventLoop\LoopInterface;
 
 class HydratorTest extends TestCase
 {
@@ -20,6 +21,7 @@ class HydratorTest extends TestCase
     {
         $loop = LoopFactory::create();
         $container = ContainerBuilder::buildDevContainer();
+        $container->set(LoopInterface::class, $loop);
         $container->set(CommandBus::class, $this->createCommandBus($loop));
         $hydrator = Factory::create($container, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
@@ -54,6 +56,7 @@ class HydratorTest extends TestCase
         $loop = LoopFactory::create();
         $tmpDir = $this->getTmpDir();
         $container = ContainerBuilder::buildDevContainer();
+        $container->set(LoopInterface::class, $loop);
         $container->set(CommandBus::class, $this->createCommandBus($loop));
         $hydrator = Factory::create($container, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
@@ -75,6 +78,7 @@ class HydratorTest extends TestCase
         $json = $this->getJson();
         $tmpDir = $this->getTmpDir();
         $container = ContainerBuilder::buildDevContainer();
+        $container->set(LoopInterface::class, $loop);
         $container->set(CommandBus::class, $this->createCommandBus($loop));
         $hydrator = Factory::create($container, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
@@ -99,6 +103,7 @@ class HydratorTest extends TestCase
         $resourceCache = $tmpDir . 'resource' . DIRECTORY_SEPARATOR;
         mkdir($resourceCache);
         $container = ContainerBuilder::buildDevContainer();
+        $container->set(LoopInterface::class, $loop);
         $container->set(CommandBus::class, $this->createCommandBus($loop));
         $hydrator = Factory::create($container, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',

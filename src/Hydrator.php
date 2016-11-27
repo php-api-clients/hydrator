@@ -11,6 +11,7 @@ use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
 use Interop\Container\ContainerInterface;
+use React\EventLoop\LoopInterface;
 use ReflectionClass;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -139,7 +140,7 @@ class Hydrator
     {
         $class = $this->getEmptyOrResource($class, $json);
         $hydrator = $this->getHydrator($class);
-        $object = new $class($this->container->get(CommandBus::class));
+        $object = new $class($this->container->get(LoopInterface::class), $this->container->get(CommandBus::class));
         $json = $this->hydrateApplyAnnotations($json, $object);
         $resource = $hydrator->hydrate($json, $object);
         return $resource;
@@ -170,7 +171,10 @@ class Hydrator
             return $class;
         }
 
-        $annotation = $this->getAnnotation(new $class($this->container->get(CommandBus::class)), EmptyResource::class);
+        $annotation = $this->getAnnotation(
+            new $class($this->container->get(LoopInterface::class), $this->container->get(CommandBus::class)),
+            EmptyResource::class
+        );
 
         if (!($annotation instanceof EmptyResource)) {
             return $class;
