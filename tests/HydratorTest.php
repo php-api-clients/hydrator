@@ -5,9 +5,9 @@ namespace ApiClients\Tests\Foundation\Hydrator;
 
 use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Options;
+use ApiClients\Tests\Foundation\Hydrator\Resources\Async\EmptySubResource as AsyncEmptySubResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\Resource as AsyncResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\SubResource as AsyncSubResource;
-use ApiClients\Tests\Foundation\Hydrator\Resources\Async\EmptySubResource as AsyncEmptySubResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Sync\Resource as SyncResource;
 use ApiClients\Tools\CommandBus\CommandBus;
 use DI\ContainerBuilder;

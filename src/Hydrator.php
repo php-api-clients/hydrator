@@ -13,10 +13,8 @@ use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
 use Interop\Container\ContainerInterface;
 use React\EventLoop\LoopInterface;
-use ReflectionClass;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use ReflectionClass;
 use Zend\Hydrator\HydratorInterface;
 
 class Hydrator
