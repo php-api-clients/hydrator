@@ -21,7 +21,7 @@ class ExtractHandlerTest extends TestCase
             'slug' => 'slug',
         ];
         $class = 'SubResource';
-        $resource = new SubResource($this->createCommandBus($loop));
+        $resource = new SubResource($loop, $this->createCommandBus($loop));
         get_property($resource, 'id')->setValue($resource, $result['id']);
         get_property($resource, 'slug')->setValue($resource, $result['slug']);
 

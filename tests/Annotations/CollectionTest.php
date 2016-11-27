@@ -81,7 +81,7 @@ class CollectionTest extends TestCase
     public function testDummyResourceAnnotation()
     {
         $loop = Factory::create();
-        $dummy = new DummyResource($this->createCommandBus($loop));
+        $dummy = new DummyResource($loop, $this->createCommandBus($loop));
         $reader = new AnnotationReader();
         $annotaion = $reader->getClassAnnotation(new \ReflectionClass($dummy), Collection::class);
         $this->assertInstanceOf(Collection::class, $annotaion);
