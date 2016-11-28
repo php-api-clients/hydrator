@@ -4,10 +4,8 @@ use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Hydrator;
 use ApiClients\Foundation\Hydrator\Options;
 use ApiClients\Tools\CommandBus\CommandBus;
+use DI\ContainerBuilder;
 use GeneratedHydrator\Configuration;
-use League\Container\Container;
-use League\Event\Emitter;
-use League\Event\EmitterInterface;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
 use League\Tactician\Handler\Locator\InMemoryLocator;
@@ -38,9 +36,10 @@ abstract class AbstractBench
 
     protected function createHydrator(): Hydrator
     {
-        $container = new Container();
-        $container->share(EmitterInterface::class, new Emitter());
-        $container->share(CommandBus::class, $this->createCommandBus(LoopFactory::create()));
+        $loop = LoopFactory::create();
+        $container = ContainerBuilder::buildDevContainer();
+        $container->set(LoopInterface::class, $loop);
+        $container->set(CommandBus::class, $this->createCommandBus($loop));
         return Factory::create(
             $container,
             [
@@ -54,9 +53,10 @@ abstract class AbstractBench
 
     protected function createNoCacheHydrator(): Hydrator
     {
-        $container = new Container();
-        $container->share(EmitterInterface::class, new Emitter());
-        $container->share(CommandBus::class, $this->createCommandBus(LoopFactory::create()));
+        $loop = LoopFactory::create();
+        $container = ContainerBuilder::buildDevContainer();
+        $container->set(LoopInterface::class, $loop);
+        $container->set(CommandBus::class, $this->createCommandBus($loop));
         return Factory::create(
             $container,
             [
