@@ -206,6 +206,7 @@ class HydratorTest extends TestCase
 
         $loop = LoopFactory::create();
         $container = ContainerBuilder::buildDevContainer();
+        $container->set(LoopInterface::class, $loop);
         $container->set(CommandBus::class, $this->createCommandBus($loop));
         $hydrator = Factory::create($container, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
@@ -249,6 +250,7 @@ class HydratorTest extends TestCase
 
         $loop = LoopFactory::create();
         $container = ContainerBuilder::buildDevContainer();
+        $container->set(LoopInterface::class, $loop);
         $container->set(CommandBus::class, $this->createCommandBus($loop));
         $hydrator = Factory::create($container, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
