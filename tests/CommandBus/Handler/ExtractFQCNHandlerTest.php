@@ -8,8 +8,8 @@ use ApiClients\Foundation\Hydrator\CommandBus\Handler\ExtractFQCNHandler;
 use ApiClients\Foundation\Hydrator\Hydrator;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\SubResource;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
-use function ApiClients\Foundation\get_property;
 use React\EventLoop\Factory;
+use function ApiClients\Foundation\get_property;
 
 class ExtractFQCNHandlerTest extends TestCase
 {

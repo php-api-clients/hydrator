@@ -5,15 +5,16 @@ namespace ApiClients\Tests\Foundation\Hydrator;
 
 use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Options;
+use ApiClients\Tests\Foundation\Hydrator\Resources\Async\EmptySubResource as AsyncEmptySubResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\Resource as AsyncResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\SubResource as AsyncSubResource;
-use ApiClients\Tests\Foundation\Hydrator\Resources\Async\EmptySubResource as AsyncEmptySubResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Sync\Resource as SyncResource;
 use ApiClients\Tools\CommandBus\CommandBus;
 use DI\ContainerBuilder;
 use Doctrine\Common\Cache\FilesystemCache;
 use React\EventLoop\Factory as LoopFactory;
 use React\EventLoop\LoopInterface;
+use TypeError;
 
 class HydratorTest extends TestCase
 {
@@ -173,5 +174,80 @@ class HydratorTest extends TestCase
         ]);
 
         $this->assertFalse($classCount === count(get_declared_classes()));
+    }
+
+    /**
+     * @expectedException TypeError
+     */
+    public function testHydrateEmptyValue()
+    {
+        $json = [
+            'id' => 1,
+            'sub' => [
+                'id' => 1,
+                'slug' => 'Wyrihaximus/php-travis-client',
+            ],
+            'subs' => [
+                [
+                    'id' => 1,
+                    'slug' => 'Wyrihaximus/php-travis-client',
+                ],
+                [
+                    'id' => 2,
+                    'slug' => 'Wyrihaximus/php-travis-client',
+                ],
+                [
+                    'id' => 3,
+                    'slug' => 'Wyrihaximus/php-travis-client',
+                ],
+                [],
+            ],
+        ];
+
+        $loop = LoopFactory::create();
+        $container = ContainerBuilder::buildDevContainer();
+        $container->set(LoopInterface::class, $loop);
+        $container->set(CommandBus::class, $this->createCommandBus($loop));
+        $hydrator = Factory::create($container, [
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Async',
+            Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+        ]);
+        $syncRepository = $hydrator->hydrateFQCN(
+            SyncResource::class,
+            $json,
+            'Async'
+        );
+
+        $syncRepository->slug();
+    }
+
+    public function testExtractEmptyValue()
+    {
+        $json = [
+            'id' => 1,
+        ];
+
+        $loop = LoopFactory::create();
+        $container = ContainerBuilder::buildDevContainer();
+        $container->set(LoopInterface::class, $loop);
+        $container->set(CommandBus::class, $this->createCommandBus($loop));
+        $hydrator = Factory::create($container, [
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Async',
+            Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+        ]);
+        $syncRepository = $hydrator->hydrateFQCN(
+            SyncResource::class,
+            $json,
+            'Async'
+        );
+
+        $json['slog'] = null;
+        $json['sub'] = null;
+        $json['subs'] = [];
+        $this->assertEquals($json, $hydrator->extractFQCN(SyncResource::class, $syncRepository));
     }
 }

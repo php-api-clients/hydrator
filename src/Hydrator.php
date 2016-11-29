@@ -4,6 +4,7 @@ namespace ApiClients\Foundation\Hydrator;
 
 use ApiClients\Foundation\Hydrator\Annotations\EmptyResource;
 use ApiClients\Foundation\Resource\EmptyResourceInterface;
+use ApiClients\Foundation\Resource\ResourceInterface;
 use ApiClients\Tools\CommandBus\CommandBus;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
@@ -12,10 +13,9 @@ use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
 use Interop\Container\ContainerInterface;
 use React\EventLoop\LoopInterface;
-use ReflectionClass;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use ApiClients\Foundation\Resource\ResourceInterface;
+use ReflectionClass;
 use Zend\Hydrator\HydratorInterface;
 
 class Hydrator
@@ -49,6 +49,11 @@ class Hydrator
      * @var Reader
      */
     protected $annotationReader;
+
+    /**
+     * @var array
+     */
+    protected $classProperties = [];
 
     /**
      * @param ContainerInterface $container
@@ -142,6 +147,7 @@ class Hydrator
         $hydrator = $this->getHydrator($class);
         $object = new $class($this->container->get(LoopInterface::class), $this->container->get(CommandBus::class));
         $json = $this->hydrateApplyAnnotations($json, $object);
+        $json = $this->ensureMissingValuesAreNull($json, $class);
         $resource = $hydrator->hydrate($json, $object);
         return $resource;
     }
@@ -163,6 +169,43 @@ class Hydrator
         }
 
         return $json;
+    }
+
+    /**
+     * Ensure all properties expected by resource are available
+     *
+     * @param array $json
+     * @param string $class
+     * @return array
+     */
+    protected function ensureMissingValuesAreNull(array $json, string $class): array
+    {
+        foreach ($this->getReflectionClassProperties($class) as $key) {
+            if (isset($json[$key])) {
+                continue;
+            }
+
+            $json[$key] = null;
+        }
+
+        return $json;
+    }
+
+    /**
+     * @param string $class
+     * @return string[]
+     */
+    protected function getReflectionClassProperties(string $class): array
+    {
+        if (isset($this->classProperties[$class])) {
+            return $this->classProperties[$class];
+        }
+
+        $this->classProperties[$class] = [];
+        foreach ((new ReflectionClass($class))->getProperties() as $property) {
+            $this->classProperties[$class][] = (string)$property->getName();
+        }
+        return $this->classProperties[$class];
     }
 
     protected function getEmptyOrResource(string $class, array $json): string

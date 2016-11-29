@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace ApiClients\Foundation\Hydrator\Annotations\Handler;
 
-use ApiClients\Foundation\Hydrator\Annotations\Rename;
 use ApiClients\Foundation\Hydrator\AnnotationInterface;
+use ApiClients\Foundation\Hydrator\Annotations\Rename;
 use ApiClients\Foundation\Hydrator\HandlerInterface;
 use ApiClients\Foundation\Resource\ResourceInterface;
 
@@ -17,6 +17,10 @@ class RenameHandler extends AbstractHandler implements HandlerInterface
         }
 
         foreach ($annotation->properties() as $property) {
+            if (!isset($json[$annotation->get($property)])) {
+                continue;
+            }
+
             $json[$property] = $json[$annotation->get($property)];
             unset($json[$annotation->get($property)]);
         }
