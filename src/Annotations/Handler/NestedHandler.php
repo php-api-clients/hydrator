@@ -17,6 +17,11 @@ class NestedHandler extends AbstractHandler implements HandlerInterface
         }
 
         foreach ($annotation->properties() as $property) {
+            if (!isset($json[$property])) {
+                $json[$property] = null;
+                continue;
+            }
+
             if (!is_array($json[$property])) {
                 continue;
             }
