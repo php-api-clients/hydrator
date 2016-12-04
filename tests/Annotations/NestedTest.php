@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace ApiClients\Tests\Foundation\Hydrator\Annotations;
 
-use Doctrine\Common\Annotations\AnnotationReader;
 use ApiClients\Foundation\Hydrator\Annotations\Nested;
 use ApiClients\Foundation\Resource\DummyResource;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
+use Doctrine\Common\Annotations\AnnotationReader;
 use React\EventLoop\Factory;
 
 class NestedTest extends TestCase

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace ApiClients\Foundation\Hydrator\Annotations\Handler;
 
-use ApiClients\Foundation\Hydrator\Annotations\Nested;
 use ApiClients\Foundation\Hydrator\AnnotationInterface;
+use ApiClients\Foundation\Hydrator\Annotations\Nested;
 use ApiClients\Foundation\Hydrator\HandlerInterface;
 use ApiClients\Foundation\Resource\ResourceInterface;
 
@@ -17,6 +17,11 @@ class NestedHandler extends AbstractHandler implements HandlerInterface
         }
 
         foreach ($annotation->properties() as $property) {
+            if (!isset($json[$property])) {
+                $json[$property] = null;
+                continue;
+            }
+
             if (!is_array($json[$property])) {
                 continue;
             }

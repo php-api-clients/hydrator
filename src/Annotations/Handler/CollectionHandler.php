@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace ApiClients\Foundation\Hydrator\Annotations\Handler;
 
-use ApiClients\Foundation\Hydrator\Annotations\Collection;
 use ApiClients\Foundation\Hydrator\AnnotationInterface;
+use ApiClients\Foundation\Hydrator\Annotations\Collection;
 use ApiClients\Foundation\Hydrator\HandlerInterface;
 use ApiClients\Foundation\Resource\ResourceInterface;
 
@@ -17,6 +17,11 @@ class CollectionHandler extends AbstractHandler implements HandlerInterface
         }
 
         foreach ($annotation->properties() as $property) {
+            if (!isset($json[$property])) {
+                $json[$property] = [];
+                continue;
+            }
+
             $array = $json[$property];
 
             if (!is_array($array)) {
