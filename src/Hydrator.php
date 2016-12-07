@@ -360,6 +360,22 @@ class Hydrator
     }
 
     /**
+     * @param string $resource
+     * @param ResourceInterface $object
+     * @return ResourceInterface
+     */
+    public function buildSyncFromAsync(string $resource, ResourceInterface $object): ResourceInterface
+    {
+        return $this->hydrateFQCN(
+            $this->options[Options::NAMESPACE] . '\\Sync\\' . $resource,
+            $this->extractFQCN(
+                $this->options[Options::NAMESPACE] . '\\Async\\' . $resource,
+                $object
+            )
+        );
+    }
+
+    /**
      * @param string $class
      * @return HydratorInterface
      */
