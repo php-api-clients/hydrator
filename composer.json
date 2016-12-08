@@ -2,8 +2,6 @@
   "name": "api-clients/hydrator",
   "description": "Hydrator wrapping ocramius/generated-hydrator specifically for api clients",
   "license": "MIT",
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "authors": [
     {
       "name": "Cees-Jan Kiewiet",
@@ -12,8 +10,8 @@
   ],
   "require": {
     "php": "^7.0",
-    "api-clients/command-bus": "^1.0",
-    "api-clients/resource": "^1.0",
+    "api-clients/command-bus": "^2.0",
+    "api-clients/resource": "^2.0",
     "container-interop/container-interop": "^1.1",
     "doctrine/annotations": "^1.2",
     "doctrine/cache": "^1.6",
@@ -22,7 +20,7 @@
     "wyrihaximus/ticking-promise": "^1.6"
   },
   "require-dev": {
-    "api-clients/test-utilities": "^1.0",
+    "api-clients/test-utilities": "^2.0",
     "php-di/php-di": "^5.4",
     "phpbench/phpbench": "^0.11"
   },

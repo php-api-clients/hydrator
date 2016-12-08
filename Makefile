@@ -1,7 +1,7 @@
-all: cs unit humbug
-travis: cs travis-unit humbug
+all: cs unit
+travis: cs travis-unit
 travis-benchmark: benchmark-travis
-contrib: cs unit humbug
+contrib: cs unit
 
 init:
 	if [ ! -d vendor ]; then composer install; fi;
@@ -11,9 +11,6 @@ cs: init
 
 unit: init
 	./vendor/bin/phpunit --coverage-text --coverage-html covHtml
-
-humbug: init
-	if [ `php -m | grep xdebug | wc -l` -gt 0 ]; then ./vendor/bin/humbug --ansi --incremental; fi
 
 benchmark: init
 	./vendor/bin/phpbench run benchmarks/ --progress=dots --store --report='generator: "table", cols: ["benchmark", "subject", "params", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}'
