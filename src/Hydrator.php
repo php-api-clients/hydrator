@@ -5,7 +5,7 @@ namespace ApiClients\Foundation\Hydrator;
 use ApiClients\Foundation\Hydrator\Annotations\EmptyResource;
 use ApiClients\Foundation\Resource\EmptyResourceInterface;
 use ApiClients\Foundation\Resource\ResourceInterface;
-use ApiClients\Tools\CommandBus\CommandBus;
+use ApiClients\Tools\CommandBus\CommandBusInterface;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
@@ -145,7 +145,10 @@ class Hydrator
     {
         $class = $this->getEmptyOrResource($class, $json);
         $hydrator = $this->getHydrator($class);
-        $object = new $class($this->container->get(LoopInterface::class), $this->container->get(CommandBus::class));
+        $object = new $class(
+            $this->container->get(LoopInterface::class),
+            $this->container->get(CommandBusInterface::class)
+        );
         $json = $this->hydrateApplyAnnotations($json, $object);
         $json = $this->ensureMissingValuesAreNull($json, $class);
         $resource = $hydrator->hydrate($json, $object);
@@ -215,7 +218,10 @@ class Hydrator
         }
 
         $annotation = $this->getAnnotation(
-            new $class($this->container->get(LoopInterface::class), $this->container->get(CommandBus::class)),
+            new $class(
+                $this->container->get(LoopInterface::class),
+                $this->container->get(CommandBusInterface::class)
+            ),
             EmptyResource::class
         );
 

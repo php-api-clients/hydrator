@@ -11,7 +11,7 @@
   "require": {
     "php": "^7.0",
     "api-clients/command-bus": "^2.0",
-    "api-clients/resource": "^2.0",
+    "api-clients/resource": "^3.0",
     "container-interop/container-interop": "^1.1",
     "doctrine/annotations": "^1.2",
     "doctrine/cache": "^1.6",
