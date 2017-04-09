@@ -3,7 +3,7 @@
 namespace ApiClients\Foundation\Hydrator;
 
 use ApiClients\Foundation\Hydrator\Annotations;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 class Factory
 {
