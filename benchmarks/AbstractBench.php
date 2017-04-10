@@ -4,6 +4,7 @@ use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Hydrator;
 use ApiClients\Foundation\Hydrator\Options;
 use ApiClients\Tools\CommandBus\CommandBus;
+use ApiClients\Tools\CommandBus\CommandBusInterface;
 use DI\ContainerBuilder;
 use GeneratedHydrator\Configuration;
 use League\Tactician\Handler\CommandHandlerMiddleware;
@@ -39,7 +40,7 @@ abstract class AbstractBench
         $loop = LoopFactory::create();
         $container = ContainerBuilder::buildDevContainer();
         $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBus::class, $this->createCommandBus($loop));
+        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
         return Factory::create(
             $container,
             [
@@ -56,7 +57,7 @@ abstract class AbstractBench
         $loop = LoopFactory::create();
         $container = ContainerBuilder::buildDevContainer();
         $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBus::class, $this->createCommandBus($loop));
+        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
         return Factory::create(
             $container,
             [
