@@ -12,10 +12,10 @@
     "php": "^7.0",
     "api-clients/command-bus": "^2.0",
     "api-clients/resource": "^3.0",
-    "container-interop/container-interop": "^1.1",
     "doctrine/annotations": "^1.2",
     "doctrine/cache": "^1.6",
     "ocramius/generated-hydrator": "^2.0",
+    "psr/container": "^1.0",
     "react/promise": "^2.4",
     "wyrihaximus/ticking-promise": "^1.6"
   },
