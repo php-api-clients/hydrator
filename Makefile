@@ -1,13 +1,16 @@
-all: cs unit
-travis: cs travis-unit
+all: lint cs unit
+travis: lint cs travis-unit
 travis-benchmark: benchmark-travis
-contrib: cs unit
+contrib: lint cs unit
 
 init:
 	if [ ! -d vendor ]; then composer install; fi;
 
 cs: init
 	./vendor/bin/phpcs --standard=PSR2 src/
+
+lint: init
+	./vendor/bin/parallel-lint --exclude vendor .
 
 unit: init
 	./vendor/bin/phpunit --coverage-text --coverage-html covHtml
