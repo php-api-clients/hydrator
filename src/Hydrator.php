@@ -11,7 +11,7 @@ use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use React\EventLoop\LoopInterface;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
