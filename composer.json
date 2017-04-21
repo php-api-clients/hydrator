@@ -24,11 +24,6 @@
     "php-di/php-di": "^5.4.1",
     "phpbench/phpbench": "^0.11"
   },
-  "suggest": {
-    "api-clients/resource-generator": "Easy wireframing of resources",
-    "wyrihaximus/react-cache-filesystem": "Filesystem cache",
-    "wyrihaximus/react-cache-redis": "Redis cache"
-  },
   "autoload": {
     "psr-4": {
       "ApiClients\\Foundation\\Hydrator\\": "src/"
