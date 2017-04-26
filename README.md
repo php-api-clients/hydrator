@@ -8,10 +8,13 @@
 [![Total Downloads](https://poser.pugx.org/api-clients/hydrator/downloads.png)](https://packagist.org/packages/api-clients/hydrator/stats)
 [![PHP 7 ready](http://php7ready.timesplinter.ch/php-api-clients/hydrator/badge.svg)](https://travis-ci.org/php-api-clients/hydrator)
 
+# Install
 
-# Goals
+To install via [Composer](http://getcomposer.org/), use the command below, it will automatically detect the latest version and bind it with `^`.
 
-* Hydrator for creating synchronous and asynchronous API clients 
+```
+composer require api-clients/hydrator
+```
 
 # License
 
