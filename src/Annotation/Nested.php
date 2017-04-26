@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Foundation\Hydrator\Annotations;
+namespace ApiClients\Foundation\Hydrator\Annotation;
 
 use ApiClients\Foundation\Hydrator\AnnotationInterface;
 
@@ -9,20 +9,20 @@ use ApiClients\Foundation\Hydrator\AnnotationInterface;
  * @Annotation
  * @Target({"CLASS"})
  */
-class Collection implements AnnotationInterface
+class Nested implements AnnotationInterface
 {
     /**
      * @var array
      */
-    protected $types = [];
+    protected $nestedObjects = [];
 
     /**
      * Nested constructor.
-     * @param array $types
+     * @param array $nestedObjects
      */
-    public function __construct(array $types)
+    public function __construct(array $nestedObjects)
     {
-        $this->types = $types;
+        $this->nestedObjects = $nestedObjects;
     }
 
     /**
@@ -30,7 +30,7 @@ class Collection implements AnnotationInterface
      */
     public function properties(): array
     {
-        return array_keys($this->types);
+        return array_keys($this->nestedObjects);
     }
 
     /**
@@ -39,7 +39,7 @@ class Collection implements AnnotationInterface
      */
     public function has($key): bool
     {
-        return isset($this->types[$key]);
+        return isset($this->nestedObjects[$key]);
     }
 
     /**
@@ -52,6 +52,6 @@ class Collection implements AnnotationInterface
             throw new \InvalidArgumentException();
         }
 
-        return $this->types[$key];
+        return $this->nestedObjects[$key];
     }
 }

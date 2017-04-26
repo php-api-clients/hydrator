@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace ApiClients\Tests\Foundation\Hydrator\Resources;
 
-use ApiClients\Foundation\Hydrator\Annotations\Collection;
-use ApiClients\Foundation\Hydrator\Annotations\Nested;
-use ApiClients\Foundation\Hydrator\Annotations\Rename;
+use ApiClients\Foundation\Hydrator\Annotation\Collection;
+use ApiClients\Foundation\Hydrator\Annotation\Nested;
+use ApiClients\Foundation\Hydrator\Annotation\Rename;
 use ApiClients\Foundation\Resource\AbstractResource;
 use ApiClients\Foundation\Resource\ResourceInterface;
 

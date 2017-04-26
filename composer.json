@@ -11,7 +11,7 @@
   "require": {
     "php": "^7.0",
     "api-clients/command-bus": "^2.0",
-    "api-clients/resource": "^3.0",
+    "api-clients/resource": "^3.0.1",
     "doctrine/annotations": "^1.2",
     "doctrine/cache": "^1.6",
     "ocramius/generated-hydrator": "^2.0",

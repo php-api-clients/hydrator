@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Foundation\Hydrator\Annotations\Handler;
+namespace ApiClients\Foundation\Hydrator\Annotation\Handler;
 
 use ApiClients\Foundation\Hydrator\AnnotationInterface;
-use ApiClients\Foundation\Hydrator\Annotations\Rename;
+use ApiClients\Foundation\Hydrator\Annotation\Rename;
 use ApiClients\Foundation\Hydrator\HandlerInterface;
 use ApiClients\Foundation\Resource\ResourceInterface;
 

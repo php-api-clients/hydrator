@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ApiClients\Tests\Foundation\Hydrator\Annotations;
 
-use ApiClients\Foundation\Hydrator\Annotations\Nested;
+use ApiClients\Foundation\Hydrator\Annotation\Nested;
 use ApiClients\Foundation\Resource\DummyResource;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
 use Doctrine\Common\Annotations\AnnotationReader;

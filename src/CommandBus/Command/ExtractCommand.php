@@ -3,7 +3,7 @@
 namespace ApiClients\Foundation\Hydrator\CommandBus\Command;
 
 use ApiClients\Foundation\Resource\ResourceInterface;
-use WyriHaximus\Tactician\CommandHandler\Annotations\Handler;
+use WyriHaximus\Tactician\CommandHandler\Annotation\Handler;
 
 /**
  * @Handler("ApiClients\Foundation\Hydrator\CommandBus\handler\ExtractHandler")

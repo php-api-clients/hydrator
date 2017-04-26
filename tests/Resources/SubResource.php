@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ApiClients\Tests\Foundation\Hydrator\Resources;
 
-use ApiClients\Foundation\Hydrator\Annotations\EmptyResource;
+use ApiClients\Foundation\Hydrator\Annotation\EmptyResource;
 use ApiClients\Foundation\Resource\AbstractResource;
 use ApiClients\Foundation\Resource\ResourceInterface;
 

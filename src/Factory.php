@@ -2,16 +2,16 @@
 
 namespace ApiClients\Foundation\Hydrator;
 
-use ApiClients\Foundation\Hydrator\Annotations;
+use ApiClients\Foundation\Hydrator\Annotation;
 use ApiClients\Tools\CommandBus\CommandBusInterface;
 use React\EventLoop\LoopInterface;
 
 class Factory
 {
     const ANNOTATIONS = [
-        Annotations\Collection::class => Annotations\Handler\CollectionHandler::class,
-        Annotations\Nested::class => Annotations\Handler\NestedHandler::class,
-        Annotations\Rename::class => Annotations\Handler\RenameHandler::class,
+        Annotation\Collection::class => Annotation\Handler\CollectionHandler::class,
+        Annotation\Nested::class => Annotation\Handler\NestedHandler::class,
+        Annotation\Rename::class => Annotation\Handler\RenameHandler::class,
     ];
 
     public static function create(LoopInterface $loop, CommandBusInterface $commandBus, array $options = []): Hydrator

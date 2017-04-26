@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ApiClients\Foundation\Hydrator\Annotations\Handler;
+namespace ApiClients\Foundation\Hydrator\Annotation\Handler;
 
 use ApiClients\Foundation\Hydrator\Hydrator;
 

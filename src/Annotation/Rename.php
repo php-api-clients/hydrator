@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Foundation\Hydrator\Annotations;
+namespace ApiClients\Foundation\Hydrator\Annotation;
 
 use ApiClients\Foundation\Hydrator\AnnotationInterface;
 
@@ -9,20 +9,19 @@ use ApiClients\Foundation\Hydrator\AnnotationInterface;
  * @Annotation
  * @Target({"CLASS"})
  */
-class Nested implements AnnotationInterface
+class Rename implements AnnotationInterface
 {
     /**
      * @var array
      */
-    protected $nestedObjects = [];
+    protected $renameMapping = [];
 
     /**
-     * Nested constructor.
-     * @param array $nestedObjects
+     * @param array $renameMapping
      */
-    public function __construct(array $nestedObjects)
+    public function __construct(array $renameMapping)
     {
-        $this->nestedObjects = $nestedObjects;
+        $this->renameMapping = $renameMapping;
     }
 
     /**
@@ -30,7 +29,7 @@ class Nested implements AnnotationInterface
      */
     public function properties(): array
     {
-        return array_keys($this->nestedObjects);
+        return array_keys($this->renameMapping);
     }
 
     /**
@@ -39,7 +38,7 @@ class Nested implements AnnotationInterface
      */
     public function has($key): bool
     {
-        return isset($this->nestedObjects[$key]);
+        return isset($this->renameMapping[$key]);
     }
 
     /**
@@ -52,6 +51,6 @@ class Nested implements AnnotationInterface
             throw new \InvalidArgumentException();
         }
 
-        return $this->nestedObjects[$key];
+        return $this->renameMapping[$key];
     }
 }

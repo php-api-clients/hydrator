@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Foundation\Hydrator\Annotations;
+namespace ApiClients\Foundation\Hydrator\Annotation;
 
 use ApiClients\Foundation\Hydrator\AnnotationInterface;
 
@@ -9,19 +9,20 @@ use ApiClients\Foundation\Hydrator\AnnotationInterface;
  * @Annotation
  * @Target({"CLASS"})
  */
-class Rename implements AnnotationInterface
+class Collection implements AnnotationInterface
 {
     /**
      * @var array
      */
-    protected $renameMapping = [];
+    protected $types = [];
 
     /**
-     * @param array $renameMapping
+     * Nested constructor.
+     * @param array $types
      */
-    public function __construct(array $renameMapping)
+    public function __construct(array $types)
     {
-        $this->renameMapping = $renameMapping;
+        $this->types = $types;
     }
 
     /**
@@ -29,7 +30,7 @@ class Rename implements AnnotationInterface
      */
     public function properties(): array
     {
-        return array_keys($this->renameMapping);
+        return array_keys($this->types);
     }
 
     /**
@@ -38,7 +39,7 @@ class Rename implements AnnotationInterface
      */
     public function has($key): bool
     {
-        return isset($this->renameMapping[$key]);
+        return isset($this->types[$key]);
     }
 
     /**
@@ -51,6 +52,6 @@ class Rename implements AnnotationInterface
             throw new \InvalidArgumentException();
         }
 
-        return $this->renameMapping[$key];
+        return $this->types[$key];
     }
 }

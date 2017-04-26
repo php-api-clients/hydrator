@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Foundation\Hydrator\Annotations;
+namespace ApiClients\Foundation\Hydrator\Annotation;
 
 use ApiClients\Foundation\Hydrator\AnnotationInterface;
 

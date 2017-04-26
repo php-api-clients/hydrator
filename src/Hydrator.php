@@ -2,7 +2,7 @@
 
 namespace ApiClients\Foundation\Hydrator;
 
-use ApiClients\Foundation\Hydrator\Annotations\EmptyResource;
+use ApiClients\Foundation\Hydrator\Annotation\EmptyResource;
 use ApiClients\Foundation\Resource\EmptyResourceInterface;
 use ApiClients\Foundation\Resource\ResourceInterface;
 use ApiClients\Tools\CommandBus\CommandBusInterface;

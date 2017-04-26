@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c89e397dfb0b2dba29d508e53b1ff405",
+    "content-hash": "34da445a2c60ac2a93456c815229bc5b",
     "packages": [
         {
             "name": "api-clients/command-bus",
@@ -56,16 +56,16 @@
         },
         {
             "name": "api-clients/resource",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-api-clients/resource.git",
-                "reference": "ac000b6d1fa66b50eb8acde3d8ba333e7fde3233"
+                "reference": "2a3887a5da9cad8222edd726e466bf8895512f3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/ac000b6d1fa66b50eb8acde3d8ba333e7fde3233",
-                "reference": "ac000b6d1fa66b50eb8acde3d8ba333e7fde3233",
+                "url": "https://api.github.com/repos/php-api-clients/resource/zipball/2a3887a5da9cad8222edd726e466bf8895512f3f",
+                "reference": "2a3887a5da9cad8222edd726e466bf8895512f3f",
                 "shasum": ""
             },
             "require": {
@@ -96,7 +96,7 @@
                 }
             ],
             "description": "Abstract resource",
-            "time": "2016-12-09T16:48:22+00:00"
+            "time": "2017-04-26T21:16:20+00:00"
         },
         {
             "name": "clue/block-react",
