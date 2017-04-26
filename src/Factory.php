@@ -3,7 +3,8 @@
 namespace ApiClients\Foundation\Hydrator;
 
 use ApiClients\Foundation\Hydrator\Annotations;
-use Psr\Container\ContainerInterface;
+use ApiClients\Tools\CommandBus\CommandBusInterface;
+use React\EventLoop\LoopInterface;
 
 class Factory
 {
@@ -13,11 +14,11 @@ class Factory
         Annotations\Rename::class => Annotations\Handler\RenameHandler::class,
     ];
 
-    public static function create(ContainerInterface $container, array $options = []): Hydrator
+    public static function create(LoopInterface $loop, CommandBusInterface $commandBus, array $options = []): Hydrator
     {
         $options[Options::ANNOTATIONS] = static::annotations($options[Options::ANNOTATIONS] ?? []);
 
-        $hydrator = new Hydrator($container, $options);
+        $hydrator = new Hydrator($loop, $commandBus, $options);
 
         self::preheat($hydrator, $options);
 

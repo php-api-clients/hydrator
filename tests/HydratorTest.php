@@ -9,11 +9,8 @@ use ApiClients\Tests\Foundation\Hydrator\Resources\Async\EmptySubResource as Asy
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\Resource as AsyncResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\SubResource as AsyncSubResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Sync\Resource as SyncResource;
-use ApiClients\Tools\CommandBus\CommandBusInterface;
-use DI\ContainerBuilder;
 use Doctrine\Common\Cache\FilesystemCache;
 use React\EventLoop\Factory as LoopFactory;
-use React\EventLoop\LoopInterface;
 use TypeError;
 
 class HydratorTest extends TestCase
@@ -21,10 +18,8 @@ class HydratorTest extends TestCase
     public function testBuildAsyncFromSync()
     {
         $loop = LoopFactory::create();
-        $container = ContainerBuilder::buildDevContainer();
-        $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
-        $hydrator = Factory::create($container, [
+        $commandBus = $this->createCommandBus($loop);
+        $hydrator = Factory::create($loop, $commandBus, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_SUFFIX => 'Async',
             Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
@@ -54,12 +49,10 @@ class HydratorTest extends TestCase
 
     public function testSetGeneratedClassesTargetDir()
     {
-        $loop = LoopFactory::create();
         $tmpDir = $this->getTmpDir();
-        $container = ContainerBuilder::buildDevContainer();
-        $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
-        $hydrator = Factory::create($container, [
+        $loop = LoopFactory::create();
+        $commandBus = $this->createCommandBus($loop);
+        $hydrator = Factory::create($loop, $commandBus, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_SUFFIX => 'Async',
             Options::RESOURCE_CACHE_DIR => $tmpDir,
@@ -75,13 +68,11 @@ class HydratorTest extends TestCase
 
     public function testExtract()
     {
-        $loop = LoopFactory::create();
         $json = $this->getJson();
         $tmpDir = $this->getTmpDir();
-        $container = ContainerBuilder::buildDevContainer();
-        $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
-        $hydrator = Factory::create($container, [
+        $loop = LoopFactory::create();
+        $commandBus = $this->createCommandBus($loop);
+        $hydrator = Factory::create($loop, $commandBus, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_SUFFIX => 'Async',
             Options::RESOURCE_CACHE_DIR => $tmpDir,
@@ -96,17 +87,15 @@ class HydratorTest extends TestCase
 
     public function testAnnotationCache()
     {
-        $loop = LoopFactory::create();
         $json = $this->getJson();
         $tmpDir = $this->getTmpDir();
         $annotationCache = $tmpDir . 'annotation' . DIRECTORY_SEPARATOR;
         mkdir($annotationCache);
         $resourceCache = $tmpDir . 'resource' . DIRECTORY_SEPARATOR;
         mkdir($resourceCache);
-        $container = ContainerBuilder::buildDevContainer();
-        $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
-        $hydrator = Factory::create($container, [
+        $loop = LoopFactory::create();
+        $commandBus = $this->createCommandBus($loop);
+        $hydrator = Factory::create($loop, $commandBus, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_SUFFIX => 'Async',
             Options::RESOURCE_CACHE_DIR => $resourceCache,
@@ -135,8 +124,9 @@ class HydratorTest extends TestCase
     public function testPreheat()
     {
         $tmpDir = $this->getTmpDir();
-        $container = ContainerBuilder::buildDevContainer();
-        $hydrator = Factory::create($container, [
+        $loop = LoopFactory::create();
+        $commandBus = $this->createCommandBus($loop);
+        $hydrator = Factory::create($loop, $commandBus, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_SUFFIX => 'Async',
             Options::RESOURCE_CACHE_DIR => $tmpDir,
@@ -154,8 +144,9 @@ class HydratorTest extends TestCase
     public function testPreheatFactory()
     {
         $tmpDir = $this->getTmpDir();
-        $container = ContainerBuilder::buildDevContainer();
-        Factory::create($container, [
+        $loop = LoopFactory::create();
+        $commandBus = $this->createCommandBus($loop);
+        Factory::create($loop, $commandBus, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_SUFFIX => 'Async',
             Options::RESOURCE_CACHE_DIR => $tmpDir,
@@ -164,8 +155,7 @@ class HydratorTest extends TestCase
 
         $classCount = count(get_declared_classes());
 
-        $container = ContainerBuilder::buildDevContainer();
-        Factory::create($container, [
+        Factory::create($loop, $commandBus, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_DIR => __DIR__ . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR,
             Options::NAMESPACE_SUFFIX => 'Async',
@@ -205,10 +195,8 @@ class HydratorTest extends TestCase
         ];
 
         $loop = LoopFactory::create();
-        $container = ContainerBuilder::buildDevContainer();
-        $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
-        $hydrator = Factory::create($container, [
+        $commandBus = $this->createCommandBus($loop);
+        $hydrator = Factory::create($loop, $commandBus, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_SUFFIX => 'Async',
             Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
@@ -230,10 +218,8 @@ class HydratorTest extends TestCase
         ];
 
         $loop = LoopFactory::create();
-        $container = ContainerBuilder::buildDevContainer();
-        $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
-        $hydrator = Factory::create($container, [
+        $commandBus = $this->createCommandBus($loop);
+        $hydrator = Factory::create($loop, $commandBus, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_SUFFIX => 'Async',
             Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),

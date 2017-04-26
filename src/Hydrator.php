@@ -11,7 +11,6 @@ use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use GeneratedHydrator\Configuration;
-use Psr\Container\ContainerInterface;
 use React\EventLoop\LoopInterface;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -21,9 +20,14 @@ use Zend\Hydrator\HydratorInterface;
 class Hydrator
 {
     /**
-     * @var ContainerInterface
+     * @var LoopInterface
      */
-    protected $container;
+    protected $loop;
+
+    /**
+     * @var CommandBusInterface
+     */
+    protected $commandBus;
 
     /**
      * @var array
@@ -56,12 +60,14 @@ class Hydrator
     protected $classProperties = [];
 
     /**
-     * @param ContainerInterface $container
+     * @param LoopInterface $loop
+     * @param CommandBusInterface $commandBus
      * @param array $options
      */
-    public function __construct(ContainerInterface $container, array $options)
+    public function __construct(LoopInterface $loop, CommandBusInterface $commandBus, array $options)
     {
-        $this->container = $container;
+        $this->loop = $loop;
+        $this->commandBus = $commandBus;
         $this->options = $options;
 
         $reader = new AnnotationReader();
@@ -146,8 +152,8 @@ class Hydrator
         $class = $this->getEmptyOrResource($class, $json);
         $hydrator = $this->getHydrator($class);
         $object = new $class(
-            $this->container->get(LoopInterface::class),
-            $this->container->get(CommandBusInterface::class)
+            $this->loop,
+            $this->commandBus
         );
         $json = $this->hydrateApplyAnnotations($json, $object);
         $json = $this->ensureMissingValuesAreNull($json, $class);
@@ -219,8 +225,8 @@ class Hydrator
 
         $annotation = $this->getAnnotation(
             new $class(
-                $this->container->get(LoopInterface::class),
-                $this->container->get(CommandBusInterface::class)
+                $this->loop,
+                $this->commandBus
             ),
             EmptyResource::class
         );

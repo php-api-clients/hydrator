@@ -15,13 +15,11 @@
     "doctrine/annotations": "^1.2",
     "doctrine/cache": "^1.6",
     "ocramius/generated-hydrator": "^2.0",
-    "psr/container": "^1.0",
     "react/promise": "^2.4",
     "wyrihaximus/ticking-promise": "^1.6"
   },
   "require-dev": {
     "api-clients/test-utilities": "^3.0.1",
-    "php-di/php-di": "^5.4.1",
     "phpbench/phpbench": "^0.11"
   },
   "autoload": {
