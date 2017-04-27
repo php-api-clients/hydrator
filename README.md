@@ -18,6 +18,10 @@ To install via [Composer](http://getcomposer.org/), use the command below, it wi
 composer require api-clients/hydrator
 ```
 
+# Preheating
+
+In order to ensure the hydrator doesn't block the hydrator comes with a `preheat` method. Give it a the path of a namespace and the namespace it self, and it will create a hydrator for each resource it finds plus read the annotations for the given resource. This ensures all disk IO and heavy CPU operations have been completed before using the hydrator. When using the hydrator in async code the hydrator should, preferable, be created before running the loop.
+
 # License
 
 The MIT License (MIT)
