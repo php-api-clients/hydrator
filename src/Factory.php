@@ -14,7 +14,7 @@ class Factory
         Annotation\Rename::class => Annotation\Handler\RenameHandler::class,
     ];
 
-    public static function create(LoopInterface $loop, CommandBusInterface $commandBus, array $options = []): Hydrator
+    public static function create(LoopInterface $loop, CommandBusInterface $commandBus, array $options): Hydrator
     {
         $options[Options::ANNOTATIONS] = static::annotations($options[Options::ANNOTATIONS] ?? []);
 
