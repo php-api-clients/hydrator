@@ -22,6 +22,17 @@ composer require api-clients/hydrator
 
 In order to ensure the hydrator doesn't block the hydrator comes with a `preheat` method. Give it a the path of a namespace and the namespace it self, and it will create a hydrator for each resource it finds plus read the annotations for the given resource. This ensures all disk IO and heavy CPU operations have been completed before using the hydrator. When using the hydrator in async code the hydrator should, preferable, be created before running the loop.
 
+# Set up
+
+Before using the Hydrator it has to be set up, note that using this method of setting up it will also preheat the hydrator.
+
+```php
+$loop = LoopFactory::create();
+$commandBus = new CommandBus(); // Implementation of ApiClients\Tools\CommandBus\CommandBusInterface
+$options = []; // Options as described below
+$hydrator = Factory::create($loop, $commandBus, $options);
+```
+
 # License
 
 The MIT License (MIT)
