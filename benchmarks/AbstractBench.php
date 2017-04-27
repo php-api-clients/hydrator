@@ -38,12 +38,8 @@ abstract class AbstractBench
     protected function createHydrator(): Hydrator
     {
         $loop = LoopFactory::create();
-        $container = ContainerBuilder::buildDevContainer();
-        $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
-        return Factory::create(
-            $container,
-            [
+        $commandBus = $this->createCommandBus($loop);
+        return Factory::create($loop, $commandBus, [
                 Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
                 Options::NAMESPACE_SUFFIX => 'Sync',
                 Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
@@ -55,12 +51,8 @@ abstract class AbstractBench
     protected function createNoCacheHydrator(): Hydrator
     {
         $loop = LoopFactory::create();
-        $container = ContainerBuilder::buildDevContainer();
-        $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
-        return Factory::create(
-            $container,
-            [
+        $commandBus = $this->createCommandBus($loop);
+        return Factory::create($loop, $commandBus, [
                 Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
                 Options::NAMESPACE_SUFFIX => 'Sync',
                 Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
