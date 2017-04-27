@@ -11,5 +11,4 @@ class Options
     const ANNOTATION_CACHE =   'annotation_cache';
     const RESOURCE_NAMESPACE = 'resource_namespace';
     const ANNOTATIONS =        'annotations';
-    const COMMAND_BUS =        'command_bus';
 }
