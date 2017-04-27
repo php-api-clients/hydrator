@@ -8,7 +8,7 @@
 [![Total Downloads](https://poser.pugx.org/api-clients/hydrator/downloads.png)](https://packagist.org/packages/api-clients/hydrator/stats)
 [![PHP 7 ready](http://php7ready.timesplinter.ch/php-api-clients/hydrator/badge.svg)](https://travis-ci.org/php-api-clients/hydrator)
 
-In a nutshell this package is a wrapper around `ocramius/generated-hydrator` adding some annotations for nesting, collections, and renaming properties.
+In a nutshell this package is a wrapper around [`ocramius/generated-hydrator`](https://github.com/Ocramius/GeneratedHydrator) adding some annotations for nesting, collections, and renaming properties.
 
 # Install
 
