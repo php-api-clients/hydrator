@@ -33,6 +33,20 @@ $options = []; // Options as described below
 $hydrator = Factory::create($loop, $commandBus, $options);
 ```
 
+# Hydrating
+
+The hydrator offers two methods of hydrating. The first is a method that accepts FQCN (Fully Qualified Class Name), for example `ApiClients\Client\Github\Resource\Async\Emoji` or `Emoji::class` for short, and the JSON holding the resource contents.
+
+```php
+$resource = $hydrator->hydrateFQCN(Emoji::class, $json);
+```
+
+Or when you've configured `Options::NAMESPACE`, `Options::NAMESPACE_SUFFIX` you can do the same with the `hydrate` method, which internally uses `hydrateFQCN`:
+
+```php
+$resource = $hydrator->hydrate('Emoji', $json);
+```
+
 # License
 
 The MIT License (MIT)
