@@ -47,6 +47,19 @@ Or when you've configured `Options::NAMESPACE`, `Options::NAMESPACE_SUFFIX` you 
 $resource = $hydrator->hydrate('Emoji', $json);
 ```
 
+# Extracting
+
+A resource can also be broken down again into JSON with the hydrator.
+
+```php
+$json = $hydrator->extractFQCN(Emoji::class, $resource);
+```
+
+Same magic as the `hydrate` method applies to the `extract` method, this does exactly the same as `extractFQCN` when `Options::NAMESPACE` and `Options::NAMESPACE_SUFFIX` are configured.
+```php
+$json = $hydrator->extract('Emoji', $resource);
+```
+
 # License
 
 The MIT License (MIT)
