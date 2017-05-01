@@ -60,6 +60,36 @@ Same magic as the `hydrate` method applies to the `extract` method, this does ex
 $json = $hydrator->extract('Emoji', $resource);
 ```
 
+# Options
+
+## Options::ANNOTATIONS
+
+Supply an array with extra annotations in the format key => annotation, value => handler.
+
+## Options::ANNOTATION_CACHE_DIR
+
+Cache directory for resource annotations.
+
+## Options::NAMESPACE
+
+Base namespace where the resources reside, required.
+
+## Options::NAMESPACE_DIR
+
+Filesystem path to the base namespace where the resources reside, required. 
+
+## Options::NAMESPACE_SUFFIX
+
+Namespaces suffix, useful for different types of the same resource.
+
+## Options::RESOURCE_CACHE_DIR
+
+Cache directory for resource generated resources.
+
+## Options::RESOURCE_NAMESPACE
+
+Namespace for generated resources.
+
 # License
 
 The MIT License (MIT)
