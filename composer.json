@@ -16,6 +16,7 @@
     "doctrine/cache": "^1.6",
     "ocramius/generated-hydrator": "^2.0",
     "react/promise": "^2.4",
+    "wyrihaximus/doctrine-annotation-autoloader": "^1.0",
     "wyrihaximus/ticking-promise": "^1.6"
   },
   "require-dev": {
@@ -25,10 +26,7 @@
   "autoload": {
     "psr-4": {
       "ApiClients\\Foundation\\Hydrator\\": "src/"
-    },
-    "files": [
-      "src/bootstrap.php"
-    ]
+    }
   },
   "autoload-dev": {
     "psr-4": {
