@@ -397,6 +397,10 @@ class Hydrator
             return $this->hydrators[$class];
         }
 
+        if (strpos($class, $this->options[Options::NAMESPACE]) !== 0) {
+            throw OutsideNamespaceException::create($class, $this->options[Options::NAMESPACE]);
+        }
+
         $config = new Configuration($class);
         if (isset($this->options[Options::RESOURCE_CACHE_DIR])) {
             $config->setGeneratedClassesTargetDir($this->options[Options::RESOURCE_CACHE_DIR]);

@@ -1,10 +1,10 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace ApiClients\Tests\Foundation\Hydrator;
 
 use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Options;
+use ApiClients\Foundation\Hydrator\OutsideNamespaceException;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\EmptySubResource as AsyncEmptySubResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\Resource as AsyncResource;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\SubResource as AsyncSubResource;
@@ -235,5 +235,20 @@ class HydratorTest extends TestCase
         $json['sub'] = null;
         $json['subs'] = [];
         $this->assertEquals($json, $hydrator->extractFQCN(SyncResource::class, $syncRepository));
+    }
+
+    public function testHydrateOutsideNamespace()
+    {
+        self::expectException(OutsideNamespaceException::class);
+
+        $loop = LoopFactory::create();
+        $commandBus = $this->createCommandBus($loop);
+        $hydrator = Factory::create($loop, $commandBus, [
+            Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
+            Options::NAMESPACE_SUFFIX => 'Async',
+            Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+        ]);
+        $hydrator->hydrateFQCN('\stdClass', ['id' => 1]);
     }
 }
