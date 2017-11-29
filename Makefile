@@ -1,5 +1,3 @@
-travis-benchmark: benchmark-travis
-
 all:
 	composer run-script qa-all --timeout=0
 
