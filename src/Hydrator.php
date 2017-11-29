@@ -60,9 +60,9 @@ class Hydrator
     protected $classProperties = [];
 
     /**
-     * @param LoopInterface $loop
+     * @param LoopInterface       $loop
      * @param CommandBusInterface $commandBus
-     * @param array $options
+     * @param array               $options
      */
     public function __construct(LoopInterface $loop, CommandBusInterface $commandBus, array $options)
     {
@@ -82,17 +82,6 @@ class Hydrator
         $this->annotationReader = $reader;
 
         $this->setUpAnnotations();
-    }
-
-    protected function setUpAnnotations()
-    {
-        if (!isset($this->options[Options::ANNOTATIONS])) {
-            return;
-        }
-
-        foreach ($this->options[Options::ANNOTATIONS] as $annotationClass => $handler) {
-            $this->annotationHandlers[$annotationClass] = new $handler($this);
-        }
     }
 
     public function preheat(string $scanTarget, string $namespace)
@@ -125,8 +114,8 @@ class Hydrator
     }
 
     /**
-     * @param string $class
-     * @param array $json
+     * @param  string            $class
+     * @param  array             $json
      * @return ResourceInterface
      */
     public function hydrate(string $class, array $json): ResourceInterface
@@ -139,12 +128,13 @@ class Hydrator
                 $class,
             ]
         );
+
         return $this->hydrateFQCN($fullClassName, $json);
     }
 
     /**
-     * @param string $class
-     * @param array $json
+     * @param  string            $class
+     * @param  array             $json
      * @return ResourceInterface
      */
     public function hydrateFQCN(string $class, array $json): ResourceInterface
@@ -158,12 +148,93 @@ class Hydrator
         $json = $this->hydrateApplyAnnotations($json, $object);
         $json = $this->ensureMissingValuesAreNull($json, $class);
         $resource = $hydrator->hydrate($json, $object);
+
         return $resource;
     }
 
     /**
-     * @param array $json
-     * @param ResourceInterface $object
+     * @param  string            $class
+     * @param  ResourceInterface $object
+     * @return array
+     */
+    public function extract(string $class, ResourceInterface $object): array
+    {
+        $fullClassName = implode(
+            '\\',
+            [
+                $this->options[Options::NAMESPACE],
+                $this->options[Options::NAMESPACE_SUFFIX],
+                $class,
+            ]
+        );
+
+        return $this->extractFQCN($fullClassName, $object);
+    }
+
+    /**
+     * Takes a fully qualified class name and extracts the data for that class from the given $object.
+     * @param  string            $class
+     * @param  ResourceInterface $object
+     * @return array
+     */
+    public function extractFQCN(string $class, ResourceInterface $object): array
+    {
+        if ($object instanceof EmptyResourceInterface) {
+            return [];
+        }
+
+        $json = $this->getHydrator($class)->extract($object);
+        $json = $this->extractApplyAnnotations($object, $json);
+
+        return $json;
+    }
+
+    /**
+     * @param  string            $resource
+     * @param  ResourceInterface $object
+     * @return ResourceInterface
+     */
+    public function buildAsyncFromSync(string $resource, ResourceInterface $object): ResourceInterface
+    {
+        return $this->hydrateFQCN(
+            $this->options[Options::NAMESPACE] . '\\Async\\' . $resource,
+            $this->extractFQCN(
+                $this->options[Options::NAMESPACE] . '\\Sync\\' . $resource,
+                $object
+            )
+        );
+    }
+
+    /**
+     * @param  string            $resource
+     * @param  ResourceInterface $object
+     * @return ResourceInterface
+     */
+    public function buildSyncFromAsync(string $resource, ResourceInterface $object): ResourceInterface
+    {
+        return $this->hydrateFQCN(
+            $this->options[Options::NAMESPACE] . '\\Sync\\' . $resource,
+            $this->extractFQCN(
+                $this->options[Options::NAMESPACE] . '\\Async\\' . $resource,
+                $object
+            )
+        );
+    }
+
+    protected function setUpAnnotations()
+    {
+        if (!isset($this->options[Options::ANNOTATIONS])) {
+            return;
+        }
+
+        foreach ($this->options[Options::ANNOTATIONS] as $annotationClass => $handler) {
+            $this->annotationHandlers[$annotationClass] = new $handler($this);
+        }
+    }
+
+    /**
+     * @param  array             $json
+     * @param  ResourceInterface $object
      * @return array
      */
     protected function hydrateApplyAnnotations(array $json, ResourceInterface $object): array
@@ -181,10 +252,10 @@ class Hydrator
     }
 
     /**
-     * Ensure all properties expected by resource are available
+     * Ensure all properties expected by resource are available.
      *
-     * @param array $json
-     * @param string $class
+     * @param  array  $json
+     * @param  string $class
      * @return array
      */
     protected function ensureMissingValuesAreNull(array $json, string $class): array
@@ -201,7 +272,7 @@ class Hydrator
     }
 
     /**
-     * @param string $class
+     * @param  string   $class
      * @return string[]
      */
     protected function getReflectionClassProperties(string $class): array
@@ -214,6 +285,7 @@ class Hydrator
         foreach ((new ReflectionClass($class))->getProperties() as $property) {
             $this->classProperties[$class][] = (string)$property->getName();
         }
+
         return $this->classProperties[$class];
     }
 
@@ -249,43 +321,8 @@ class Hydrator
     }
 
     /**
-     * @param string $class
-     * @param ResourceInterface $object
-     * @return array
-     */
-    public function extract(string $class, ResourceInterface $object): array
-    {
-        $fullClassName = implode(
-            '\\',
-            [
-                $this->options[Options::NAMESPACE],
-                $this->options[Options::NAMESPACE_SUFFIX],
-                $class,
-            ]
-        );
-        return $this->extractFQCN($fullClassName, $object);
-    }
-
-    /**
-     * Takes a fully qualified class name and extracts the data for that class from the given $object
-     * @param string $class
-     * @param ResourceInterface $object
-     * @return array
-     */
-    public function extractFQCN(string $class, ResourceInterface $object): array
-    {
-        if ($object instanceof EmptyResourceInterface) {
-            return [];
-        }
-
-        $json = $this->getHydrator($class)->extract($object);
-        $json = $this->extractApplyAnnotations($object, $json);
-        return $json;
-    }
-
-    /**
-     * @param array $json
-     * @param ResourceInterface $object
+     * @param  array             $json
+     * @param  ResourceInterface $object
      * @return array
      */
     protected function extractApplyAnnotations(ResourceInterface $object, array $json): array
@@ -303,8 +340,8 @@ class Hydrator
     }
 
     /**
-     * @param ResourceInterface $object
-     * @param string $annotationClass
+     * @param  ResourceInterface        $object
+     * @param  string                   $annotationClass
      * @return null|AnnotationInterface
      */
     protected function getAnnotation(ResourceInterface $object, string $annotationClass)
@@ -319,12 +356,13 @@ class Hydrator
         }
 
         $this->annotations[$class][$annotationClass] = $this->recursivelyGetAnnotation($class, $annotationClass);
+
         return $this->annotations[$class][$annotationClass];
     }
 
     /**
-     * @param string $class
-     * @param string $annotationClass
+     * @param  string                   $class
+     * @param  string                   $annotationClass
      * @return null|AnnotationInterface
      */
     protected function recursivelyGetAnnotation(string $class, string $annotationClass)
@@ -356,39 +394,7 @@ class Hydrator
     }
 
     /**
-     * @param string $resource
-     * @param ResourceInterface $object
-     * @return ResourceInterface
-     */
-    public function buildAsyncFromSync(string $resource, ResourceInterface $object): ResourceInterface
-    {
-        return $this->hydrateFQCN(
-            $this->options[Options::NAMESPACE] . '\\Async\\' . $resource,
-            $this->extractFQCN(
-                $this->options[Options::NAMESPACE] . '\\Sync\\' . $resource,
-                $object
-            )
-        );
-    }
-
-    /**
-     * @param string $resource
-     * @param ResourceInterface $object
-     * @return ResourceInterface
-     */
-    public function buildSyncFromAsync(string $resource, ResourceInterface $object): ResourceInterface
-    {
-        return $this->hydrateFQCN(
-            $this->options[Options::NAMESPACE] . '\\Sync\\' . $resource,
-            $this->extractFQCN(
-                $this->options[Options::NAMESPACE] . '\\Async\\' . $resource,
-                $object
-            )
-        );
-    }
-
-    /**
-     * @param string $class
+     * @param  string            $class
      * @return HydratorInterface
      */
     protected function getHydrator(string $class): HydratorInterface
@@ -405,7 +411,7 @@ class Hydrator
             $config->setGeneratedClassesNamespace($this->options[Options::RESOURCE_NAMESPACE]);
         }
         $hydrator = $config->createFactory()->getHydratorClass();
-        $this->hydrators[$class] = new $hydrator;
+        $this->hydrators[$class] = new $hydrator();
 
         return $this->hydrators[$class];
     }

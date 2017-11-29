@@ -22,7 +22,7 @@ class ExtractCommand
 
     /**
      * ExtractCommand constructor.
-     * @param string $class
+     * @param string            $class
      * @param ResourceInterface $object
      */
     public function __construct(string $class, ResourceInterface $object)

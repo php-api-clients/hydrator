@@ -22,12 +22,12 @@ class SubResource extends AbstractResource implements ResourceInterface
      */
     protected $slug;
 
-    public function id() : int
+    public function id(): int
     {
         return $this->id;
     }
 
-    public function slug() : string
+    public function slug(): string
     {
         return $this->slug;
     }

@@ -5,7 +5,6 @@ namespace ApiClients\Tests\Foundation\Hydrator;
 use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Hydrator;
 use ApiClients\Foundation\Hydrator\Options;
-use DI\ContainerBuilder;
 use React\EventLoop\Factory as LoopFactory;
 
 class FactoryTest extends TestCase
@@ -14,7 +13,10 @@ class FactoryTest extends TestCase
     {
         $loop = LoopFactory::create();
         $commandBus = $this->createCommandBus($loop);
-        $hydrator = Factory::create($loop, $commandBus, [
+        $hydrator = Factory::create(
+            $loop,
+            $commandBus,
+            [
                 Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
                 Options::NAMESPACE_SUFFIX => 'Async',
                 Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),

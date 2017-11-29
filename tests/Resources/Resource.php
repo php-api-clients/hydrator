@@ -36,22 +36,22 @@ class Resource extends AbstractResource implements ResourceInterface
      */
     protected $subs;
 
-    public function id() : int
+    public function id(): int
     {
         return $this->id;
     }
 
-    public function slug() : string
+    public function slug(): string
     {
         return $this->slug;
     }
 
-    public function sub() : SubResource
+    public function sub(): SubResource
     {
         return $this->sub;
     }
 
-    public function subs() : array
+    public function subs(): array
     {
         return $this->subs;
     }

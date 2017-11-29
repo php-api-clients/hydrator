@@ -22,7 +22,7 @@ class BuildAsyncFromSyncCommand
 
     /**
      * ExtractCommand constructor.
-     * @param string $resource
+     * @param string            $resource
      * @param ResourceInterface $object
      */
     public function __construct(string $resource, ResourceInterface $object)

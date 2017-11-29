@@ -44,7 +44,8 @@ class HydratorTest extends TestCase
             $this->assertSame('Wyrihaximus/php-travis-client', $asyncRepository->subs()[$i]->slug());
         }
 
-        $this->assertInstanceOf(AsyncEmptySubResource::class, $asyncRepository->subs()[3]);;
+        $this->assertInstanceOf(AsyncEmptySubResource::class, $asyncRepository->subs()[3]);
+        ;
     }
 
     public function testSetGeneratedClassesTargetDir()

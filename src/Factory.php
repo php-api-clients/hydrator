@@ -2,7 +2,6 @@
 
 namespace ApiClients\Foundation\Hydrator;
 
-use ApiClients\Foundation\Hydrator\Annotation;
 use ApiClients\Tools\CommandBus\CommandBusInterface;
 use React\EventLoop\LoopInterface;
 
