@@ -6,7 +6,7 @@ use ApiClients\Foundation\Resource\ResourceInterface;
 use WyriHaximus\Tactician\CommandHandler\Annotations\Handler;
 
 /**
- * @Handler("ApiClients\Foundation\Hydrator\CommandBus\handler\ExtractHandler")
+ * @Handler("ApiClients\Foundation\Hydrator\CommandBus\Handler\ExtractHandler")
  */
 class ExtractCommand
 {
