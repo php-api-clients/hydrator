@@ -1,24 +1,42 @@
-all: lint cs unit
-travis: lint cs travis-unit
 travis-benchmark: benchmark-travis
-contrib: lint cs unit
+
+all:
+	composer run-script qa-all --timeout=0
+
+all-coverage:
+	composer run-script qa-all-coverage --timeout=0
+
+ci:
+	composer run-script qa-ci --timeout=0
+
+ci-extended:
+	composer run-script qa-ci-extended --timeout=0
+
+contrib:
+	composer run-script qa-contrib --timeout=0
 
 init:
-	if [ ! -d vendor ]; then composer install; fi;
+	composer ensure-installed
 
-cs: init
-	./vendor/bin/phpcs --standard=PSR2 src/
+cs:
+	composer cs
 
-lint: init
-	./vendor/bin/parallel-lint --exclude vendor .
+cs-fix:
+	composer cs-fix
 
-unit: init
-	./vendor/bin/phpunit --coverage-text --coverage-html covHtml
+unit:
+	composer run-script unit --timeout=0
 
-benchmark: init
+unit-coverage:
+	composer run-script unit-coverage --timeout=0
+
+ci-coverage: init
+	composer ci-coverage
+
+benchmark:
 	./vendor/bin/phpbench run benchmarks/ --progress=dots --store --report='generator: "table", cols: ["benchmark", "subject", "params", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}'
 
-benchmark-travis: init
+travis-benchmark:
 	mkdir -p .phpbench_storage/xml
 	mkdir -p .phpbench_storage/store
 	mkdir -p .phpbench_storage/csv
@@ -26,12 +44,6 @@ benchmark-travis: init
 	if [ -f ".phpbench_storage/xml/previous.xml" ]; then ./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --file=.phpbench_storage/xml/latest.xml --report='generator: "table", compare: "revs", cols: ["subject", "params", "mean"], compare_fields: ["best", "mean", "mode", "worst"]'; fi;
 	mv .phpbench_storage/xml/latest.xml .phpbench_storage/xml/previous.xml
 
-travis-benchmark-delimited: init
+travis-benchmark-delimited:
 	if [ -f ".phpbench_storage/xml/previous.xml" ]; then ./vendor/bin/phpbench report --file=.phpbench_storage/xml/previous.xml --report='generator: "table", cols: ["benchmark", "subject", "params", "best", "mean", "mode", "worst", "diff"], break: ["benchmark"], sort: {mean: "asc"}' --output=delimited; fi;
 	if [ -f ".phpbench_storage/xml/previous.xml" ]; then cat .phpbench_storage/csv/previous.csv; fi;
-
-travis-unit: init
-	./vendor/bin/phpunit --coverage-text --coverage-clover ./build/logs/clover.xml
-
-travis-coverage: init
-	if [ -f ./build/logs/clover.xml ]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover ./build/logs/clover.xml; fi
