@@ -184,6 +184,7 @@ class Hydrator
         }
 
         $json = $this->getHydrator($class)->extract($object);
+        unset($json['loop'], $json['commandBus']);
         $json = $this->extractApplyAnnotations($object, $json);
 
         return $json;
