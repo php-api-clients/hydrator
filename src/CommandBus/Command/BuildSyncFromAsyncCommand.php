@@ -6,7 +6,7 @@ use ApiClients\Foundation\Resource\ResourceInterface;
 use WyriHaximus\Tactician\CommandHandler\Annotations\Handler;
 
 /**
- * @Handler("ApiClients\Foundation\Hydrator\CommandBus\handler\BuildSyncFromAsyncHandler")
+ * @Handler("ApiClients\Foundation\Hydrator\CommandBus\Handler\BuildSyncFromAsyncHandler")
  */
 class BuildSyncFromAsyncCommand
 {

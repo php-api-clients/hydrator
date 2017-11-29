@@ -5,7 +5,7 @@ namespace ApiClients\Foundation\Hydrator\CommandBus\Command;
 use WyriHaximus\Tactician\CommandHandler\Annotations\Handler;
 
 /**
- * @Handler("ApiClients\Foundation\Hydrator\CommandBus\handler\HydrateFQCNHandler")
+ * @Handler("ApiClients\Foundation\Hydrator\CommandBus\Handler\HydrateFQCNHandler")
  */
 final class HydrateFQCNCommand
 {
