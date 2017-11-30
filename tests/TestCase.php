@@ -21,6 +21,7 @@ abstract class TestCase extends BaseTestCase
     {
         $container = new Container();
         $container->share(EmitterInterface::class, new Emitter());
+
         return Factory::create($container, [
             Options::NAMESPACE => 'ApiClients\Tests\Foundation\Hydrator\Resources',
             Options::NAMESPACE_SUFFIX => $namespace,

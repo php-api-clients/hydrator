@@ -22,7 +22,7 @@ final class HydrateFQCNCommand
     /**
      * HydrateCommand constructor.
      * @param string $class
-     * @param array $json
+     * @param array  $json
      */
     public function __construct(string $class, array $json)
     {
