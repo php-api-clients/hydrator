@@ -19,8 +19,6 @@ class Factory
 
         $hydrator = new Hydrator($loop, $commandBus, $options);
 
-        self::preheat($hydrator, $options);
-
         return $hydrator;
     }
 
@@ -35,16 +33,5 @@ class Factory
         }
 
         return $annotations;
-    }
-
-    protected static function preheat(Hydrator $hydrator, array $options)
-    {
-        $hasNamespaceDir = isset($options[Options::NAMESPACE_DIR]);
-        $hasNamespace = isset($options[Options::NAMESPACE]);
-        if (!$hasNamespaceDir || !$hasNamespace) {
-            return;
-        }
-
-        $hydrator->preheat($options[Options::NAMESPACE_DIR], $options[Options::NAMESPACE]);
     }
 }
