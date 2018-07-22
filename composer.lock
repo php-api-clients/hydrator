@@ -786,16 +786,16 @@
         },
         {
             "name": "react/event-loop",
-            "version": "v0.5.3",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/event-loop.git",
-                "reference": "228178a947de1f7cd9296d691878569628288c6f"
+                "reference": "0266aff7aa7b0613b1f38a723e14a0ebc55cfca3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/event-loop/zipball/228178a947de1f7cd9296d691878569628288c6f",
-                "reference": "228178a947de1f7cd9296d691878569628288c6f",
+                "url": "https://api.github.com/repos/reactphp/event-loop/zipball/0266aff7aa7b0613b1f38a723e14a0ebc55cfca3",
+                "reference": "0266aff7aa7b0613b1f38a723e14a0ebc55cfca3",
                 "shasum": ""
             },
             "require": {
@@ -823,7 +823,7 @@
                 "asynchronous",
                 "event-loop"
             ],
-            "time": "2018-07-09T13:51:04+00:00"
+            "time": "2018-07-11T14:37:46+00:00"
         },
         {
             "name": "react/promise",
@@ -1007,16 +1007,16 @@
         },
         {
             "name": "wyrihaximus/ticking-promise",
-            "version": "1.6.2",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WyriHaximus/TickingPromise.git",
-                "reference": "6b9f9abc74bb52ba3a479f8d3b8889579cd2cd6f"
+                "reference": "4bb99024402bb7526de8880f3dab0c1f0858def5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WyriHaximus/TickingPromise/zipball/6b9f9abc74bb52ba3a479f8d3b8889579cd2cd6f",
-                "reference": "6b9f9abc74bb52ba3a479f8d3b8889579cd2cd6f",
+                "url": "https://api.github.com/repos/WyriHaximus/TickingPromise/zipball/4bb99024402bb7526de8880f3dab0c1f0858def5",
+                "reference": "4bb99024402bb7526de8880f3dab0c1f0858def5",
                 "shasum": ""
             },
             "require": {
@@ -1050,7 +1050,7 @@
                 }
             ],
             "description": "Wrapping ticks into a promise",
-            "time": "2017-10-31T21:46:39+00:00"
+            "time": "2018-04-05T12:36:50+00:00"
         },
         {
             "name": "zendframework/zend-hydrator",
