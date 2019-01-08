@@ -15,7 +15,7 @@
     "doctrine/annotations": "^1.2",
     "doctrine/cache": "^1.6",
     "ocramius/generated-hydrator": "^2.0",
-    "react/promise": "^2.4",
+    "react/promise": "^2.7",
     "wyrihaximus/doctrine-annotation-autoloader": "^1.0",
     "wyrihaximus/ticking-promise": "^1.6"
   },
