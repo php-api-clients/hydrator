@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace ApiClients\Tests\Foundation\Hydrator\CommandBus\Command;
 
+use function ApiClients\Foundation\get_property;
 use ApiClients\Foundation\Hydrator\CommandBus\Command\ExtractCommand;
 use ApiClients\Foundation\Hydrator\CommandBus\Handler\ExtractHandler;
 use ApiClients\Foundation\Hydrator\Hydrator;
 use ApiClients\Tests\Foundation\Hydrator\Resources\Async\SubResource;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
 use React\EventLoop\Factory;
-use function ApiClients\Foundation\get_property;
 
 class ExtractHandlerTest extends TestCase
 {
