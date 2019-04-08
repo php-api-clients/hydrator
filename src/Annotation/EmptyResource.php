@@ -22,7 +22,7 @@ class EmptyResource implements AnnotationInterface
      */
     public function __construct(array $emptyReplacements)
     {
-        $this->emptyReplacement = current($emptyReplacements);
+        $this->emptyReplacement = \current($emptyReplacements);
     }
 
     /**

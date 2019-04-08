@@ -7,9 +7,12 @@ use ApiClients\Foundation\Hydrator\CommandBus\Command\ExtractFQCNCommand;
 use ApiClients\Foundation\Resource\ResourceInterface;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
 
+/**
+ * @internal
+ */
 class ExtractFQCNCommandTest extends TestCase
 {
-    public function testCommand()
+    public function testCommand(): void
     {
         $class = 'abc';
         $object = $this->prophesize(ResourceInterface::class)->reveal();

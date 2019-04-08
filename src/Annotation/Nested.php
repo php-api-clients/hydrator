@@ -30,7 +30,7 @@ class Nested implements AnnotationInterface
      */
     public function properties(): array
     {
-        return array_keys($this->nestedObjects);
+        return \array_keys($this->nestedObjects);
     }
 
     /**

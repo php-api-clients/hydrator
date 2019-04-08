@@ -30,7 +30,7 @@ class Collection implements AnnotationInterface
      */
     public function properties(): array
     {
-        return array_keys($this->types);
+        return \array_keys($this->types);
     }
 
     /**

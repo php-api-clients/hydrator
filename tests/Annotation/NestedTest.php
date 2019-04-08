@@ -9,9 +9,12 @@ use ApiClients\Tests\Foundation\Hydrator\TestCase;
 use Doctrine\Common\Annotations\AnnotationReader;
 use React\EventLoop\Factory;
 
+/**
+ * @internal
+ */
 class NestedTest extends TestCase
 {
-    public function testProperties()
+    public function testProperties(): void
     {
         $nested = new Nested([
             'a' => 'a',
@@ -32,7 +35,7 @@ class NestedTest extends TestCase
         );
     }
 
-    public function testHas()
+    public function testHas(): void
     {
         $nested = new Nested([
             'a' => 'a',
@@ -53,7 +56,7 @@ class NestedTest extends TestCase
         $this->assertFalse($nested->has('j'));
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $nested = new Nested([
             'a' => 'a',
@@ -69,16 +72,15 @@ class NestedTest extends TestCase
         $this->assertSame('e', $nested->get('e'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testGetException()
+    public function testGetException(): void
     {
+        self::expectException(\InvalidArgumentException::class);
+
         $nested = new Nested([]);
         $nested->get('a');
     }
 
-    public function testDummyResourceAnnotation()
+    public function testDummyResourceAnnotation(): void
     {
         $loop = Factory::create();
         $dummy = new DummyResource($loop, $this->createCommandBus($loop));

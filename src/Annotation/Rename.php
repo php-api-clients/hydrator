@@ -29,7 +29,7 @@ class Rename implements AnnotationInterface
      */
     public function properties(): array
     {
-        return array_keys($this->renameMapping);
+        return \array_keys($this->renameMapping);
     }
 
     /**

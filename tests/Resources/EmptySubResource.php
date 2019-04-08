@@ -18,7 +18,7 @@ class EmptySubResource extends AbstractResource implements EmptyResourceInterfac
         return null;
     }
 
-    public function refresh()
+    public function refresh(): void
     {
     }
 }

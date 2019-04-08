@@ -13,9 +13,12 @@ use Doctrine\Common\Cache\FilesystemCache;
 use React\EventLoop\Factory as LoopFactory;
 use TypeError;
 
+/**
+ * @internal
+ */
 class HydratorTest extends TestCase
 {
-    public function testBuildAsyncFromSync()
+    public function testBuildAsyncFromSync(): void
     {
         $loop = LoopFactory::create();
         $commandBus = $this->createCommandBus($loop);
@@ -37,7 +40,7 @@ class HydratorTest extends TestCase
         $this->assertInstanceOf(AsyncSubResource::class, $asyncRepository->sub());
         $this->assertSame(1, $asyncRepository->sub()->id());
         $this->assertSame('Wyrihaximus/php-travis-client', $asyncRepository->sub()->slug());
-        $this->assertSame(4, count($asyncRepository->subs()));
+        $this->assertSame(4, \count($asyncRepository->subs()));
         for ($i = 0; $i < 3; $i++) {
             $this->assertInstanceOf(AsyncSubResource::class, $asyncRepository->subs()[$i]);
             $this->assertSame($i + 1, $asyncRepository->subs()[$i]->id());
@@ -48,7 +51,7 @@ class HydratorTest extends TestCase
         ;
     }
 
-    public function testSetGeneratedClassesTargetDir()
+    public function testSetGeneratedClassesTargetDir(): void
     {
         $tmpDir = $this->getTmpDir();
         $loop = LoopFactory::create();
@@ -64,10 +67,10 @@ class HydratorTest extends TestCase
             $this->getJson()
         );
         $files = $this->getFilesInDirectory($tmpDir);
-        $this->assertSame(3, count($files));
+        $this->assertSame(3, \count($files));
     }
 
-    public function testExtract()
+    public function testExtract(): void
     {
         $json = $this->getJson();
         $tmpDir = $this->getTmpDir();
@@ -86,14 +89,14 @@ class HydratorTest extends TestCase
         $this->assertEquals($json, $hydrator->extract('Resource', $repository));
     }
 
-    public function testAnnotationCache()
+    public function testAnnotationCache(): void
     {
         $json = $this->getJson();
         $tmpDir = $this->getTmpDir();
-        $annotationCache = $tmpDir . 'annotation' . DIRECTORY_SEPARATOR;
-        mkdir($annotationCache);
-        $resourceCache = $tmpDir . 'resource' . DIRECTORY_SEPARATOR;
-        mkdir($resourceCache);
+        $annotationCache = $tmpDir . 'annotation' . \DIRECTORY_SEPARATOR;
+        \mkdir($annotationCache);
+        $resourceCache = $tmpDir . 'resource' . \DIRECTORY_SEPARATOR;
+        \mkdir($resourceCache);
         $loop = LoopFactory::create();
         $commandBus = $this->createCommandBus($loop);
         $hydrator = Factory::create($loop, $commandBus, [
@@ -107,22 +110,22 @@ class HydratorTest extends TestCase
 
         ]);
         $files = $this->getFilesInDirectory($annotationCache);
-        $this->assertSame(0, count($files));
+        $this->assertSame(0, \count($files));
         $hydrator->hydrate(
             'Resource',
             $json
         );
         $files = $this->getFilesInDirectory($annotationCache);
-        $this->assertSame(7, count($files));
+        $this->assertSame(7, \count($files));
         $hydrator->hydrate(
             'Resource',
             $json
         );
         $files = $this->getFilesInDirectory($annotationCache);
-        $this->assertSame(7, count($files));
+        $this->assertSame(7, \count($files));
     }
 
-    public function testPreheat()
+    public function testPreheat(): void
     {
         $tmpDir = $this->getTmpDir();
         $loop = LoopFactory::create();
@@ -134,19 +137,18 @@ class HydratorTest extends TestCase
             Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
         ]);
 
-        $classCount = count(get_declared_classes());
+        $classCount = \count(\get_declared_classes());
         $hydrator->preheat(
-            __DIR__ . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR,
+            __DIR__ . \DIRECTORY_SEPARATOR . 'Resources' . \DIRECTORY_SEPARATOR,
             'ApiClients\Tests\Foundation\Hydrator\Resources'
         );
-        $this->assertFalse($classCount === count(get_declared_classes()));
+        $this->assertFalse($classCount === \count(\get_declared_classes()));
     }
 
-    /**
-     * @expectedException TypeError
-     */
-    public function testHydrateEmptyValue()
+    public function testHydrateEmptyValue(): void
     {
+        self::expectException(TypeError::class);
+
         $json = [
             'id' => 1,
             'sub' => [
@@ -187,7 +189,7 @@ class HydratorTest extends TestCase
         $syncRepository->slug();
     }
 
-    public function testExtractEmptyValue()
+    public function testExtractEmptyValue(): void
     {
         $json = [
             'id' => 1,
@@ -213,7 +215,7 @@ class HydratorTest extends TestCase
         $this->assertEquals($json, $hydrator->extractFQCN(SyncResource::class, $syncRepository));
     }
 
-    public function testHydrateOutsideNamespace()
+    public function testHydrateOutsideNamespace(): void
     {
         self::expectException(OutsideNamespaceException::class);
 

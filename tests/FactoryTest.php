@@ -7,9 +7,12 @@ use ApiClients\Foundation\Hydrator\Hydrator;
 use ApiClients\Foundation\Hydrator\Options;
 use React\EventLoop\Factory as LoopFactory;
 
+/**
+ * @internal
+ */
 class FactoryTest extends TestCase
 {
-    public function testCreate()
+    public function testCreate(): void
     {
         $loop = LoopFactory::create();
         $commandBus = $this->createCommandBus($loop);

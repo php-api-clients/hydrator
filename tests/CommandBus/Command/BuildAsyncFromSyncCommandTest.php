@@ -7,9 +7,12 @@ use ApiClients\Foundation\Hydrator\CommandBus\Command\BuildAsyncFromSyncCommand;
 use ApiClients\Foundation\Resource\ResourceInterface;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
 
+/**
+ * @internal
+ */
 class BuildAsyncFromSyncCommandTest extends TestCase
 {
-    public function testCommand()
+    public function testCommand(): void
     {
         $resource = 'abc';
         $object = $this->prophesize(ResourceInterface::class)->reveal();

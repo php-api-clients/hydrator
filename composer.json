@@ -9,19 +9,19 @@
     }
   ],
   "require": {
-    "php": "^7.0",
+    "php": "^7.3",
     "api-clients/command-bus": "^2.0",
     "api-clients/resource": "^3.0.1",
     "doctrine/annotations": "^1.2",
     "doctrine/cache": "^1.6",
-    "ocramius/generated-hydrator": "^2.0",
+    "ocramius/generated-hydrator": "^3.0 || ^2.0",
     "react/promise": "^2.7",
     "wyrihaximus/doctrine-annotation-autoloader": "^1.0",
     "wyrihaximus/ticking-promise": "^1.6"
   },
   "require-dev": {
-    "api-clients/test-utilities": "^4.2",
-    "phpbench/phpbench": "^0.11"
+    "api-clients/test-utilities": "^5.4",
+    "phpbench/phpbench": "^0.16"
   },
   "autoload": {
     "psr-4": {
@@ -39,7 +39,7 @@
   "config": {
     "sort-packages": true,
     "platform": {
-      "php": "7.0.22"
+      "php": "7.3.3"
     }
   },
   "extra": {

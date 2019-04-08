@@ -24,7 +24,7 @@ class CollectionHandler extends AbstractHandler implements HandlerInterface
 
             $array = $json[$property];
 
-            if (!is_array($array)) {
+            if (!\is_array($array)) {
                 continue;
             }
 

@@ -11,9 +11,12 @@ use ApiClients\Tests\Foundation\Hydrator\Resources\Async\SubResource;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
 use React\EventLoop\Factory;
 
+/**
+ * @internal
+ */
 class ExtractFQCNHandlerTest extends TestCase
 {
-    public function testHandler()
+    public function testHandler(): void
     {
         $loop = Factory::create();
         $result = [

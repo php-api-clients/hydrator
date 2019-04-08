@@ -56,7 +56,7 @@ class Resource extends AbstractResource implements ResourceInterface
         return $this->subs;
     }
 
-    public function refresh()
+    public function refresh(): void
     {
     }
 }

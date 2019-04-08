@@ -6,9 +6,12 @@ namespace ApiClients\Tests\Foundation\Hydrator\CommandBus\Command;
 use ApiClients\Foundation\Hydrator\CommandBus\Command\HydrateCommand;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
 
+/**
+ * @internal
+ */
 class HydrateCommandTest extends TestCase
 {
-    public function testCommand()
+    public function testCommand(): void
     {
         $class = 'abc';
         $json = [];

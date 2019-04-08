@@ -22,7 +22,7 @@ class NestedHandler extends AbstractHandler implements HandlerInterface
                 continue;
             }
 
-            if (!is_array($json[$property])) {
+            if (!\is_array($json[$property])) {
                 continue;
             }
 

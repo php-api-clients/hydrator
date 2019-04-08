@@ -32,7 +32,7 @@ class SubResource extends AbstractResource implements ResourceInterface
         return $this->slug;
     }
 
-    public function refresh()
+    public function refresh(): void
     {
     }
 }

@@ -9,9 +9,12 @@ use ApiClients\Tests\Foundation\Hydrator\TestCase;
 use Doctrine\Common\Annotations\AnnotationReader;
 use React\EventLoop\Factory;
 
+/**
+ * @internal
+ */
 class CollectionTest extends TestCase
 {
-    public function testProperties()
+    public function testProperties(): void
     {
         $collection = new Collection([
             'a' => 'a',
@@ -32,7 +35,7 @@ class CollectionTest extends TestCase
         );
     }
 
-    public function testHas()
+    public function testHas(): void
     {
         $collection = new Collection([
             'a' => 'a',
@@ -53,7 +56,7 @@ class CollectionTest extends TestCase
         $this->assertFalse($collection->has('j'));
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $collection = new Collection([
             'a' => 'a',
@@ -69,16 +72,15 @@ class CollectionTest extends TestCase
         $this->assertSame('e', $collection->get('e'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testGetException()
+    public function testGetException(): void
     {
+        self::expectException(\InvalidArgumentException::class);
+
         $collection = new Collection([]);
         $collection->get('a');
     }
 
-    public function testDummyResourceAnnotation()
+    public function testDummyResourceAnnotation(): void
     {
         $loop = Factory::create();
         $dummy = new DummyResource($loop, $this->createCommandBus($loop));

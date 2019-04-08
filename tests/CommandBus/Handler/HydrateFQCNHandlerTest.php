@@ -9,9 +9,12 @@ use ApiClients\Foundation\Hydrator\Hydrator;
 use ApiClients\Foundation\Resource\ResourceInterface;
 use ApiClients\Tests\Foundation\Hydrator\TestCase;
 
+/**
+ * @internal
+ */
 class HydrateFQCNHandlerTest extends TestCase
 {
-    public function testHandler()
+    public function testHandler(): void
     {
         $resource = 'abc';
         $json = [];

@@ -84,27 +84,27 @@ class Hydrator
         $this->setUpAnnotations();
     }
 
-    public function preheat(string $scanTarget, string $namespace)
+    public function preheat(string $scanTarget, string $namespace): void
     {
         $directory = new RecursiveDirectoryIterator($scanTarget);
         $directory = new RecursiveIteratorIterator($directory);
 
         foreach ($directory as $node) {
-            if (!is_file($node->getPathname())) {
+            if (!\is_file($node->getPathname())) {
                 continue;
             }
 
-            $file = substr($node->getPathname(), strlen($scanTarget));
-            $file = ltrim($file, DIRECTORY_SEPARATOR);
-            $file = rtrim($file, '.php');
+            $file = \substr($node->getPathname(), \strlen($scanTarget));
+            $file = \ltrim($file, \DIRECTORY_SEPARATOR);
+            $file = \rtrim($file, '.php');
 
-            $class = $namespace . '\\' . str_replace(DIRECTORY_SEPARATOR, '\\', $file);
+            $class = $namespace . '\\' . \str_replace(\DIRECTORY_SEPARATOR, '\\', $file);
 
-            if (!class_exists($class)) {
+            if (!\class_exists($class)) {
                 continue;
             }
 
-            if (!is_subclass_of($class, ResourceInterface::class)) {
+            if (!\is_subclass_of($class, ResourceInterface::class)) {
                 continue;
             }
 
@@ -120,7 +120,7 @@ class Hydrator
      */
     public function hydrate(string $class, array $json): ResourceInterface
     {
-        $fullClassName = implode(
+        $fullClassName = \implode(
             '\\',
             [
                 $this->options[Options::NAMESPACE],
@@ -159,7 +159,7 @@ class Hydrator
      */
     public function extract(string $class, ResourceInterface $object): array
     {
-        $fullClassName = implode(
+        $fullClassName = \implode(
             '\\',
             [
                 $this->options[Options::NAMESPACE],
@@ -222,7 +222,7 @@ class Hydrator
         );
     }
 
-    protected function setUpAnnotations()
+    protected function setUpAnnotations(): void
     {
         if (!isset($this->options[Options::ANNOTATIONS])) {
             return;
@@ -292,7 +292,7 @@ class Hydrator
 
     protected function getEmptyOrResource(string $class, array $json): string
     {
-        if (count($json) > 0) {
+        if (\count($json) > 0) {
             return $class;
         }
 
@@ -314,7 +314,7 @@ class Hydrator
             '\\' .
             $annotation->getEmptyReplacement();
 
-        if (!class_exists($emptyClass)) {
+        if (!\class_exists($emptyClass)) {
             return $class;
         }
 
@@ -347,7 +347,7 @@ class Hydrator
      */
     protected function getAnnotation(ResourceInterface $object, string $annotationClass)
     {
-        $class = get_class($object);
+        $class = \get_class($object);
         if (isset($this->annotations[$class][$annotationClass])) {
             return $this->annotations[$class][$annotationClass];
         }
@@ -368,8 +368,8 @@ class Hydrator
      */
     protected function recursivelyGetAnnotation(string $class, string $annotationClass)
     {
-        if (!class_exists($class)) {
-            return null;
+        if (!\class_exists($class)) {
+            return;
         }
 
         $annotation = $this->annotationReader
@@ -380,15 +380,15 @@ class Hydrator
         ;
 
         if ($annotation !== null &&
-            get_class($annotation) === $annotationClass
+            \get_class($annotation) === $annotationClass
         ) {
             return $annotation;
         }
 
-        $parentClass = get_parent_class($class);
+        $parentClass = \get_parent_class($class);
 
-        if ($parentClass === false || !class_exists($parentClass)) {
-            return null;
+        if ($parentClass === false || !\class_exists($parentClass)) {
+            return;
         }
 
         return $this->recursivelyGetAnnotation($parentClass, $annotationClass);
@@ -404,7 +404,7 @@ class Hydrator
             return $this->hydrators[$class];
         }
 
-        if (strpos($class, $this->options[Options::NAMESPACE]) !== 0) {
+        if (\strpos($class, $this->options[Options::NAMESPACE]) !== 0) {
             throw OutsideNamespaceException::create($class, $this->options[Options::NAMESPACE]);
         }
 
