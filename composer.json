@@ -21,7 +21,7 @@
   },
   "require-dev": {
     "api-clients/test-utilities": "^5.4",
-    "phpbench/phpbench": "^0.16"
+    "phpbench/phpbench": "^0.16 || ^0.17"
   },
   "autoload": {
     "psr-4": {
