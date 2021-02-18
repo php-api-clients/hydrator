@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb398f00bcc6e7fc1dd36ef7d0be151f",
+    "content-hash": "36b134b08abab8ce9d07da6665b89c4e",
     "packages": [
         {
             "name": "api-clients/command-bus",
@@ -1644,6 +1644,10 @@
                 }
             ],
             "description": "Wrapping ticks into a promise",
+            "support": {
+                "issues": "https://github.com/WyriHaximus/TickingPromise/issues",
+                "source": "https://github.com/WyriHaximus/TickingPromise/tree/master"
+            },
             "time": "2018-04-05T12:36:50+00:00"
         },
         {
@@ -7142,5 +7146,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.3.3"
-    }
+    },
+    "plugin-api-version": "2.0.0"
 }

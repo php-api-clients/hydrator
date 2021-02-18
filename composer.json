@@ -17,7 +17,7 @@
     "ocramius/generated-hydrator": "^3.0 || ^2.0",
     "react/promise": "^2.7",
     "wyrihaximus/doctrine-annotation-autoloader": "^1.0",
-    "wyrihaximus/ticking-promise": "^1.6"
+    "wyrihaximus/ticking-promise": "^2 || ^1.6"
   },
   "require-dev": {
     "api-clients/test-utilities": "^5.4",
